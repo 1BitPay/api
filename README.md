@@ -1,3 +1,79 @@
+# Quick Start 
+------------
+ ### **1. 克隆仓库**
+ ``` shell
+  git clone git@github.com:1BitPay/apidocs.git
+ ```
+ ### **2. 确保已经安装了 Ruby 和 Bundler**
+ ``` shell
+ bundle install
+```
+ ### **3. 编辑文件**
+ Slate 使用 Markdown 语法编写 API 文档。默认情况下，文档源文件位于 source/index.html.md。使用您喜欢的文本编辑器打开此文件，并根据您的 API 修改内容。您可以在此文件中添加各种编程语言示例、请求和响应示例以及详细说明。
+
+在文档中，您可以使用以下格式添加代码示例：
+
+<pre>
+```python
+import requests
+
+response = requests.get("https://api.example.com/pets")
+print(response.json())
+```
+```javascript
+fetch("https://api.example.com/pets")
+  .then(response => response.json())
+  .then(data => console.log(data))
+  .catch(error => console.error(error));
+```
+```
+</pre>
+这将在文档中显示一个带有选项卡的代码块，用户可以在 Python 和 JavaScript 示例之间切换。
+
+### **4. 运行本地开发服务器**
+要在本地预览您的 API 文档，请运行以下命令启动一个开发服务器：
+``` bash
+ bundle exec middleman server
+
+```
+默认情况下，服务器将监听 localhost:4567。在浏览器中访问此地址以查看您的 API 文档。当您更改源文件时，服务器将自动重新加载，因此您可以实时查看更改。
+
+### **5. 自定义样式**
+
+Slate 允许您自定义文档的外观。要更改样式，编辑位于 source/stylesheets 目录中的 CSS 文件。例如，您可以更改主题颜色、字体等。
+
+### **6. 构建并部署文档**
+当您对文档内容和样式满意时，运行以下命令构建静态 HTML 文件：
+``` bash
+bundle exec middleman build --clean
+```
+
+这将在 build 目录中生成静态 HTML 文件和相关资源。您可以将这些文件部署到任何支持静态站点托管的服务，如 GitHub Pages、Netlify、Vercel 等。
+
+
+# Slate 如何支持 Swagger
+ 
+Slate 本身不直接支持 Swagger（即 OpenAPI 规范），但您可以使用第三方工具将 Swagger（OpenAPI）规范转换为 Slate 使用的 Markdown 格式。一个流行的工具是 widdershins，它可以将 OpenAPI 规范转换为兼容 Slate 的 Markdown 文件。
+
+以下是使用 widdershins 将 Swagger（OpenAPI）规范转换为 Slate Markdown 文件的步骤：
+
+1. 安装 Node.js 和 npm（如果尚未安装）。
+全局安装 widdershins：
+``` bash
+  npm install -g widdershins
+```
+2. 使用 widdershins 将您的 Swagger（OpenAPI）规范转换为 Slate 兼容的 Markdown 文件：
+``` bash
+  widdershins your_openapi.yaml -o slate_compatible_output.md
+```
+3. 请将 your_openapi.yaml 替换为您的 OpenAPI 规范文件，slate_compatible_output.md 则是转换后的 Markdown 文件。
+
+4. 使用生成的 Markdown 文件替换 Slate 项目中的 source/index.html.md。
+5. 按照之前的 Slate 使用教程构建和部署
+
+# Fork from Salte
+------------
+
 <p align="center">
   <img src="https://raw.githubusercontent.com/slatedocs/img/main/logo-slate.png" alt="Slate: API Documentation Generator" width="226">
   <br>

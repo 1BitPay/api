@@ -8,8 +8,11 @@ language_tabs: # must be one of https://github.com/rouge-ruby/rouge/wiki/List-of
   - javascript
 
 toc_footers:
-  - <a href='#'>Sign Up for a Developer Key</a>
-  - <a href='https://github.com/slatedocs/slate'>Documentation Powered by Slate</a>
+  - <div id="language-selector">
+    <a href="index.html">English</a> |
+    <a href="index_zh.html">简体中文</a>
+   </div>
+  - <br>
 
 includes:
   - errors
@@ -23,7 +26,7 @@ meta:
     content: Documentation for the Kittn API
 ---
 
-# Introduction
+# English
 
 Welcome to the Kittn API! You can use our API to access Kittn API endpoints, which can get information on various cats, kittens, and breeds in our database.
 
