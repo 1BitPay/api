@@ -1,10 +1,6 @@
 ---
 title: API Reference
 
-language_tabs: # must be one of https://github.com/rouge-ruby/rouge/wiki/List-of-supported-languages-and-lexers
-  - shell
-  - java
-
 toc_footers:
   - <div id="language-selector">
     <a href="index.html">English</a> |
@@ -24,225 +20,68 @@ meta:
     content: Documentation for the 1BitPay API
 ---
 
-# English
+# Introduction
 
-**<font color=red>Here is the English version</font>**
+Welcome to 1BitPay API, you can use our API to manage transactions, automate signatures, manage assets, etc., and more functions will come soon.
 
-Welcome to the Kittn API! You can use our API to access Kittn API endpoints, which can get information on various cats, kittens, and breeds in our database.
+# Quick Start
 
-We have language bindings in Shell, Ruby, Python, and JavaScript! You can view code examples in the dark area to the right, and you can switch the programming language of the examples with the tabs in the top right.
+## Create an API Key
 
-This example API documentation page was created with [Slate](https://github.com/slatedocs/slate). Feel free to edit it and use it as a base for your own API's documentation.
+Please log in to the merchant system, open "ApiKey" in the left navigation, click Add, and create an API Key. After the API Key is successfully created, you can use the API Key to access the 1BitPay API.
 
-# Authentication
+## IP whitelist
 
-> To authorize, use this code:
+If you set a whitelist when creating the API Key, when calling the 1BitPay API, only requests from the IP whitelist addresses you set are allowed.
 
-```ruby
-require 'kittn'
+## API Authentication *
 
-api = Kittn::APIClient.authorize!('meowmeowmeow')
-```
+## General Info
 
-```python
-import kittn
+### Base URL *
 
-api = kittn.authorize('meowmeowmeow')
-```
+  https://api.1bitpay.io
 
-```shell
-# With shell, you can just pass the correct header with each request
-curl "api_endpoint_here" \
-  -H "Authorization: meowmeowmeow"
-```
+### Public Parameters *
 
-```javascript
-const kittn = require('kittn');
+The public request parameters are the request parameters that each interface needs to use. Each request needs to carry these parameters in order to initiate the request normally. The initial letters of public request parameters are all `uppercase` to distinguish them from ordinary interface request parameters
 
-let api = kittn.authorize('meowmeowmeow');
-```
+Parameter | Type | Description
+--------- | ----------- | -----------
+Nonce | int  | Random combination of 6 characters or numbers
 
-> Make sure to replace `meowmeowmeow` with your API key.
+### Sandbox  
 
-Kittn uses API keys to allow access to the API. You can register a new Kittn API key at our [developer portal](http://example.com/developers).
+  https://sandbox.1bitpay.io
 
-Kittn expects for the API key to be included in all API requests to the server in a header that looks like the following:
+# C2C  *
 
-`Authorization: meowmeowmeow`
 
-<aside class="notice">
-You must replace <code>meowmeowmeow</code> with your personal API key.
-</aside>
 
-# Kittens
+# MPC Co-Signer
 
-## Get All Kittens
+## Overview
 
-```ruby
-require 'kittn'
+  The full name of MPC is [Secure Multi-Party Computation](https://en.wikipedia.org/wiki/Secure_multi-party_computation). Through MPC, the private key is available and invisible throughout the entire life cycle from generation, use, and storage. 1BitPay uses MPC technology to transform the traditional single private key into distributed private key sharding, which can effectively avoid the single-point risk brought by a single private key, realize the joint management of funds by multiple people in the team, and support social recovery. For detailed private key management scheme, please refer to [Private key management](https://support.1bitpay.io/mpcwallet/key-management).
 
-api = Kittn::APIClient.authorize!('meowmeowmeow')
-api.kittens.get
-```
+  MPC Co-Signer can allow automatic transaction approval and signing transactions through API, replacing manual approval with mobile devices. It is very suitable for frequent transaction scenarios and realizes automatic approval and signature.
 
-```python
-import kittn
+## Download the piece
 
-api = kittn.authorize('meowmeowmeow')
-api.kittens.get()
-```
+  According to 1BitPay [Private key management](https://support.1bitpay.io/mpcwallet/key-management), after the user creates a wallet, the private key is divided into three parts, and the fragment 1 is stored in the user Device, piece 2 is backed up to iCloud or Google Drive, piece 3 is saved in 1BitPay SGX trusted server, when you need to use the MPC Co-Signer function, you need to apply for downloading the private key piece in the merchant background -> ApiKey module, After the APP confirms the approval, it is allowed to download the encrypted private key fragment 1 stored on the user device.
 
-```shell
-curl "http://example.com/api/kittens" \
-  -H "Authorization: meowmeowmeow"
-```
 
-```javascript
-const kittn = require('kittn');
+  <aside class="warning">
+  Although private key sharding is not a complete private key, it is also an important part of asset management. It is recommended to be operated by a dedicated person and deployed in a secure environment.
+  </aside>
 
-let api = kittn.authorize('meowmeowmeow');
-let kittens = api.kittens.get();
-```
+## Signature Algorithm *
 
-> The above command returns JSON structured like this:
+## Get list of pending signatures *
+ 
+## Sign *
 
-```json
-[
-  {
-    "id": 1,
-    "name": "Fluffums",
-    "breed": "calico",
-    "fluffiness": 6,
-    "cuteness": 7
-  },
-  {
-    "id": 2,
-    "name": "Max",
-    "breed": "unknown",
-    "fluffiness": 5,
-    "cuteness": 10
-  }
-]
-```
 
-This endpoint retrieves all kittens.
+# MPC WaaS
 
-### HTTP Request
-
-`GET http://example.com/api/kittens`
-
-### Query Parameters
-
-Parameter | Default | Description
---------- | ------- | -----------
-include_cats | false | If set to true, the result will also include cats.
-available | true | If set to false, the result will include kittens that have already been adopted.
-
-<aside class="success">
-Remember — a happy kitten is an authenticated kitten!
-</aside>
-
-## Get a Specific Kitten
-
-```ruby
-require 'kittn'
-
-api = Kittn::APIClient.authorize!('meowmeowmeow')
-api.kittens.get(2)
-```
-
-```python
-import kittn
-
-api = kittn.authorize('meowmeowmeow')
-api.kittens.get(2)
-```
-
-```shell
-curl "http://example.com/api/kittens/2" \
-  -H "Authorization: meowmeowmeow"
-```
-
-```javascript
-const kittn = require('kittn');
-
-let api = kittn.authorize('meowmeowmeow');
-let max = api.kittens.get(2);
-```
-
-> The above command returns JSON structured like this:
-
-```json
-{
-  "id": 2,
-  "name": "Max",
-  "breed": "unknown",
-  "fluffiness": 5,
-  "cuteness": 10
-}
-```
-
-This endpoint retrieves a specific kitten.
-
-<aside class="warning">Inside HTML code blocks like this one, you can't use Markdown, so use <code>&lt;code&gt;</code> blocks to denote code.</aside>
-
-### HTTP Request
-
-`GET http://example.com/kittens/<ID>`
-
-### URL Parameters
-
-Parameter | Description
---------- | -----------
-ID | The ID of the kitten to retrieve
-
-## Delete a Specific Kitten
-
-```ruby
-require 'kittn'
-
-api = Kittn::APIClient.authorize!('meowmeowmeow')
-api.kittens.delete(2)
-```
-
-```python
-import kittn
-
-api = kittn.authorize('meowmeowmeow')
-api.kittens.delete(2)
-```
-
-```shell
-curl "http://example.com/api/kittens/2" \
-  -X DELETE \
-  -H "Authorization: meowmeowmeow"
-```
-
-```javascript
-const kittn = require('kittn');
-
-let api = kittn.authorize('meowmeowmeow');
-let max = api.kittens.delete(2);
-```
-
-> The above command returns JSON structured like this:
-
-```json
-{
-  "id": 2,
-  "deleted" : ":("
-}
-```
-
-This endpoint deletes a specific kitten.
-
-### HTTP Request
-
-`DELETE http://example.com/kittens/<ID>`
-
-### URL Parameters
-
-Parameter | Description
---------- | -----------
-ID | The ID of the kitten to delete
-
+MPC WaaS, coming soon！
