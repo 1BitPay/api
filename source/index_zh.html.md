@@ -35,24 +35,302 @@ meta:
 
 ## 鉴权规则 *
 
+
 ## 基本信息
 
 ### Base URL *
 
   https://api.1bitpay.io
 
+
 ### 公共参数 *
-公共请求参数是每个接口都需要使用到的请求参数，每次请求均需要携带这些参数, 才能正常发起请求。公共请求参数的首字母均为`大写`，以此区分于普通接口请求参数
+公共请求参数是每个接口都需要使用到的请求参数，每次请求均需要携带这些参数, 才能正常发起请求。公共请求参数的首字母均为`大写`，以此区分于普通接口请求参数，并且公共参数需要放入到Header中。
 
 参数名 | 类型 | 描述
 --------- | ----------- | -----------
 Nonce | Int  | 随机6位字符或数字组合
+TimeStamp | Int| 13位毫秒级时间戳
+MerchantNo| String | 商户编号
+SignType|Int|采取的签名类型
+Lang|Strng | 语言 en：英文 zh：中文
+Sign|String | 签名值，具体规则详见签名规则描述
+ApiKey|String|商户API Key
+
+### 公共响应 *
+公共响应参数如下所示，code为状态码，data为业务响应参数，message为响应结果
+参数名 | 类型 | 描述
+--------- | ----------- | -----------
+code | Int  | 200 成功 详见状态描述
+message | String| Success
+data|Object| 具体根绝业务会展现不同的数据结构，详见具体业务即可
+
+### 签名规则
+- 1、把公共参数与业务参数合并，去除Sign参数，以及空的参数。
+- 2、把1中参数集合的Key按照ASCII排序以后用“=”连接到一块以后。
+- 3、把2中做好的串后拼接商户的secret参数。
+- 4、把3中生成的串做32位md5小写即可生成参数Sign。
 
 ### 沙盒环境 
 
   https://sandbox.1bitpay.io
 
 # C2C  *
+### 获取平台汇率 *
+#### 请求地址：/api/otc/rate
+### 请求方式 *
+- Method: POST 
+- Content-Type: application/json
+#### 请求参数：
+参数名 | 类型 | 必要性 | 描述
+--------- | ----------- |  ----------- | -----------
+| cryptoCurrency  | String |Y|交易币种
+| legalCurrency   | String |Y|付款币种
+true：为移动端用户使用 false：为PC端用户使用
+#### 请求示例
+```
+{
+  "cryptoCurrency":"USDT",
+  "legalCurrency":"CNY"
+}
+```
+
+
+#### 响应参数
+data参数如下：
+参数名 | 类型 | 描述
+--------- | ----------- | -----------
+buyRate | Decimal  | 买单最新汇率
+sellRate | Decimal| 卖单最新汇率 
+#### 响应示例
+```
+{
+  "code": 200,
+  "message": "Success",
+  "data": {
+    "buyRate":"6.47",
+    "sellRate":"6.9"
+  }
+}
+```
+
+
+
+### 创建订单接口 *
+#### 请求地址：/api/otc/create
+### 请求方式 *
+- Method: POST 
+- Content-Type: application/json
+#### 请求参数：
+参数名 | 类型 | 必要性 | 描述
+--------- | ----------- |  ----------- | -----------
+| userName        | String                 |Y|用户姓名
+| areaCode        | String                |Y|用户手机区号
+| phone           | String         |Y|用户手机号码
+| syncUrl         | String    |N|同步回调地址
+| asyncUrl        | String    |N|异步回调地址
+| cryptoAmount    | Decimal                  |Y|购买或者出售数量
+| cryptoCurrency  | String                |Y|交易币种
+| legalCurrency   | String                 |Y|付款币种
+| idCardType      | Int                   |Y| 证件类型 1：身份证 2：护照
+| idCard          | String  |Y|证件号码
+| kyc             | Int                   |Y|Kyc级别，目前Kyc级别传递2
+| merchantOrderNo | String        |Y|商户订单号
+| orderType       | Int                   |Y|订单类型 1：买单 2:卖单
+| payWay          | Int                 |Y|支付方式1：银行卡 2:支付宝 3:微信 用户卖单目前仅支持1:银行卡 
+| bank            | String                |N| 用户收款开户行，卖单必填
+| bankAccount     | String |N|用户收款账户，卖单必填
+| bankBranch      | String               |N|用户收款开户支行
+|h5|Bool|收银台展现类型 true：移动端适用 false：PC端适用
+#### 请求示例
+```
+{
+  "userName":"陈先生",
+  "areaCode":"+86",
+  "phone":"18848820305",
+  "syncUrl":"https://example.com",
+  "asyncUrl":"https://example.com",
+  "cryptoAmount":"10",
+  "cryptoCurrency":"USDT",
+  "legalCurrency":"CNY",
+  "idCardType":1,
+  "idCard":"412627288918989891",
+  "merchantNo":"mer1c92b0319ef5b794",
+  "merchantOrderNo":"1231222112d8",
+  "orderType":1,
+  "payWay":"1",
+  "bank":"建设银行",
+  "bankAccount":"6217229282829299111",
+  "bankBranch":"建设支行",
+  "h5":false
+}
+```
+
+
+#### 响应参数
+data参数如下：
+参数名 | 类型 | 描述
+--------- | ----------- | -----------
+url | String  | 收银台地址
+isNew | Bool| 是否为新订单 
+orderNo|String| 订单号
+#### 响应示例
+```
+{
+  "code": 200,
+  "message": "Success",
+  "data": {
+      "url": "http://sanbox.1bitpay.io/1bitpay-open-api-h5/otc.html?t=02d457b0ced0576a69282054911585aa&o=335793449653514240&l=zh",
+      "isNew": true,
+      "orderNo": "335793449653514240"
+  }
+}
+```
+
+
+### 待签名列表 *
+#### 请求地址：/api/transaction/pending
+### 请求方式 *
+- Method: POST 
+- Content-Type: application/json
+#### 请求参数：
+参数名 | 类型 | 必要性 | 描述
+--------- | ----------- |  ----------- | -----------
+| pageNum        | Int                 |Y|当前页码
+| pageSize        | Int                |Y|每页数量
+#### 请求示例
+```
+{
+  "pageNum":1,
+  "pageSize":20
+}
+```
+
+
+#### 响应参数
+data 结构如下：
+参数名 | 类型 | 描述
+--------- | ----------- | -----------
+total | Int  | 总数量
+list | List| 待签名list
+list 结构如下：
+参数名 | 类型 | 描述
+--------- | ----------- | -----------
+id | Int  | 唯一标识
+fromAddress | String| 转入地址
+toAddress | String| 转出地址
+amount|Decimal|交易金额
+chainId|String|链ID
+
+#### 响应示例
+```
+{
+  "code": 200,
+  "message": "Success",
+  "data": {
+     total:25,
+     list:[
+      {
+        "id":1,
+        "fromAddress":"TGGh3cGp9P21Ebvg9JitjHoeJaKqrg3bRg",
+        "toAddress":"TFMQrPdFWuPzFRXb42sxB22ABCVL6xSopV",
+        "amount":"4.1",
+        "chainId":"56"
+      }
+     ]
+  }
+}
+```
+
+
+
+### 签名接口 *
+#### 交易签名规则：
+参与签名的参数如下：
+参数名 | 类型 | 必要性 | 描述
+--------- | ----------- |  ----------- | -----------
+| id          | Int    |Y|待签名列表id
+| from          | String    |N| 待签名列表fromAddress：转出地址
+| to          | String    |N| 待签名列表toAddress：转入地址
+| value          | String    |N| 待签名列表amount： 转入金额
+| chainId          | String    |B| 待签名列表chainId 链id
+| status          | String    |Y｜交易状态 1：通过交易 2:拒绝交易
+签名步骤：
+- 1、获取商户MPC私钥，从商户后台下载即可
+- 2、用MPC私钥对参数的JSON结构的字符串进行加密。
+- 3、将2中生成的即为签名参数data，同业务数据一并传入到apprvoe接口进行交易签名即可
+#### 请求地址：/api/transaction/approve
+### 请求方式 *
+- Method: POST 
+- Content-Type: application/json
+#### 请求参数：
+参数名 | 类型 | 必要性 | 描述
+--------- | ----------- |  ----------- | -----------
+| id          | Int    |Y|待签名列表id
+| from          | String    |N| 待签名列表fromAddress：转出地址
+| to          | String    |N| 待签名列表toAddress：转入地址
+| value          | String    |N| 待签名列表amount： 转入金额
+| chainId          | String    |B| 待签名列表chainId 链id
+| status          | String    |Y｜交易状态 1：通过交易 2:拒绝交易
+|data|String|Y|交易签名数据
+#### 请求示例
+```
+{
+  "id":1,
+  "from":"TGGh3cGp9P21Ebvg9JitjHoeJaKqrg3bRg",
+  "to":"TFMQrPdFWuPzFRXb42sxB22ABCVL6xSopV",
+  "value":"67.2",
+  "chainId":"20",
+  "status":1,
+  "data":"dahsudiasdoaasidoasdaosdasd9as8d9a0s8d90as8d9a0s8d09asduashdkasdjaksdajksdasjdhakjdha"
+}
+```
+
+
+#### 响应参数
+暂无data参数
+
+#### 响应示例
+```
+{
+  "code": 200,
+  "message": "Success"
+}
+```
+
+
+
+### 资金归集 *
+#### 注意：商户目前需每5分钟调用一次该接口进行资金归集，否则将无法交易
+
+#### 请求地址：/api/transaction/assets/collect
+### 请求方式 *
+- Method: POST 
+- Content-Type: application/json
+#### 请求参数：
+参数名 | 类型 | 必要性 | 描述
+--------- | ----------- |  ----------- | -----------
+| isMain          | Int    |Y|归集的是否是主链币 1：是 0：否
+#### 请求示例
+```
+{
+  "isMain":1
+}
+```
+
+
+#### 响应参数
+暂无data参数
+
+#### 响应示例
+```
+{
+  "code": 200,
+  "message": "Success"
+}
+```
+
+
+
 
 
 
