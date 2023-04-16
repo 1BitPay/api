@@ -33,17 +33,20 @@ meta:
 如果创建 API Key 时设置了白名单，则在调用 1BitPay API 时，只允许从您设置的 IP 白名单地址发起请求。
 
 
-## 鉴权规则 *
-
+## 鉴权规则 
+- 把公共参数与业务参数合并，去除Sign参数，以及空的参数。
+- 把1中参数集合的Key按照ASCII排序以后用“=”连接到一块以后。
+- 把2中做好的串后拼接商户的secret参数。
+- 把3中生成的串做32位md5小写即可生成参数Sign。
 
 ## 基本信息
 
-### Base URL *
+### Base URL
 
   https://api.1bitpay.io
 
 
-### 公共参数 *
+### 公共参数
 公共请求参数是每个接口都需要使用到的请求参数，每次请求均需要携带这些参数, 才能正常发起请求。公共请求参数的首字母均为`大写`，以此区分于普通接口请求参数，并且公共参数需要放入到Header中。
 
 参数名 | 类型 | 描述
@@ -56,7 +59,7 @@ Lang|Strng | 语言 en：英文 zh：中文
 Sign|String | 签名值，具体规则详见签名规则描述
 ApiKey|String|商户API Key
 
-### 公共响应 *
+### 公共响应
 公共响应参数如下所示，code为状态码，data为业务响应参数，message为响应结果
 
 
@@ -66,20 +69,16 @@ code | Int  | 200 成功 详见状态描述
 message | String| Success
 data|Object| 具体根绝业务会展现不同的数据结构，详见具体业务即可
 
-### 签名规则
-- 1、把公共参数与业务参数合并，去除Sign参数，以及空的参数。
-- 2、把1中参数集合的Key按照ASCII排序以后用“=”连接到一块以后。
-- 3、把2中做好的串后拼接商户的secret参数。
-- 4、把3中生成的串做32位md5小写即可生成参数Sign。
+
 
 ### 沙盒环境 
 
   https://sandbox.1bitpay.io
 
-# C2C  *
-### 获取平台汇率 *
+# C2C
+### 获取平台汇率
 #### 请求地址：/api/otc/rate
-### 请求方式 *
+#### 请求方式
 - Method: POST 
 - Content-Type: application/json
 #### 请求参数：
@@ -120,9 +119,9 @@ sellRate | Decimal| 卖单最新汇率
 
 
 
-### 创建订单接口 *
+### 创建订单接口
 #### 请求地址：/api/otc/create
-### 请求方式 *
+#### 请求方式
 - Method: POST 
 - Content-Type: application/json
 #### 请求参数：
@@ -194,9 +193,79 @@ orderNo|String| 订单号
 ```
 
 
-### 待签名列表 *
+
+### 资金归集
+#### 注意：商户目前需每5分钟调用一次该接口进行资金归集，否则将无法交易
+
+#### 请求地址：/api/transaction/assets/collect
+#### 请求方式
+- Method: POST 
+- Content-Type: application/json
+#### 请求参数：
+
+参数名 | 类型 | 必要性 | 描述
+--------- | ----------- |  ----------- | -----------
+| isMain          | Int    |Y|归集的是否是主链币 1：是 0：否
+#### 请求示例
+```
+{
+  "isMain":1
+}
+```
+
+
+#### 响应参数
+暂无data参数
+
+#### 响应示例
+```
+{
+  "code": 200,
+  "message": "Success"
+}
+```
+
+
+
+
+
+
+# MPC Co-Signer
+
+## 概述
+  MPC 全称为 Security Multi-Party Computation（[安全多方计算](https://zh.wikipedia.org/wiki/安全多方计算)）。通过 MPC 可以做到从生成、使用、存储整个生命周期中，私钥可用不可见。1BitPay 使用 MPC 技术将传统的单私钥变成了分布式的私钥分片，可以有效避免单私钥带来的单点风险，实现团队多人共同管理资金，并支持社交恢复。详细的私钥管理方案可参考 [私钥管理方案](https://support.1bitpay.io/v/zh/mpcwalletcn/key-management-cn).
+
+  MPC Co-Signer 可以允许通过API自动实现交易批准和签署交易，取代使用移动设备手动审批，非常适合频繁交易的场景，实现自动化审批及签名。
+
+## 下载私钥分片
+
+  根据1BitPay[私钥管理方案](https://support.1bitpay.io/v/zh/mpcwalletcn/key-management-cn)，用户创建钱包后，私钥分为三部分，分片1保存在用户设备，分片2备份到iCloud 或 Google Drive，分片3保存在1BitPay SGX可信服务器，当您需要使用 MPC Co-Signer功能时，需要在商户后台 -> ApiKey模块，申请下载私钥分片，APP确认审批后，允许下载加密后的存储在用户设备上的私钥分片1。
+
+  <aside class="warning">
+  私钥分片虽然不是完整的私钥，但是也是资产管理重要的一部分，建议专人操作，并部署在安全环境。
+  </aside>
+
+## 签名算法
+
+参与签名的参数如下：
+
+参数名 | 类型 | 必要性 | 描述
+--------- | ----------- |  ----------- | -----------
+| id          | Int    |Y|待签名列表id
+| from          | String    |N| 待签名列表fromAddress：转出地址
+| to          | String    |N| 待签名列表toAddress：转入地址
+| value          | String    |N| 待签名列表amount： 转入金额
+| chainId          | String    |B| 待签名列表chainId 链id
+| status          | String    |Y｜交易状态 1：通过交易 2:拒绝交易
+
+#### 签名步骤：
+- 获取商户MPC私钥，从商户后台下载即可
+- 用MPC私钥对参数的JSON结构的字符串进行加密。
+- 将2中生成的即为签名参数data，同业务数据一并传入到apprvoe接口进行交易签名即可
+
+## 获得待签名列表 
 #### 请求地址：/api/transaction/pending
-### 请求方式 *
+#### 请求方式
 - Method: POST 
 - Content-Type: application/json
 #### 请求参数：
@@ -250,27 +319,11 @@ chainId|String|链ID
   }
 }
 ```
+ 
+## 签名 
 
-
-
-### 签名接口 *
-#### 交易签名规则：
-参与签名的参数如下：
-
-参数名 | 类型 | 必要性 | 描述
---------- | ----------- |  ----------- | -----------
-| id          | Int    |Y|待签名列表id
-| from          | String    |N| 待签名列表fromAddress：转出地址
-| to          | String    |N| 待签名列表toAddress：转入地址
-| value          | String    |N| 待签名列表amount： 转入金额
-| chainId          | String    |B| 待签名列表chainId 链id
-| status          | String    |Y｜交易状态 1：通过交易 2:拒绝交易
-签名步骤：
-- 1、获取商户MPC私钥，从商户后台下载即可
-- 2、用MPC私钥对参数的JSON结构的字符串进行加密。
-- 3、将2中生成的即为签名参数data，同业务数据一并传入到apprvoe接口进行交易签名即可
 #### 请求地址：/api/transaction/approve
-### 请求方式 *
+#### 请求方式
 - Method: POST 
 - Content-Type: application/json
 #### 请求参数：
@@ -308,66 +361,6 @@ chainId|String|链ID
   "message": "Success"
 }
 ```
-
-
-
-### 资金归集 *
-#### 注意：商户目前需每5分钟调用一次该接口进行资金归集，否则将无法交易
-
-#### 请求地址：/api/transaction/assets/collect
-### 请求方式 *
-- Method: POST 
-- Content-Type: application/json
-#### 请求参数：
-
-参数名 | 类型 | 必要性 | 描述
---------- | ----------- |  ----------- | -----------
-| isMain          | Int    |Y|归集的是否是主链币 1：是 0：否
-#### 请求示例
-```
-{
-  "isMain":1
-}
-```
-
-
-#### 响应参数
-暂无data参数
-
-#### 响应示例
-```
-{
-  "code": 200,
-  "message": "Success"
-}
-```
-
-
-
-
-
-
-# MPC Co-Signer
-
-## 概述
-  MPC 全称为 Security Multi-Party Computation（[安全多方计算](https://zh.wikipedia.org/wiki/安全多方计算)）。通过 MPC 可以做到从生成、使用、存储整个生命周期中，私钥可用不可见。1BitPay 使用 MPC 技术将传统的单私钥变成了分布式的私钥分片，可以有效避免单私钥带来的单点风险，实现团队多人共同管理资金，并支持社交恢复。详细的私钥管理方案可参考 [私钥管理方案](https://support.1bitpay.io/v/zh/mpcwalletcn/key-management-cn).
-
-  MPC Co-Signer 可以允许通过API自动实现交易批准和签署交易，取代使用移动设备手动审批，非常适合频繁交易的场景，实现自动化审批及签名。
-
-## 下载私钥分片
-
-  根据1BitPay[私钥管理方案](https://support.1bitpay.io/v/zh/mpcwalletcn/key-management-cn)，用户创建钱包后，私钥分为三部分，分片1保存在用户设备，分片2备份到iCloud 或 Google Drive，分片3保存在1BitPay SGX可信服务器，当您需要使用 MPC Co-Signer功能时，需要在商户后台 -> ApiKey模块，申请下载私钥分片，APP确认审批后，允许下载加密后的存储在用户设备上的私钥分片1。
-
-  <aside class="warning">
-  私钥分片虽然不是完整的私钥，但是也是资产管理重要的一部分，建议专人操作，并部署在安全环境。
-  </aside>
-
-## 签名算法 *
-
-## 获得待签名列表 *
- 
-## 签名 *
-
 
 # MPC 钱包
 
