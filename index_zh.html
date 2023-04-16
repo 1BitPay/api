@@ -454,12 +454,31 @@
 </tr>
 </tbody></table>
 <h3 id='608447dcde'>公共响应 *</h3>
-<p>公共响应参数如下所示，code为状态码，data为业务响应参数，message为响应结果
-参数名 | 类型 | 描述
---------- | ----------- | -----------
-code | Int  | 200 成功 详见状态描述
-message | String| Success
-data|Object| 具体根绝业务会展现不同的数据结构，详见具体业务即可</p>
+<p>公共响应参数如下所示，code为状态码，data为业务响应参数，message为响应结果</p>
+
+<table><thead>
+<tr>
+<th>参数名</th>
+<th>类型</th>
+<th>描述</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>code</td>
+<td>Int</td>
+<td>200 成功 详见状态描述</td>
+</tr>
+<tr>
+<td>message</td>
+<td>String</td>
+<td>Success</td>
+</tr>
+<tr>
+<td>data</td>
+<td>Object</td>
+<td>具体根绝业务会展现不同的数据结构，详见具体业务即可</td>
+</tr>
+</tbody></table>
 <h3 id='ef6306a9ba'>签名规则</h3>
 <ul>
 <li>1、把公共参数与业务参数合并，去除Sign参数，以及空的参数。</li>
@@ -473,26 +492,57 @@ data|Object| 具体根绝业务会展现不同的数据结构，详见具体业�
 <ul>
 <li>Method: POST </li>
 <li>Content-Type: application/json
-#### 请求参数：
-参数名 | 类型 | 必要性 | 描述
---------- | ----------- |  ----------- | -----------
-| cryptoCurrency  | String |Y|交易币种
-| legalCurrency   | String |Y|付款币种
-true：为移动端用户使用 false：为PC端用户使用
-#### 请求示例
-<code>
-{
-&quot;cryptoCurrency&quot;:&quot;USDT&quot;,
-&quot;legalCurrency&quot;:&quot;CNY&quot;
-}
-</code></li>
+#### 请求参数：</li>
 </ul>
-<h4 id='50faad05f3'>响应参数</h4>
-<p>data参数如下：
-参数名 | 类型 | 描述
---------- | ----------- | -----------
-buyRate | Decimal  | 买单最新汇率
-sellRate | Decimal| 卖单最新汇率 </p>
+
+<table><thead>
+<tr>
+<th>参数名</th>
+<th>类型</th>
+<th>必要性</th>
+<th>描述</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>cryptoCurrency</td>
+<td>String</td>
+<td>Y</td>
+<td>交易币种</td>
+</tr>
+<tr>
+<td>legalCurrency</td>
+<td>String</td>
+<td>Y</td>
+<td>付款币种</td>
+</tr>
+</tbody></table>
+
+<p>true：为移动端用户使用 false：为PC端用户使用</p>
+<h4 id='57e26a6943'>请求示例</h4><div class="highlight"><pre class="highlight plaintext"><code>{
+  "cryptoCurrency":"USDT",
+  "legalCurrency":"CNY"
+}
+</code></pre></div><h4 id='50faad05f3'>响应参数</h4>
+<p>data参数如下：</p>
+
+<table><thead>
+<tr>
+<th>参数名</th>
+<th>类型</th>
+<th>描述</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>buyRate</td>
+<td>Decimal</td>
+<td>买单最新汇率</td>
+</tr>
+<tr>
+<td>sellRate</td>
+<td>Decimal</td>
+<td>卖单最新汇率</td>
+</tr>
+</tbody></table>
 <h4 id='b0c6ec87f8'>响应示例</h4><div class="highlight"><pre class="highlight plaintext"><code>{
   "code": 200,
   "message": "Success",
@@ -505,58 +555,172 @@ sellRate | Decimal| 卖单最新汇率 </p>
 <ul>
 <li>Method: POST </li>
 <li>Content-Type: application/json
-#### 请求参数：
-参数名 | 类型 | 必要性 | 描述
---------- | ----------- |  ----------- | -----------
-| userName        | String                 |Y|用户姓名
-| areaCode        | String                |Y|用户手机区号
-| phone           | String         |Y|用户手机号码
-| syncUrl         | String    |N|同步回调地址
-| asyncUrl        | String    |N|异步回调地址
-| cryptoAmount    | Decimal                  |Y|购买或者出售数量
-| cryptoCurrency  | String                |Y|交易币种
-| legalCurrency   | String                 |Y|付款币种
-| idCardType      | Int                   |Y| 证件类型 1：身份证 2：护照
-| idCard          | String  |Y|证件号码
-| kyc             | Int                   |Y|Kyc级别，目前Kyc级别传递2
-| merchantOrderNo | String        |Y|商户订单号
-| orderType       | Int                   |Y|订单类型 1：买单 2:卖单
-| payWay          | Int                 |Y|支付方式1：银行卡 2:支付宝 3:微信 用户卖单目前仅支持1:银行卡 
-| bank            | String                |N| 用户收款开户行，卖单必填
-| bankAccount     | String |N|用户收款账户，卖单必填
-| bankBranch      | String               |N|用户收款开户支行
-|h5|Bool|收银台展现类型 true：移动端适用 false：PC端适用
-#### 请求示例
-<code>
-{
-&quot;userName&quot;:&quot;陈先生&quot;,
-&quot;areaCode&quot;:&quot;+86&quot;,
-&quot;phone&quot;:&quot;18848820305&quot;,
-&quot;syncUrl&quot;:&quot;https://example.com&quot;,
-&quot;asyncUrl&quot;:&quot;https://example.com&quot;,
-&quot;cryptoAmount&quot;:&quot;10&quot;,
-&quot;cryptoCurrency&quot;:&quot;USDT&quot;,
-&quot;legalCurrency&quot;:&quot;CNY&quot;,
-&quot;idCardType&quot;:1,
-&quot;idCard&quot;:&quot;412627288918989891&quot;,
-&quot;merchantNo&quot;:&quot;mer1c92b0319ef5b794&quot;,
-&quot;merchantOrderNo&quot;:&quot;1231222112d8&quot;,
-&quot;orderType&quot;:1,
-&quot;payWay&quot;:&quot;1&quot;,
-&quot;bank&quot;:&quot;建设银行&quot;,
-&quot;bankAccount&quot;:&quot;6217229282829299111&quot;,
-&quot;bankBranch&quot;:&quot;建设支行&quot;,
-&quot;h5&quot;:false
-}
-</code></li>
+#### 请求参数：</li>
 </ul>
-<h4 id='50faad05f3-2'>响应参数</h4>
-<p>data参数如下：
-参数名 | 类型 | 描述
---------- | ----------- | -----------
-url | String  | 收银台地址
-isNew | Bool| 是否为新订单 
-orderNo|String| 订单号</p>
+
+<table><thead>
+<tr>
+<th>参数名</th>
+<th>类型</th>
+<th>必要性</th>
+<th>描述</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>userName</td>
+<td>String</td>
+<td>Y</td>
+<td>用户姓名</td>
+</tr>
+<tr>
+<td>areaCode</td>
+<td>String</td>
+<td>Y</td>
+<td>用户手机区号</td>
+</tr>
+<tr>
+<td>phone</td>
+<td>String</td>
+<td>Y</td>
+<td>用户手机号码</td>
+</tr>
+<tr>
+<td>syncUrl</td>
+<td>String</td>
+<td>N</td>
+<td>同步回调地址</td>
+</tr>
+<tr>
+<td>asyncUrl</td>
+<td>String</td>
+<td>N</td>
+<td>异步回调地址</td>
+</tr>
+<tr>
+<td>cryptoAmount</td>
+<td>Decimal</td>
+<td>Y</td>
+<td>购买或者出售数量</td>
+</tr>
+<tr>
+<td>cryptoCurrency</td>
+<td>String</td>
+<td>Y</td>
+<td>交易币种</td>
+</tr>
+<tr>
+<td>legalCurrency</td>
+<td>String</td>
+<td>Y</td>
+<td>付款币种</td>
+</tr>
+<tr>
+<td>idCardType</td>
+<td>Int</td>
+<td>Y</td>
+<td>证件类型 1：身份证 2：护照</td>
+</tr>
+<tr>
+<td>idCard</td>
+<td>String</td>
+<td>Y</td>
+<td>证件号码</td>
+</tr>
+<tr>
+<td>kyc</td>
+<td>Int</td>
+<td>Y</td>
+<td>Kyc级别，目前Kyc级别传递2</td>
+</tr>
+<tr>
+<td>merchantOrderNo</td>
+<td>String</td>
+<td>Y</td>
+<td>商户订单号</td>
+</tr>
+<tr>
+<td>orderType</td>
+<td>Int</td>
+<td>Y</td>
+<td>订单类型 1：买单 2:卖单</td>
+</tr>
+<tr>
+<td>payWay</td>
+<td>Int</td>
+<td>Y</td>
+<td>支付方式1：银行卡 2:支付宝 3:微信 用户卖单目前仅支持1:银行卡</td>
+</tr>
+<tr>
+<td>bank</td>
+<td>String</td>
+<td>N</td>
+<td>用户收款开户行，卖单必填</td>
+</tr>
+<tr>
+<td>bankAccount</td>
+<td>String</td>
+<td>N</td>
+<td>用户收款账户，卖单必填</td>
+</tr>
+<tr>
+<td>bankBranch</td>
+<td>String</td>
+<td>N</td>
+<td>用户收款开户支行</td>
+</tr>
+<tr>
+<td>h5</td>
+<td>Bool</td>
+<td>收银台展现类型 true：移动端适用 false：PC端适用</td>
+<td></td>
+</tr>
+</tbody></table>
+<h4 id='57e26a6943-2'>请求示例</h4><div class="highlight"><pre class="highlight plaintext"><code>{
+  "userName":"陈先生",
+  "areaCode":"+86",
+  "phone":"18848820305",
+  "syncUrl":"https://example.com",
+  "asyncUrl":"https://example.com",
+  "cryptoAmount":"10",
+  "cryptoCurrency":"USDT",
+  "legalCurrency":"CNY",
+  "idCardType":1,
+  "idCard":"412627288918989891",
+  "merchantNo":"mer1c92b0319ef5b794",
+  "merchantOrderNo":"1231222112d8",
+  "orderType":1,
+  "payWay":"1",
+  "bank":"建设银行",
+  "bankAccount":"6217229282829299111",
+  "bankBranch":"建设支行",
+  "h5":false
+}
+</code></pre></div><h4 id='50faad05f3-2'>响应参数</h4>
+<p>data参数如下：</p>
+
+<table><thead>
+<tr>
+<th>参数名</th>
+<th>类型</th>
+<th>描述</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>url</td>
+<td>String</td>
+<td>收银台地址</td>
+</tr>
+<tr>
+<td>isNew</td>
+<td>Bool</td>
+<td>是否为新订单</td>
+</tr>
+<tr>
+<td>orderNo</td>
+<td>String</td>
+<td>订单号</td>
+</tr>
+</tbody></table>
 <h4 id='b0c6ec87f8-2'>响应示例</h4><div class="highlight"><pre class="highlight plaintext"><code>{
   "code": 200,
   "message": "Success",
@@ -570,33 +734,91 @@ orderNo|String| 订单号</p>
 <ul>
 <li>Method: POST </li>
 <li>Content-Type: application/json
-#### 请求参数：
-参数名 | 类型 | 必要性 | 描述
---------- | ----------- |  ----------- | -----------
-| pageNum        | Int                 |Y|当前页码
-| pageSize        | Int                |Y|每页数量
-#### 请求示例
-<code>
-{
-&quot;pageNum&quot;:1,
-&quot;pageSize&quot;:20
-}
-</code></li>
+#### 请求参数：</li>
 </ul>
-<h4 id='50faad05f3-3'>响应参数</h4>
-<p>data 结构如下：
-参数名 | 类型 | 描述
---------- | ----------- | -----------
-total | Int  | 总数量
-list | List| 待签名list
-list 结构如下：
-参数名 | 类型 | 描述
---------- | ----------- | -----------
-id | Int  | 唯一标识
-fromAddress | String| 转入地址
-toAddress | String| 转出地址
-amount|Decimal|交易金额
-chainId|String|链ID</p>
+
+<table><thead>
+<tr>
+<th>参数名</th>
+<th>类型</th>
+<th>必要性</th>
+<th>描述</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>pageNum</td>
+<td>Int</td>
+<td>Y</td>
+<td>当前页码</td>
+</tr>
+<tr>
+<td>pageSize</td>
+<td>Int</td>
+<td>Y</td>
+<td>每页数量</td>
+</tr>
+</tbody></table>
+<h4 id='57e26a6943-3'>请求示例</h4><div class="highlight"><pre class="highlight plaintext"><code>{
+  "pageNum":1,
+  "pageSize":20
+}
+</code></pre></div><h4 id='50faad05f3-3'>响应参数</h4>
+<p>data 结构如下：</p>
+
+<table><thead>
+<tr>
+<th>参数名</th>
+<th>类型</th>
+<th>描述</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>total</td>
+<td>Int</td>
+<td>总数量</td>
+</tr>
+<tr>
+<td>list</td>
+<td>List</td>
+<td>待签名list</td>
+</tr>
+</tbody></table>
+
+<p>list 结构如下：</p>
+
+<table><thead>
+<tr>
+<th>参数名</th>
+<th>类型</th>
+<th>描述</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>id</td>
+<td>Int</td>
+<td>唯一标识</td>
+</tr>
+<tr>
+<td>fromAddress</td>
+<td>String</td>
+<td>转入地址</td>
+</tr>
+<tr>
+<td>toAddress</td>
+<td>String</td>
+<td>转出地址</td>
+</tr>
+<tr>
+<td>amount</td>
+<td>Decimal</td>
+<td>交易金额</td>
+</tr>
+<tr>
+<td>chainId</td>
+<td>String</td>
+<td>链ID</td>
+</tr>
+</tbody></table>
 <h4 id='b0c6ec87f8-3'>响应示例</h4><div class="highlight"><pre class="highlight plaintext"><code>{
   "code": 200,
   "message": "Success",
@@ -614,16 +836,55 @@ chainId|String|链ID</p>
   }
 }
 </code></pre></div><h3 id='9e5c118dd2'>签名接口 *</h3><h4 id='3b3d32ae71'>交易签名规则：</h4>
-<p>参与签名的参数如下：
-参数名 | 类型 | 必要性 | 描述
---------- | ----------- |  ----------- | -----------
-| id          | Int    |Y|待签名列表id
-| from          | String    |N| 待签名列表fromAddress：转出地址
-| to          | String    |N| 待签名列表toAddress：转入地址
-| value          | String    |N| 待签名列表amount： 转入金额
-| chainId          | String    |B| 待签名列表chainId 链id
-| status          | String    |Y｜交易状态 1：通过交易 2:拒绝交易
-签名步骤：
+<p>参与签名的参数如下：</p>
+
+<table><thead>
+<tr>
+<th>参数名</th>
+<th>类型</th>
+<th>必要性</th>
+<th>描述</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>id</td>
+<td>Int</td>
+<td>Y</td>
+<td>待签名列表id</td>
+</tr>
+<tr>
+<td>from</td>
+<td>String</td>
+<td>N</td>
+<td>待签名列表fromAddress：转出地址</td>
+</tr>
+<tr>
+<td>to</td>
+<td>String</td>
+<td>N</td>
+<td>待签名列表toAddress：转入地址</td>
+</tr>
+<tr>
+<td>value</td>
+<td>String</td>
+<td>N</td>
+<td>待签名列表amount： 转入金额</td>
+</tr>
+<tr>
+<td>chainId</td>
+<td>String</td>
+<td>B</td>
+<td>待签名列表chainId 链id</td>
+</tr>
+<tr>
+<td>status</td>
+<td>String</td>
+<td>Y｜交易状态 1：通过交易 2:拒绝交易</td>
+<td></td>
+</tr>
+</tbody></table>
+
+<p>签名步骤：
 - 1、获取商户MPC私钥，从商户后台下载即可
 - 2、用MPC私钥对参数的JSON结构的字符串进行加密。
 - 3、将2中生成的即为签名参数data，同业务数据一并传入到apprvoe接口进行交易签名即可</p>
@@ -631,30 +892,70 @@ chainId|String|链ID</p>
 <ul>
 <li>Method: POST </li>
 <li>Content-Type: application/json
-#### 请求参数：
-参数名 | 类型 | 必要性 | 描述
---------- | ----------- |  ----------- | -----------
-| id          | Int    |Y|待签名列表id
-| from          | String    |N| 待签名列表fromAddress：转出地址
-| to          | String    |N| 待签名列表toAddress：转入地址
-| value          | String    |N| 待签名列表amount： 转入金额
-| chainId          | String    |B| 待签名列表chainId 链id
-| status          | String    |Y｜交易状态 1：通过交易 2:拒绝交易
-|data|String|Y|交易签名数据
-#### 请求示例
-<code>
-{
-&quot;id&quot;:1,
-&quot;from&quot;:&quot;TGGh3cGp9P21Ebvg9JitjHoeJaKqrg3bRg&quot;,
-&quot;to&quot;:&quot;TFMQrPdFWuPzFRXb42sxB22ABCVL6xSopV&quot;,
-&quot;value&quot;:&quot;67.2&quot;,
-&quot;chainId&quot;:&quot;20&quot;,
-&quot;status&quot;:1,
-&quot;data&quot;:&quot;dahsudiasdoaasidoasdaosdasd9as8d9a0s8d90as8d9a0s8d09asduashdkasdjaksdajksdasjdhakjdha&quot;
-}
-</code></li>
+#### 请求参数：</li>
 </ul>
-<h4 id='50faad05f3-4'>响应参数</h4>
+
+<table><thead>
+<tr>
+<th>参数名</th>
+<th>类型</th>
+<th>必要性</th>
+<th>描述</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>id</td>
+<td>Int</td>
+<td>Y</td>
+<td>待签名列表id</td>
+</tr>
+<tr>
+<td>from</td>
+<td>String</td>
+<td>N</td>
+<td>待签名列表fromAddress：转出地址</td>
+</tr>
+<tr>
+<td>to</td>
+<td>String</td>
+<td>N</td>
+<td>待签名列表toAddress：转入地址</td>
+</tr>
+<tr>
+<td>value</td>
+<td>String</td>
+<td>N</td>
+<td>待签名列表amount： 转入金额</td>
+</tr>
+<tr>
+<td>chainId</td>
+<td>String</td>
+<td>B</td>
+<td>待签名列表chainId 链id</td>
+</tr>
+<tr>
+<td>status</td>
+<td>String</td>
+<td>Y｜交易状态 1：通过交易 2:拒绝交易</td>
+<td></td>
+</tr>
+<tr>
+<td>data</td>
+<td>String</td>
+<td>Y</td>
+<td>交易签名数据</td>
+</tr>
+</tbody></table>
+<h4 id='57e26a6943-4'>请求示例</h4><div class="highlight"><pre class="highlight plaintext"><code>{
+  "id":1,
+  "from":"TGGh3cGp9P21Ebvg9JitjHoeJaKqrg3bRg",
+  "to":"TFMQrPdFWuPzFRXb42sxB22ABCVL6xSopV",
+  "value":"67.2",
+  "chainId":"20",
+  "status":1,
+  "data":"dahsudiasdoaasidoasdaosdasd9as8d9a0s8d90as8d9a0s8d09asduashdkasdjaksdajksdasjdhakjdha"
+}
+</code></pre></div><h4 id='50faad05f3-4'>响应参数</h4>
 <p>暂无data参数</p>
 <h4 id='b0c6ec87f8-4'>响应示例</h4><div class="highlight"><pre class="highlight plaintext"><code>{
   "code": 200,
@@ -664,18 +965,28 @@ chainId|String|链ID</p>
 <ul>
 <li>Method: POST </li>
 <li>Content-Type: application/json
-#### 请求参数：
-参数名 | 类型 | 必要性 | 描述
---------- | ----------- |  ----------- | -----------
-| isMain          | Int    |Y|归集的是否是主链币 1：是 0：否
-#### 请求示例
-<code>
-{
-&quot;isMain&quot;:1
-}
-</code></li>
+#### 请求参数：</li>
 </ul>
-<h4 id='50faad05f3-5'>响应参数</h4>
+
+<table><thead>
+<tr>
+<th>参数名</th>
+<th>类型</th>
+<th>必要性</th>
+<th>描述</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>isMain</td>
+<td>Int</td>
+<td>Y</td>
+<td>归集的是否是主链币 1：是 0：否</td>
+</tr>
+</tbody></table>
+<h4 id='57e26a6943-5'>请求示例</h4><div class="highlight"><pre class="highlight plaintext"><code>{
+  "isMain":1
+}
+</code></pre></div><h4 id='50faad05f3-5'>响应参数</h4>
 <p>暂无data参数</p>
 <h4 id='b0c6ec87f8-5'>响应示例</h4><div class="highlight"><pre class="highlight plaintext"><code>{
   "code": 200,
