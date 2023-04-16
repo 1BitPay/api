@@ -323,7 +323,7 @@
                     <a href="#ip" class="toc-h2 toc-link" data-title="IP白名单">IP白名单</a>
                   </li>
                   <li>
-                    <a href="#d70068c192" class="toc-h2 toc-link" data-title="鉴权规则 *">鉴权规则 *</a>
+                    <a href="#17790fda8b" class="toc-h2 toc-link" data-title="鉴权规则">鉴权规则</a>
                   </li>
                   <li>
                     <a href="#b122f813d5" class="toc-h2 toc-link" data-title="基本信息">基本信息</a>
@@ -331,37 +331,16 @@
               </ul>
           </li>
           <li>
-            <a href="#c2c" class="toc-h1 toc-link" data-title="C2C  *">C2C  *</a>
+            <a href="#c2c" class="toc-h1 toc-link" data-title="C2C">C2C</a>
               <ul class="toc-list-h2">
                   <li>
-                    <a href="#a414704a6c" class="toc-h2 toc-link" data-title="获取平台汇率 *">获取平台汇率 *</a>
+                    <a href="#774ef7eb57" class="toc-h2 toc-link" data-title="获取平台汇率">获取平台汇率</a>
                   </li>
                   <li>
-                    <a href="#aa29b2865b" class="toc-h2 toc-link" data-title="请求方式 *">请求方式 *</a>
+                    <a href="#98f39be522" class="toc-h2 toc-link" data-title="创建订单接口">创建订单接口</a>
                   </li>
                   <li>
-                    <a href="#006e3e9980" class="toc-h2 toc-link" data-title="创建订单接口 *">创建订单接口 *</a>
-                  </li>
-                  <li>
-                    <a href="#aa29b2865b-2" class="toc-h2 toc-link" data-title="请求方式 *">请求方式 *</a>
-                  </li>
-                  <li>
-                    <a href="#04f4eef6be" class="toc-h2 toc-link" data-title="待签名列表 *">待签名列表 *</a>
-                  </li>
-                  <li>
-                    <a href="#aa29b2865b-3" class="toc-h2 toc-link" data-title="请求方式 *">请求方式 *</a>
-                  </li>
-                  <li>
-                    <a href="#9e5c118dd2" class="toc-h2 toc-link" data-title="签名接口 *">签名接口 *</a>
-                  </li>
-                  <li>
-                    <a href="#aa29b2865b-4" class="toc-h2 toc-link" data-title="请求方式 *">请求方式 *</a>
-                  </li>
-                  <li>
-                    <a href="#34e6eb22ad" class="toc-h2 toc-link" data-title="资金归集 *">资金归集 *</a>
-                  </li>
-                  <li>
-                    <a href="#aa29b2865b-5" class="toc-h2 toc-link" data-title="请求方式 *">请求方式 *</a>
+                    <a href="#e83639625f" class="toc-h2 toc-link" data-title="资金归集">资金归集</a>
                   </li>
               </ul>
           </li>
@@ -375,13 +354,13 @@
                     <a href="#45d6c048a4" class="toc-h2 toc-link" data-title="下载私钥分片">下载私钥分片</a>
                   </li>
                   <li>
-                    <a href="#d043cd8dcd" class="toc-h2 toc-link" data-title="签名算法 *">签名算法 *</a>
+                    <a href="#7b81b8ce22" class="toc-h2 toc-link" data-title="签名算法">签名算法</a>
                   </li>
                   <li>
-                    <a href="#6e5243f9b8" class="toc-h2 toc-link" data-title="获得待签名列表 *">获得待签名列表 *</a>
+                    <a href="#f7c93cd51a" class="toc-h2 toc-link" data-title="获得待签名列表">获得待签名列表</a>
                   </li>
                   <li>
-                    <a href="#8d3056ae12" class="toc-h2 toc-link" data-title="签名 *">签名 *</a>
+                    <a href="#8ba46c43fe" class="toc-h2 toc-link" data-title="签名">签名</a>
                   </li>
               </ul>
           </li>
@@ -405,9 +384,16 @@
 <p>请登录商户后台, 左侧导航打开 &quot;ApiKey&quot;，点击新增，创建API Key ，API Key创建成功后，可以使用API Key访问 1BitPay API。</p>
 <h2 id='ip'>IP白名单</h2>
 <p>如果创建 API Key 时设置了白名单，则在调用 1BitPay API 时，只允许从您设置的 IP 白名单地址发起请求。</p>
-<h2 id='d70068c192'>鉴权规则 *</h2><h2 id='b122f813d5'>基本信息</h2><h3 id='base-url'>Base URL *</h3>
+<h2 id='17790fda8b'>鉴权规则</h2>
+<ul>
+<li>把公共参数与业务参数合并，去除Sign参数，以及空的参数。</li>
+<li>把1中参数集合的Key按照ASCII排序以后用“=”连接到一块以后。</li>
+<li>把2中做好的串后拼接商户的secret参数。</li>
+<li>把3中生成的串做32位md5小写即可生成参数Sign。</li>
+</ul>
+<h2 id='b122f813d5'>基本信息</h2><h3 id='base-url'>Base URL</h3>
 <p>https://api.1bitpay.io</p>
-<h3 id='3fc1cac285'>公共参数 *</h3>
+<h3 id='f45a4fe41f'>公共参数</h3>
 <p>公共请求参数是每个接口都需要使用到的请求参数，每次请求均需要携带这些参数, 才能正常发起请求。公共请求参数的首字母均为<code>大写</code>，以此区分于普通接口请求参数，并且公共参数需要放入到Header中。</p>
 
 <table><thead>
@@ -453,7 +439,7 @@
 <td>商户API Key</td>
 </tr>
 </tbody></table>
-<h3 id='608447dcde'>公共响应 *</h3>
+<h3 id='c055b5bae8'>公共响应</h3>
 <p>公共响应参数如下所示，code为状态码，data为业务响应参数，message为响应结果</p>
 
 <table><thead>
@@ -479,16 +465,9 @@
 <td>具体根绝业务会展现不同的数据结构，详见具体业务即可</td>
 </tr>
 </tbody></table>
-<h3 id='ef6306a9ba'>签名规则</h3>
-<ul>
-<li>1、把公共参数与业务参数合并，去除Sign参数，以及空的参数。</li>
-<li>2、把1中参数集合的Key按照ASCII排序以后用“=”连接到一块以后。</li>
-<li>3、把2中做好的串后拼接商户的secret参数。</li>
-<li>4、把3中生成的串做32位md5小写即可生成参数Sign。</li>
-</ul>
 <h3 id='34d85faddf'>沙盒环境</h3>
 <p>https://sandbox.1bitpay.io</p>
-<h1 id='c2c'>C2C  *</h1><h3 id='a414704a6c'>获取平台汇率 *</h3><h4 id='api-otc-rate'>请求地址：/api/otc/rate</h4><h3 id='aa29b2865b'>请求方式 *</h3>
+<h1 id='c2c'>C2C</h1><h3 id='774ef7eb57'>获取平台汇率</h3><h4 id='api-otc-rate'>请求地址：/api/otc/rate</h4><h4 id='af989d8988'>请求方式</h4>
 <ul>
 <li>Method: POST </li>
 <li>Content-Type: application/json
@@ -551,7 +530,7 @@
     "sellRate":"6.9"
   }
 }
-</code></pre></div><h3 id='006e3e9980'>创建订单接口 *</h3><h4 id='api-otc-create'>请求地址：/api/otc/create</h4><h3 id='aa29b2865b-2'>请求方式 *</h3>
+</code></pre></div><h3 id='98f39be522'>创建订单接口</h3><h4 id='api-otc-create'>请求地址：/api/otc/create</h4><h4 id='af989d8988-2'>请求方式</h4>
 <ul>
 <li>Method: POST </li>
 <li>Content-Type: application/json
@@ -730,7 +709,102 @@
       "orderNo": "335793449653514240"
   }
 }
-</code></pre></div><h3 id='04f4eef6be'>待签名列表 *</h3><h4 id='api-transaction-pending'>请求地址：/api/transaction/pending</h4><h3 id='aa29b2865b-3'>请求方式 *</h3>
+</code></pre></div><h3 id='e83639625f'>资金归集</h3><h4 id='5'>注意：商户目前需每5分钟调用一次该接口进行资金归集，否则将无法交易</h4><h4 id='api-transaction-assets-collect'>请求地址：/api/transaction/assets/collect</h4><h4 id='af989d8988-3'>请求方式</h4>
+<ul>
+<li>Method: POST </li>
+<li>Content-Type: application/json
+#### 请求参数：</li>
+</ul>
+
+<table><thead>
+<tr>
+<th>参数名</th>
+<th>类型</th>
+<th>必要性</th>
+<th>描述</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>isMain</td>
+<td>Int</td>
+<td>Y</td>
+<td>归集的是否是主链币 1：是 0：否</td>
+</tr>
+</tbody></table>
+<h4 id='57e26a6943-3'>请求示例</h4><div class="highlight"><pre class="highlight plaintext"><code>{
+  "isMain":1
+}
+</code></pre></div><h4 id='50faad05f3-3'>响应参数</h4>
+<p>暂无data参数</p>
+<h4 id='b0c6ec87f8-3'>响应示例</h4><div class="highlight"><pre class="highlight plaintext"><code>{
+  "code": 200,
+  "message": "Success"
+}
+</code></pre></div><h1 id='mpc-co-signer'>MPC Co-Signer</h1><h2 id='153042ed9e'>概述</h2>
+<p>MPC 全称为 Security Multi-Party Computation（<a href="https://zh.wikipedia.org/wiki/安全多方计算">安全多方计算</a>）。通过 MPC 可以做到从生成、使用、存储整个生命周期中，私钥可用不可见。1BitPay 使用 MPC 技术将传统的单私钥变成了分布式的私钥分片，可以有效避免单私钥带来的单点风险，实现团队多人共同管理资金，并支持社交恢复。详细的私钥管理方案可参考 <a href="https://support.1bitpay.io/v/zh/mpcwalletcn/key-management-cn">私钥管理方案</a>.</p>
+
+<p>MPC Co-Signer 可以允许通过API自动实现交易批准和签署交易，取代使用移动设备手动审批，非常适合频繁交易的场景，实现自动化审批及签名。</p>
+<h2 id='45d6c048a4'>下载私钥分片</h2>
+<p>根据1BitPay<a href="https://support.1bitpay.io/v/zh/mpcwalletcn/key-management-cn">私钥管理方案</a>，用户创建钱包后，私钥分为三部分，分片1保存在用户设备，分片2备份到iCloud 或 Google Drive，分片3保存在1BitPay SGX可信服务器，当您需要使用 MPC Co-Signer功能时，需要在商户后台 -&gt; ApiKey模块，申请下载私钥分片，APP确认审批后，允许下载加密后的存储在用户设备上的私钥分片1。</p>
+
+<p><aside class="warning">
+  私钥分片虽然不是完整的私钥，但是也是资产管理重要的一部分，建议专人操作，并部署在安全环境。
+  </aside></p>
+<h2 id='7b81b8ce22'>签名算法</h2>
+<p>参与签名的参数如下：</p>
+
+<table><thead>
+<tr>
+<th>参数名</th>
+<th>类型</th>
+<th>必要性</th>
+<th>描述</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>id</td>
+<td>Int</td>
+<td>Y</td>
+<td>待签名列表id</td>
+</tr>
+<tr>
+<td>from</td>
+<td>String</td>
+<td>N</td>
+<td>待签名列表fromAddress：转出地址</td>
+</tr>
+<tr>
+<td>to</td>
+<td>String</td>
+<td>N</td>
+<td>待签名列表toAddress：转入地址</td>
+</tr>
+<tr>
+<td>value</td>
+<td>String</td>
+<td>N</td>
+<td>待签名列表amount： 转入金额</td>
+</tr>
+<tr>
+<td>chainId</td>
+<td>String</td>
+<td>B</td>
+<td>待签名列表chainId 链id</td>
+</tr>
+<tr>
+<td>status</td>
+<td>String</td>
+<td>Y｜交易状态 1：通过交易 2:拒绝交易</td>
+<td></td>
+</tr>
+</tbody></table>
+<h4 id='b3c70925c1'>签名步骤：</h4>
+<ul>
+<li>获取商户MPC私钥，从商户后台下载即可</li>
+<li>用MPC私钥对参数的JSON结构的字符串进行加密。</li>
+<li>将2中生成的即为签名参数data，同业务数据一并传入到apprvoe接口进行交易签名即可</li>
+</ul>
+<h2 id='f7c93cd51a'>获得待签名列表</h2><h4 id='api-transaction-pending'>请求地址：/api/transaction/pending</h4><h4 id='af989d8988-4'>请求方式</h4>
 <ul>
 <li>Method: POST </li>
 <li>Content-Type: application/json
@@ -758,11 +832,11 @@
 <td>每页数量</td>
 </tr>
 </tbody></table>
-<h4 id='57e26a6943-3'>请求示例</h4><div class="highlight"><pre class="highlight plaintext"><code>{
+<h4 id='57e26a6943-4'>请求示例</h4><div class="highlight"><pre class="highlight plaintext"><code>{
   "pageNum":1,
   "pageSize":20
 }
-</code></pre></div><h4 id='50faad05f3-3'>响应参数</h4>
+</code></pre></div><h4 id='50faad05f3-4'>响应参数</h4>
 <p>data 结构如下：</p>
 
 <table><thead>
@@ -819,7 +893,7 @@
 <td>链ID</td>
 </tr>
 </tbody></table>
-<h4 id='b0c6ec87f8-3'>响应示例</h4><div class="highlight"><pre class="highlight plaintext"><code>{
+<h4 id='b0c6ec87f8-4'>响应示例</h4><div class="highlight"><pre class="highlight plaintext"><code>{
   "code": 200,
   "message": "Success",
   "data": {
@@ -835,60 +909,7 @@
      ]
   }
 }
-</code></pre></div><h3 id='9e5c118dd2'>签名接口 *</h3><h4 id='3b3d32ae71'>交易签名规则：</h4>
-<p>参与签名的参数如下：</p>
-
-<table><thead>
-<tr>
-<th>参数名</th>
-<th>类型</th>
-<th>必要性</th>
-<th>描述</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>id</td>
-<td>Int</td>
-<td>Y</td>
-<td>待签名列表id</td>
-</tr>
-<tr>
-<td>from</td>
-<td>String</td>
-<td>N</td>
-<td>待签名列表fromAddress：转出地址</td>
-</tr>
-<tr>
-<td>to</td>
-<td>String</td>
-<td>N</td>
-<td>待签名列表toAddress：转入地址</td>
-</tr>
-<tr>
-<td>value</td>
-<td>String</td>
-<td>N</td>
-<td>待签名列表amount： 转入金额</td>
-</tr>
-<tr>
-<td>chainId</td>
-<td>String</td>
-<td>B</td>
-<td>待签名列表chainId 链id</td>
-</tr>
-<tr>
-<td>status</td>
-<td>String</td>
-<td>Y｜交易状态 1：通过交易 2:拒绝交易</td>
-<td></td>
-</tr>
-</tbody></table>
-
-<p>签名步骤：
-- 1、获取商户MPC私钥，从商户后台下载即可
-- 2、用MPC私钥对参数的JSON结构的字符串进行加密。
-- 3、将2中生成的即为签名参数data，同业务数据一并传入到apprvoe接口进行交易签名即可</p>
-<h4 id='api-transaction-approve'>请求地址：/api/transaction/approve</h4><h3 id='aa29b2865b-4'>请求方式 *</h3>
+</code></pre></div><h2 id='8ba46c43fe'>签名</h2><h4 id='api-transaction-approve'>请求地址：/api/transaction/approve</h4><h4 id='af989d8988-5'>请求方式</h4>
 <ul>
 <li>Method: POST </li>
 <li>Content-Type: application/json
@@ -946,7 +967,7 @@
 <td>交易签名数据</td>
 </tr>
 </tbody></table>
-<h4 id='57e26a6943-4'>请求示例</h4><div class="highlight"><pre class="highlight plaintext"><code>{
+<h4 id='57e26a6943-5'>请求示例</h4><div class="highlight"><pre class="highlight plaintext"><code>{
   "id":1,
   "from":"TGGh3cGp9P21Ebvg9JitjHoeJaKqrg3bRg",
   "to":"TFMQrPdFWuPzFRXb42sxB22ABCVL6xSopV",
@@ -955,54 +976,13 @@
   "status":1,
   "data":"dahsudiasdoaasidoasdaosdasd9as8d9a0s8d90as8d9a0s8d09asduashdkasdjaksdajksdasjdhakjdha"
 }
-</code></pre></div><h4 id='50faad05f3-4'>响应参数</h4>
-<p>暂无data参数</p>
-<h4 id='b0c6ec87f8-4'>响应示例</h4><div class="highlight"><pre class="highlight plaintext"><code>{
-  "code": 200,
-  "message": "Success"
-}
-</code></pre></div><h3 id='34e6eb22ad'>资金归集 *</h3><h4 id='5'>注意：商户目前需每5分钟调用一次该接口进行资金归集，否则将无法交易</h4><h4 id='api-transaction-assets-collect'>请求地址：/api/transaction/assets/collect</h4><h3 id='aa29b2865b-5'>请求方式 *</h3>
-<ul>
-<li>Method: POST </li>
-<li>Content-Type: application/json
-#### 请求参数：</li>
-</ul>
-
-<table><thead>
-<tr>
-<th>参数名</th>
-<th>类型</th>
-<th>必要性</th>
-<th>描述</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>isMain</td>
-<td>Int</td>
-<td>Y</td>
-<td>归集的是否是主链币 1：是 0：否</td>
-</tr>
-</tbody></table>
-<h4 id='57e26a6943-5'>请求示例</h4><div class="highlight"><pre class="highlight plaintext"><code>{
-  "isMain":1
-}
 </code></pre></div><h4 id='50faad05f3-5'>响应参数</h4>
 <p>暂无data参数</p>
 <h4 id='b0c6ec87f8-5'>响应示例</h4><div class="highlight"><pre class="highlight plaintext"><code>{
   "code": 200,
   "message": "Success"
 }
-</code></pre></div><h1 id='mpc-co-signer'>MPC Co-Signer</h1><h2 id='153042ed9e'>概述</h2>
-<p>MPC 全称为 Security Multi-Party Computation（<a href="https://zh.wikipedia.org/wiki/安全多方计算">安全多方计算</a>）。通过 MPC 可以做到从生成、使用、存储整个生命周期中，私钥可用不可见。1BitPay 使用 MPC 技术将传统的单私钥变成了分布式的私钥分片，可以有效避免单私钥带来的单点风险，实现团队多人共同管理资金，并支持社交恢复。详细的私钥管理方案可参考 <a href="https://support.1bitpay.io/v/zh/mpcwalletcn/key-management-cn">私钥管理方案</a>.</p>
-
-<p>MPC Co-Signer 可以允许通过API自动实现交易批准和签署交易，取代使用移动设备手动审批，非常适合频繁交易的场景，实现自动化审批及签名。</p>
-<h2 id='45d6c048a4'>下载私钥分片</h2>
-<p>根据1BitPay<a href="https://support.1bitpay.io/v/zh/mpcwalletcn/key-management-cn">私钥管理方案</a>，用户创建钱包后，私钥分为三部分，分片1保存在用户设备，分片2备份到iCloud 或 Google Drive，分片3保存在1BitPay SGX可信服务器，当您需要使用 MPC Co-Signer功能时，需要在商户后台 -&gt; ApiKey模块，申请下载私钥分片，APP确认审批后，允许下载加密后的存储在用户设备上的私钥分片1。</p>
-
-<p><aside class="warning">
-  私钥分片虽然不是完整的私钥，但是也是资产管理重要的一部分，建议专人操作，并部署在安全环境。
-  </aside></p>
-<h2 id='d043cd8dcd'>签名算法 *</h2><h2 id='6e5243f9b8'>获得待签名列表 *</h2><h2 id='8d3056ae12'>签名 *</h2><h1 id='mpc'>MPC 钱包</h1>
+</code></pre></div><h1 id='mpc'>MPC 钱包</h1>
 <p>MPC SaaS 钱包，马上到来！</p>
 <h1 id='errors'>Errors *</h1>
 <p>The 1BitPay API uses the following error codes:</p>
