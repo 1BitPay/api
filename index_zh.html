@@ -387,9 +387,9 @@
 <h2 id='17790fda8b'>鉴权规则</h2>
 <ul>
 <li>把公共参数与业务参数合并，去除Sign参数，以及空的参数。</li>
-<li>把1中参数集合的Key按照ASCII排序以后用“=”连接到一块以后。</li>
-<li>把2中做好的串后拼接商户的secret参数。</li>
-<li>把3中生成的串做32位md5小写即可生成参数Sign。</li>
+<li>把上一步中参数集合的Key按照ASCII排序以后用“=”连接到一块以后。</li>
+<li>把上一步中做好的串后拼接商户的secret参数。</li>
+<li>把上一步中生成的串做32位md5小写即可生成参数Sign。</li>
 </ul>
 <h2 id='b122f813d5'>基本信息</h2><h3 id='base-url'>Base URL</h3>
 <p>https://api.1bitpay.io</p>
@@ -802,7 +802,7 @@
 <ul>
 <li>获取商户MPC私钥，从商户后台下载即可</li>
 <li>用MPC私钥对参数的JSON结构的字符串进行加密。</li>
-<li>将2中生成的即为签名参数data，同业务数据一并传入到apprvoe接口进行交易签名即可</li>
+<li>将上一步中生成的即为签名参数data，同业务数据一并传入到apprvoe接口进行交易签名即可</li>
 </ul>
 <h2 id='f7c93cd51a'>获得待签名列表</h2><h4 id='api-transaction-pending'>请求地址：/api/transaction/pending</h4><h4 id='af989d8988-4'>请求方式</h4>
 <ul>
