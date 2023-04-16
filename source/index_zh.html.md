@@ -54,7 +54,7 @@ meta:
 Nonce | Int  | 随机6位字符或数字组合
 TimeStamp | Int| 13位毫秒级时间戳
 MerchantNo| String | 商户编号
-SignType|Int|采取的签名类型
+SignType|Int|采取的签名类型 1:MD5 2:HASH 目前仅支持MD5
 Lang|Strng | 语言 en：英文 zh：中文
 Sign|String | 签名值，具体规则详见签名规则描述
 ApiKey|String|商户API Key
