@@ -41,6 +41,7 @@ meta:
 
 #### 签名示例
 - 例如业务参数:
+
 ```
   {
     "orderNo":"Or12898771811",
@@ -48,6 +49,7 @@ meta:
   }
 ```
 - 将业务参数与公共参数合并并去除Sign得到结果如下：
+
 ```
   {
     "orderNo":"Or12898771811",
@@ -61,14 +63,17 @@ meta:
   }
 ```
 - 将参数的Key按ASCII排序以后用“=”连接得到的结果如下：
+
 ```
   ApiKey=asdhuasdaosd&Lang=en&MerchantNo=meraojiasdoa123&name=John Li&Nonce=dnasja1N&orderNo=Or12898771811&SignType=1&TimeStamp=1566781991111
 ```
 - 假设API Secret=merasdasd,将上一步得到的结果后拼接API Secret得到结果如下：
+
 ```
   ApiKey=asdhuasdaosd&Lang=en&MerchantNo=meraojiasdoa123&name=John Li&Nonce=dnasja1N&orderNo=Or12898771811&SignType=1&TimeStamp=1566781991111merasdasd
 ```
-- 将上一步得到的结果进行md5即可得到Sign结果如下
+- 将上一步得到的结果进行md5即可得到Sign结果如下：
+
 ```
   md5(ApiKey=asdhuasdaosd&Lang=en&MerchantNo=meraojiasdoa123&name=John Li&Nonce=dnasja1N&orderNo=Or12898771811&SignType=1&TimeStamp=1566781991111merasdasd)
 ```
@@ -300,6 +305,7 @@ orderNo|String| 订单号
 
 #### 签名示例：
 - 例如id为1的待签名数据signObject的json结构如下:
+
 ```
   signObject:{
     "id":1,
@@ -310,17 +316,21 @@ orderNo|String| 订单号
     "status":1
   }
 ```
+
 - 将上一步的json结构转json字符串得到signObjectString
+
 
 ```
   signObjectString = toString(signObj)
 ```
+
 - 此时用私钥文件对signObjectString字符串加密得到data
 
-  注意：
-  - 私钥的密码为"1bitpay"+商户的编号
-  - 加密类型采用PKCS12
-  - 加密时均采用UTF-8编码
+#### 注意：
+- 私钥的密码为"1bitpay"+商户的编号
+- 加密类型采用PKCS12
+- 加密时均采用UTF-8编码
+
 
 ``` 
   data = "HUSDISJDSNDJSJDKSDJSIDJISOADIASLJDALSIDJISALDHAUSIDHA\ASDUAKSD|ADSADAdasdYGYASDHASDJASID"
@@ -403,6 +413,7 @@ chainId|String|链ID
 | status          | String    |Y｜交易状态 1：通过交易 2:拒绝交易
 |data|String|Y|交易签名数据
 #### 请求示例
+
 ```
 {
   "id":1,
