@@ -39,6 +39,41 @@ meta:
 - 把上一步中做好的串后拼接商户的secret参数。
 - 把上一步中生成的串做32位md5小写即可生成参数Sign。
 
+#### 签名示例
+- 例如业务参数:
+```
+  {
+    "orderNo":"Or12898771811",
+    "name":"John Li"
+  }
+```
+- 将业务参数与公共参数合并并去除Sign得到结果如下：
+```
+  {
+    "orderNo":"Or12898771811",
+    "name":"John Li",
+    "TimeStamp":1566781991111,
+    "Nonce":"dnasja1N",
+    "MerchantNo":"meraojiasdoa123",
+    "Lang":"en",
+    "SignType":"1",
+    "ApiKey":"asdhuasdaosd"
+  }
+```
+- 将参数的Key按ASCII排序以后用“=”连接得到的结果如下：
+```
+  ApiKey=asdhuasdaosd&Lang=en&MerchantNo=meraojiasdoa123&name=John Li&Nonce=dnasja1N&orderNo=Or12898771811&SignType=1&TimeStamp=1566781991111
+```
+- 假设API Secret=merasdasd,将上一步得到的结果后拼接API Secret得到结果如下：
+```
+  ApiKey=asdhuasdaosd&Lang=en&MerchantNo=meraojiasdoa123&name=John Li&Nonce=dnasja1N&orderNo=Or12898771811&SignType=1&TimeStamp=1566781991111merasdasd
+```
+- 将上一步得到的结果进行md5即可得到Sign结果如下
+```
+  md5(ApiKey=asdhuasdaosd&Lang=en&MerchantNo=meraojiasdoa123&name=John Li&Nonce=dnasja1N&orderNo=Or12898771811&SignType=1&TimeStamp=1566781991111merasdasd)
+```
+- 注意最后一步为32位小写md5
+
 ## 基本信息
 
 ### Base URL
@@ -262,6 +297,36 @@ orderNo|String| 订单号
 - 获取商户MPC私钥，从商户后台下载即可
 - 用MPC私钥对参数的JSON结构的字符串进行加密。
 - 将上一步中生成的即为签名参数data，同业务数据一并传入到apprvoe接口进行交易签名即可
+
+#### 签名示例：
+- 例如id为1的待签名数据signObject的json结构如下:
+```
+  signObject:{
+    "id":1,
+    "from":"TGGh3cGp9P21Ebvg9JitjHoeJaKqrg3bRg",
+    "to":"TFMQrPdFWuPzFRXb42sxB22ABCVL6xSopV",
+    "value":"4.1",
+    "chainId":"56",
+    "status":1
+  }
+```
+- 将上一步的json结构转json字符串得到signObjectString
+
+```
+  signObjectString = toString(signObj)
+```
+- 此时用私钥文件对signObjectString字符串加密得到data
+
+  注意：
+  - 私钥的密码为"1bitpay"+商户的编号
+  - 加密类型采用PKCS12
+  - 加密时均采用UTF-8编码
+
+``` 
+  data = "HUSDISJDSNDJSJDKSDJSIDJISOADIASLJDALSIDJISALDHAUSIDHA\ASDUAKSD|ADSADAdasdYGYASDHASDJASID"
+```
+
+
 
 ## 获得待签名列表 
 #### 请求地址：/api/transaction/pending
