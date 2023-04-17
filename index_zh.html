@@ -395,40 +395,45 @@
 <ul>
 <li>例如业务参数:</li>
 </ul>
-<div class="highlight"><pre class="highlight plaintext"><code>  {
-    "orderNo":"Or12898771811",
-    "name":"John Li"
-  }
-</code></pre></div>
+
+<p>{
+  &quot;orderNo&quot;:&quot;Or12898771811&quot;,
+  &quot;name&quot;:&quot;John Li&quot;
+}</p>
+
 <ul>
 <li>将业务参数与公共参数合并并去除Sign得到结果如下：</li>
 </ul>
-<div class="highlight"><pre class="highlight plaintext"><code>  {
-    "orderNo":"Or12898771811",
-    "name":"John Li",
-    "TimeStamp":1566781991111,
-    "Nonce":"dnasja1N",
-    "MerchantNo":"meraojiasdoa123",
-    "Lang":"en",
-    "SignType":"1",
-    "ApiKey":"asdhuasdaosd"
-  }
-</code></pre></div>
+
+<p>{
+  &quot;orderNo&quot;:&quot;Or12898771811&quot;,
+  &quot;name&quot;:&quot;John Li&quot;,
+  &quot;TimeStamp&quot;:1566781991111,
+  &quot;Nonce&quot;:&quot;dnasja1N&quot;,
+  &quot;MerchantNo&quot;:&quot;meraojiasdoa123&quot;,
+  &quot;Lang&quot;:&quot;en&quot;,
+  &quot;SignType&quot;:&quot;1&quot;,
+  &quot;ApiKey&quot;:&quot;asdhuasdaosd&quot;
+}</p>
+
 <ul>
 <li>将参数的Key按ASCII排序以后用“=”连接得到的结果如下：</li>
 </ul>
-<div class="highlight"><pre class="highlight plaintext"><code>  ApiKey=asdhuasdaosd&amp;Lang=en&amp;MerchantNo=meraojiasdoa123&amp;name=John Li&amp;Nonce=dnasja1N&amp;orderNo=Or12898771811&amp;SignType=1&amp;TimeStamp=1566781991111
-</code></pre></div>
+
+<p>ApiKey=asdhuasdaosd&amp;Lang=en&amp;MerchantNo=meraojiasdoa123&amp;name=John Li&amp;Nonce=dnasja1N&amp;orderNo=Or12898771811&amp;SignType=1&amp;TimeStamp=1566781991111</p>
+
 <ul>
 <li>假设API Secret=merasdasd,将上一步得到的结果后拼接API Secret得到结果如下：</li>
 </ul>
-<div class="highlight"><pre class="highlight plaintext"><code>  ApiKey=asdhuasdaosd&amp;Lang=en&amp;MerchantNo=meraojiasdoa123&amp;name=John Li&amp;Nonce=dnasja1N&amp;orderNo=Or12898771811&amp;SignType=1&amp;TimeStamp=1566781991111merasdasd
-</code></pre></div>
+
+<p>ApiKey=asdhuasdaosd&amp;Lang=en&amp;MerchantNo=meraojiasdoa123&amp;name=John Li&amp;Nonce=dnasja1N&amp;orderNo=Or12898771811&amp;SignType=1&amp;TimeStamp=1566781991111merasdasd</p>
+
 <ul>
 <li>将上一步得到的结果进行md5即可得到Sign结果如下：</li>
 </ul>
-<div class="highlight"><pre class="highlight plaintext"><code>  md5(ApiKey=asdhuasdaosd&amp;Lang=en&amp;MerchantNo=meraojiasdoa123&amp;name=John Li&amp;Nonce=dnasja1N&amp;orderNo=Or12898771811&amp;SignType=1&amp;TimeStamp=1566781991111merasdasd)
-</code></pre></div>
+
+<p>md5(ApiKey=asdhuasdaosd&amp;Lang=en&amp;MerchantNo=meraojiasdoa123&amp;name=John Li&amp;Nonce=dnasja1N&amp;orderNo=Or12898771811&amp;SignType=1&amp;TimeStamp=1566781991111merasdasd)</p>
+
 <ul>
 <li>注意最后一步为32位小写md5</li>
 </ul>
@@ -849,31 +854,34 @@
 <ul>
 <li>例如id为1的待签名数据signObject的json结构如下:</li>
 </ul>
-<div class="highlight"><pre class="highlight plaintext"><code>  signObject:{
-    "id":1,
-    "from":"TGGh3cGp9P21Ebvg9JitjHoeJaKqrg3bRg",
-    "to":"TFMQrPdFWuPzFRXb42sxB22ABCVL6xSopV",
-    "value":"4.1",
-    "chainId":"56",
-    "status":1
-  }
-</code></pre></div>
+
+<p>signObject:{
+  &quot;id&quot;:1,
+  &quot;from&quot;:&quot;TGGh3cGp9P21Ebvg9JitjHoeJaKqrg3bRg&quot;,
+  &quot;to&quot;:&quot;TFMQrPdFWuPzFRXb42sxB22ABCVL6xSopV&quot;,
+  &quot;value&quot;:&quot;4.1&quot;,
+  &quot;chainId&quot;:&quot;56&quot;,
+  &quot;status&quot;:1
+}</p>
+
 <ul>
 <li>将上一步的json结构转json字符串得到signObjectString</li>
 </ul>
-<div class="highlight"><pre class="highlight plaintext"><code>  signObjectString = toString(signObj)
-</code></pre></div>
+
+<p>signObjectString = toString(signObj)</p>
+
 <ul>
 <li>此时用私钥文件对signObjectString字符串加密得到data</li>
 </ul>
+
+<p>data = &quot;HUSDISJDSNDJSJDKSDJSIDJISOADIASLJDALSIDJISALDHAUSIDHA\ASDUAKSD|ADSADAdasdYGYASDHASDJASID&quot;</p>
 <h4 id='4c95618614'>注意：</h4>
 <ul>
 <li>私钥的密码为&quot;1bitpay&quot;+商户的编号</li>
 <li>加密类型采用PKCS12</li>
 <li>加密时均采用UTF-8编码</li>
 </ul>
-<div class="highlight"><pre class="highlight plaintext"><code>  data = "HUSDISJDSNDJSJDKSDJSIDJISOADIASLJDALSIDJISALDHAUSIDHA\ASDUAKSD|ADSADAdasdYGYASDHASDJASID"
-</code></pre></div><h2 id='f7c93cd51a'>获得待签名列表</h2><h4 id='api-transaction-pending'>请求地址：/api/transaction/pending</h4><h4 id='af989d8988-4'>请求方式</h4>
+<h2 id='f7c93cd51a'>获得待签名列表</h2><h4 id='api-transaction-pending'>请求地址：/api/transaction/pending</h4><h4 id='af989d8988-4'>请求方式</h4>
 <ul>
 <li>Method: POST </li>
 <li>Content-Type: application/json
