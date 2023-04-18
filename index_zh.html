@@ -326,6 +326,9 @@
                     <a href="#17790fda8b" class="toc-h2 toc-link" data-title="鉴权规则">鉴权规则</a>
                   </li>
                   <li>
+                    <a href="#09957702bc" class="toc-h2 toc-link" data-title="签名示例">签名示例</a>
+                  </li>
+                  <li>
                     <a href="#b122f813d5" class="toc-h2 toc-link" data-title="基本信息">基本信息</a>
                   </li>
               </ul>
@@ -337,7 +340,7 @@
                     <a href="#774ef7eb57" class="toc-h2 toc-link" data-title="获取平台汇率">获取平台汇率</a>
                   </li>
                   <li>
-                    <a href="#98f39be522" class="toc-h2 toc-link" data-title="创建订单接口">创建订单接口</a>
+                    <a href="#5ac84906d9" class="toc-h2 toc-link" data-title="创建订单">创建订单</a>
                   </li>
                   <li>
                     <a href="#e83639625f" class="toc-h2 toc-link" data-title="资金归集">资金归集</a>
@@ -391,7 +394,7 @@
 <li>把上一步中做好的串后拼接商户的secret参数。</li>
 <li>把上一步中生成的串做32位md5小写即可生成参数Sign。</li>
 </ul>
-<h4 id='09957702bc'>签名示例</h4>
+<h2 id='09957702bc'>签名示例</h2>
 <ul>
 <li>例如业务参数:</li>
 </ul>
@@ -467,12 +470,12 @@
 <tr>
 <td>SignType</td>
 <td>Int</td>
-<td>采取的签名类型 1:MD5 2:HASH 目前仅支持MD5</td>
+<td>采取的签名类型。1:MD5；2:HASH；目前仅支持MD5</td>
 </tr>
 <tr>
 <td>Lang</td>
 <td>Strng</td>
-<td>语言 en：英文 zh：中文</td>
+<td>语言。 en：英文；zh：中文</td>
 </tr>
 <tr>
 <td>Sign</td>
@@ -513,13 +516,14 @@
 </tbody></table>
 <h3 id='34d85faddf'>沙盒环境</h3>
 <p>https://sandbox.1bitpay.io</p>
-<h1 id='c2c'>C2C</h1><h3 id='774ef7eb57'>获取平台汇率</h3><h4 id='api-otc-rate'>请求地址：/api/otc/rate</h4><h4 id='af989d8988'>请求方式</h4>
+<h1 id='c2c'>C2C</h1><h2 id='774ef7eb57'>获取平台汇率</h2><h3 id='0e84ef42ae'>请求地址</h3>
+<p>POST <code>/api/otc/rate</code></p>
+<h3 id='af989d8988'>请求方式</h3>
 <ul>
 <li>Method: POST </li>
-<li>Content-Type: application/json
-#### 请求参数：</li>
+<li>Content-Type: application/json</li>
 </ul>
-
+<h3 id='9b19f8c9cc'>请求参数：</h3>
 <table><thead>
 <tr>
 <th>参数名</th>
@@ -542,12 +546,14 @@
 </tr>
 </tbody></table>
 
-<p>true：为移动端用户使用 false：为PC端用户使用</p>
-<h4 id='57e26a6943'>请求示例</h4><div class="highlight"><pre class="highlight plaintext"><code>{
+<blockquote>
+<p>请求示例:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>{
   "cryptoCurrency":"USDT",
   "legalCurrency":"CNY"
 }
-</code></pre></div><h4 id='50faad05f3'>响应参数</h4>
+</code></pre></div><h3 id='50faad05f3'>响应参数</h3>
 <p>data参数如下：</p>
 
 <table><thead>
@@ -568,7 +574,11 @@
 <td>卖单最新汇率</td>
 </tr>
 </tbody></table>
-<h4 id='b0c6ec87f8'>响应示例</h4><div class="highlight"><pre class="highlight plaintext"><code>{
+
+<blockquote>
+<p>响应示例:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>{
   "code": 200,
   "message": "Success",
   "data": {
@@ -576,18 +586,19 @@
     "sellRate":"6.9"
   }
 }
-</code></pre></div><h3 id='98f39be522'>创建订单接口</h3><h4 id='api-otc-create'>请求地址：/api/otc/create</h4><h4 id='af989d8988-2'>请求方式</h4>
+</code></pre></div><h2 id='5ac84906d9'>创建订单</h2><h3 id='86e489d578'>请求地址：</h3>
+<p>POST <code>/api/otc/create</code></p>
+<h3 id='af989d8988-2'>请求方式</h3>
 <ul>
 <li>Method: POST </li>
-<li>Content-Type: application/json
-#### 请求参数：</li>
+<li>Content-Type: application/json</li>
 </ul>
-
+<h3 id='9b19f8c9cc-2'>请求参数：</h3>
 <table><thead>
 <tr>
 <th>参数名</th>
 <th>类型</th>
-<th>必要性</th>
+<th><div style="width:50px">必要性</div></th>
 <th>描述</th>
 </tr>
 </thead><tbody>
@@ -643,7 +654,7 @@
 <td>idCardType</td>
 <td>Int</td>
 <td>Y</td>
-<td>证件类型 1：身份证 2：护照</td>
+<td>证件类型。1：身份证；2：护照</td>
 </tr>
 <tr>
 <td>idCard</td>
@@ -655,7 +666,7 @@
 <td>kyc</td>
 <td>Int</td>
 <td>Y</td>
-<td>Kyc级别，目前Kyc级别传递2</td>
+<td>KYC级别，目前KYC级别传递2</td>
 </tr>
 <tr>
 <td>merchantOrderNo</td>
@@ -667,13 +678,13 @@
 <td>orderType</td>
 <td>Int</td>
 <td>Y</td>
-<td>订单类型 1：买单 2:卖单</td>
+<td>订单类型。1：买单；2:卖单</td>
 </tr>
 <tr>
 <td>payWay</td>
 <td>Int</td>
 <td>Y</td>
-<td>支付方式1：银行卡 2:支付宝 3:微信 用户卖单目前仅支持1:银行卡</td>
+<td>支付方式。1：银行卡；2:支付宝；3:微信支付。用户卖单目前仅支持 1:银行卡</td>
 </tr>
 <tr>
 <td>bank</td>
@@ -696,11 +707,15 @@
 <tr>
 <td>h5</td>
 <td>Bool</td>
-<td>收银台展现类型 true：移动端适用 false：PC端适用</td>
-<td></td>
+<td>Y</td>
+<td>收银台展现类型。true：移动端适用 ；false：PC端适用</td>
 </tr>
 </tbody></table>
-<h4 id='57e26a6943-2'>请求示例</h4><div class="highlight"><pre class="highlight plaintext"><code>{
+
+<blockquote>
+<p>请求示例:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>{
   "userName":"陈先生",
   "areaCode":"+86",
   "phone":"18848820305",
@@ -720,7 +735,7 @@
   "bankBranch":"建设支行",
   "h5":false
 }
-</code></pre></div><h4 id='50faad05f3-2'>响应参数</h4>
+</code></pre></div><h3 id='50faad05f3-2'>响应参数</h3>
 <p>data参数如下：</p>
 
 <table><thead>
@@ -746,7 +761,11 @@
 <td>订单号</td>
 </tr>
 </tbody></table>
-<h4 id='b0c6ec87f8-2'>响应示例</h4><div class="highlight"><pre class="highlight plaintext"><code>{
+
+<blockquote>
+<p>响应示例:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>{
   "code": 200,
   "message": "Success",
   "data": {
@@ -755,13 +774,18 @@
       "orderNo": "335793449653514240"
   }
 }
-</code></pre></div><h3 id='e83639625f'>资金归集</h3><h4 id='5'>注意：商户目前需每5分钟调用一次该接口进行资金归集，否则将无法交易</h4><h4 id='api-transaction-assets-collect'>请求地址：/api/transaction/assets/collect</h4><h4 id='af989d8988-3'>请求方式</h4>
+</code></pre></div><h2 id='e83639625f'>资金归集</h2>
+<aside class="notice">
+ 注意：建议商户每5分钟调用一次该接口进行资金归集，否则可能影响正常交易
+</aside>
+<h3 id='86e489d578-2'>请求地址：</h3>
+<p>POST <code>/api/transaction/assets/collect</code></p>
+<h3 id='af989d8988-3'>请求方式</h3>
 <ul>
 <li>Method: POST </li>
-<li>Content-Type: application/json
-#### 请求参数：</li>
+<li>Content-Type: application/json</li>
 </ul>
-
+<h3 id='9b19f8c9cc-3'>请求参数：</h3>
 <table><thead>
 <tr>
 <th>参数名</th>
@@ -774,22 +798,30 @@
 <td>isMain</td>
 <td>Int</td>
 <td>Y</td>
-<td>归集的是否是主链币 1：是 0：否</td>
+<td>归集的是否是主链币。1：是；0：否</td>
 </tr>
 </tbody></table>
-<h4 id='57e26a6943-3'>请求示例</h4><div class="highlight"><pre class="highlight plaintext"><code>{
+
+<blockquote>
+<p>请求示例:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>{
   "isMain":1
 }
-</code></pre></div><h4 id='50faad05f3-3'>响应参数</h4>
-<p>暂无data参数</p>
-<h4 id='b0c6ec87f8-3'>响应示例</h4><div class="highlight"><pre class="highlight plaintext"><code>{
+</code></pre></div>
+<blockquote>
+<p>响应示例:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>{
   "code": 200,
   "message": "Success"
 }
 </code></pre></div><h1 id='mpc-co-signer'>MPC Co-Signer</h1><h2 id='153042ed9e'>概述</h2>
 <p>MPC 全称为 Security Multi-Party Computation（<a href="https://zh.wikipedia.org/wiki/安全多方计算">安全多方计算</a>）。通过 MPC 可以做到从生成、使用、存储整个生命周期中，私钥可用不可见。1BitPay 使用 MPC 技术将传统的单私钥变成了分布式的私钥分片，可以有效避免单私钥带来的单点风险，实现团队多人共同管理资金，并支持社交恢复。详细的私钥管理方案可参考 <a href="https://support.1bitpay.io/v/zh/mpcwalletcn/key-management-cn">私钥管理方案</a>.</p>
 
-<p>MPC Co-Signer 可以允许通过API自动实现交易批准和签署交易，取代使用移动设备手动审批，非常适合频繁交易的场景，实现自动化审批及签名。</p>
+<p><aside class="notice">
+  MPC Co-Signer 可以允许通过API自动实现交易批准和签署交易，取代使用移动设备手动审批，非常适合频繁交易的场景，实现自动化审批及签名。
+  </aside></p>
 <h2 id='45d6c048a4'>下载私钥分片</h2>
 <p>根据1BitPay<a href="https://support.1bitpay.io/v/zh/mpcwalletcn/key-management-cn">私钥管理方案</a>，用户创建钱包后，私钥分为三部分，分片1保存在用户设备，分片2备份到iCloud 或 Google Drive，分片3保存在1BitPay SGX可信服务器，当您需要使用 MPC Co-Signer功能时，需要在商户后台 -&gt; ApiKey模块，申请下载私钥分片，APP确认审批后，允许下载加密后的存储在用户设备上的私钥分片1。</p>
 
@@ -834,23 +866,23 @@
 <tr>
 <td>chainId</td>
 <td>String</td>
-<td>B</td>
-<td>待签名列表chainId 链id</td>
+<td>N</td>
+<td>待签名列表chainId: 链id</td>
 </tr>
 <tr>
 <td>status</td>
 <td>String</td>
-<td>Y｜交易状态 1：通过交易 2:拒绝交易</td>
-<td></td>
+<td>Y</td>
+<td>交易状态. 1：通过交易；2:拒绝交易</td>
 </tr>
 </tbody></table>
-<h4 id='b3c70925c1'>签名步骤：</h4>
+<h3 id='b3c70925c1'>签名步骤：</h3>
 <ul>
 <li>获取商户MPC私钥，从商户后台下载即可</li>
 <li>用MPC私钥对参数的JSON结构的字符串进行加密。</li>
 <li>将上一步中生成的即为签名参数data，同业务数据一并传入到apprvoe接口进行交易签名即可</li>
 </ul>
-<h4 id='5308ebf089'>签名示例：</h4>
+<h3 id='5308ebf089'>签名示例：</h3>
 <ul>
 <li>例如id为1的待签名数据signObject的json结构如下:</li>
 </ul>
@@ -875,19 +907,24 @@
 </ul>
 
 <p>data = &quot;HUSDISJDSNDJSJDKSDJSIDJISOADIASLJDALSIDJISALDHAUSIDHA\ASDUAKSD|ADSADAdasdYGYASDHASDJASID&quot;</p>
-<h4 id='4c95618614'>注意：</h4>
-<ul>
-<li>私钥的密码为&quot;1bitpay&quot;+商户的编号</li>
-<li>加密类型采用PKCS12</li>
-<li>加密时均采用UTF-8编码</li>
-</ul>
-<h2 id='f7c93cd51a'>获得待签名列表</h2><h4 id='api-transaction-pending'>请求地址：/api/transaction/pending</h4><h4 id='af989d8988-4'>请求方式</h4>
+
+<aside class="notice">
+说明：
+<br>
+&emsp;&emsp;1、私钥的密码为"1bitpay"+商户的编号
+<br>
+&emsp;&emsp;2、加密类型采用PKCS12
+<br>
+&emsp;&emsp;3、加密时均采用UTF-8编码
+</aside>
+<h2 id='f7c93cd51a'>获得待签名列表</h2><h3 id='86e489d578-3'>请求地址：</h3>
+<p>POST <code>/api/transaction/pending</code></p>
+<h3 id='af989d8988-4'>请求方式</h3>
 <ul>
 <li>Method: POST </li>
-<li>Content-Type: application/json
-#### 请求参数：</li>
+<li>Content-Type: application/json</li>
 </ul>
-
+<h3 id='9b19f8c9cc-4'>请求参数：</h3>
 <table><thead>
 <tr>
 <th>参数名</th>
@@ -909,11 +946,15 @@
 <td>每页数量</td>
 </tr>
 </tbody></table>
-<h4 id='57e26a6943-4'>请求示例</h4><div class="highlight"><pre class="highlight plaintext"><code>{
+
+<blockquote>
+<p>请求示例:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>{
   "pageNum":1,
   "pageSize":20
 }
-</code></pre></div><h4 id='50faad05f3-4'>响应参数</h4>
+</code></pre></div><h3 id='50faad05f3-3'>响应参数</h3>
 <p>data 结构如下：</p>
 
 <table><thead>
@@ -970,7 +1011,11 @@
 <td>链ID</td>
 </tr>
 </tbody></table>
-<h4 id='b0c6ec87f8-4'>响应示例</h4><div class="highlight"><pre class="highlight plaintext"><code>{
+
+<blockquote>
+<p>响应示例:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>{
   "code": 200,
   "message": "Success",
   "data": {
@@ -986,13 +1031,14 @@
      ]
   }
 }
-</code></pre></div><h2 id='8ba46c43fe'>签名</h2><h4 id='api-transaction-approve'>请求地址：/api/transaction/approve</h4><h4 id='af989d8988-5'>请求方式</h4>
+</code></pre></div><h2 id='8ba46c43fe'>签名</h2><h3 id='86e489d578-4'>请求地址：</h3>
+<p>POST <code>/api/transaction/approve</code></p>
+<h3 id='af989d8988-5'>请求方式</h3>
 <ul>
 <li>Method: POST </li>
-<li>Content-Type: application/json
-#### 请求参数：</li>
+<li>Content-Type: application/json</li>
 </ul>
-
+<h3 id='9b19f8c9cc-5'>请求参数：</h3>
 <table><thead>
 <tr>
 <th>参数名</th>
@@ -1011,31 +1057,31 @@
 <td>from</td>
 <td>String</td>
 <td>N</td>
-<td>待签名列表fromAddress：转出地址</td>
+<td>待签名列表fromAddress，转出地址</td>
 </tr>
 <tr>
 <td>to</td>
 <td>String</td>
 <td>N</td>
-<td>待签名列表toAddress：转入地址</td>
+<td>待签名列表toAddress，转入地址</td>
 </tr>
 <tr>
 <td>value</td>
 <td>String</td>
 <td>N</td>
-<td>待签名列表amount： 转入金额</td>
+<td>待签名列表amount，转入金额</td>
 </tr>
 <tr>
 <td>chainId</td>
 <td>String</td>
-<td>B</td>
-<td>待签名列表chainId 链id</td>
+<td>N</td>
+<td>待签名列表chainId，链id</td>
 </tr>
 <tr>
 <td>status</td>
 <td>String</td>
-<td>Y｜交易状态 1：通过交易 2:拒绝交易</td>
-<td></td>
+<td>Y</td>
+<td>交易状态。1：通过交易；2:拒绝交易</td>
 </tr>
 <tr>
 <td>data</td>
@@ -1044,7 +1090,11 @@
 <td>交易签名数据</td>
 </tr>
 </tbody></table>
-<h4 id='57e26a6943-5'>请求示例</h4><div class="highlight"><pre class="highlight plaintext"><code>{
+
+<blockquote>
+<p>请求示例:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>{
   "id":1,
   "from":"TGGh3cGp9P21Ebvg9JitjHoeJaKqrg3bRg",
   "to":"TFMQrPdFWuPzFRXb42sxB22ABCVL6xSopV",
@@ -1053,9 +1103,11 @@
   "status":1,
   "data":"dahsudiasdoaasidoasdaosdasd9as8d9a0s8d90as8d9a0s8d09asduashdkasdjaksdajksdasjdhakjdha"
 }
-</code></pre></div><h4 id='50faad05f3-5'>响应参数</h4>
-<p>暂无data参数</p>
-<h4 id='b0c6ec87f8-5'>响应示例</h4><div class="highlight"><pre class="highlight plaintext"><code>{
+</code></pre></div>
+<blockquote>
+<p>响应示例:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight plaintext"><code>{
   "code": 200,
   "message": "Success"
 }
