@@ -264,45 +264,7 @@ orderNo|String| 订单号
 
 
 
-## 资金归集
 
-<aside class="notice">
- 注意：建议商户每5分钟调用一次该接口进行资金归集，否则可能影响正常交易
-</aside>
-
-
-### 请求地址：
-
-POST `/api/transaction/assets/collect`
-
-### 请求方式
-
-- Method: POST 
-- Content-Type: application/json
- 
-### 请求参数：
-
-参数名 | 类型 | 必要性 | 描述
---------- | ----------- |  ----------- | -----------
-| isMain          | Int    |Y|归集的是否是主链币。1：是；0：否
-
-> 请求示例:
-
-```json
-{
-  "isMain":1
-}
-```
-
-
->  响应示例:
-
-```json
-{
-  "code": 200,
-  "message": "Success"
-}
-```
 
 
 
@@ -509,6 +471,46 @@ POST `/api/transaction/approve`
   "chainId":"20",
   "status":1,
   "data":"dahsudiasdoaasidoasdaosdasd9as8d9a0s8d90as8d9a0s8d09asduashdkasdjaksdajksdasjdhakjdha"
+}
+```
+
+
+>  响应示例:
+
+```json
+{
+  "code": 200,
+  "message": "Success"
+}
+```
+
+## 资金归集
+
+<aside class="notice">
+ 注意：建议商户每5分钟调用一次该接口进行资金归集，否则可能影响正常交易
+</aside>
+
+
+### 请求地址：
+
+POST `/api/transaction/assets/collect`
+
+### 请求方式
+
+- Method: POST 
+- Content-Type: application/json
+ 
+### 请求参数：
+
+参数名 | 类型 | 必要性 | 描述
+--------- | ----------- |  ----------- | -----------
+| isMain          | Int    |Y|归集的是否是主链币。1：是；0：否
+
+> 请求示例:
+
+```json
+{
+  "isMain":1
 }
 ```
 
