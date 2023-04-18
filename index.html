@@ -296,7 +296,7 @@
     </script>
   </head>
 
-  <body class="index" data-languages="[]">
+  <body class="index" data-languages="[&quot;json&quot;,&quot;java&quot;,&quot;python&quot;]">
     <a href="#" id="nav-button">
       <span>
         NAV
@@ -305,6 +305,11 @@
     </a>
     <div class="toc-wrapper">
       <a href="https://1bitpay.io" target="_blank"><img src="images/logo-eb94684b.png" class="logo" alt="" /></a>
+        <div class="lang-selector">
+              <a href="#" data-language-name="json">json</a>
+              <a href="#" data-language-name="java">java</a>
+              <a href="#" data-language-name="python">python</a>
+        </div>
         <div class="search">
           <input type="text" class="search" id="input-search" placeholder="Search">
         </div>
@@ -317,13 +322,19 @@
             <a href="#quick-start" class="toc-h1 toc-link" data-title="Quick Start">Quick Start</a>
               <ul class="toc-list-h2">
                   <li>
+                    <a href="#step-by-step" class="toc-h2 toc-link" data-title="Step by step">Step by step</a>
+                  </li>
+                  <li>
                     <a href="#create-an-api-key" class="toc-h2 toc-link" data-title="Create an API Key">Create an API Key</a>
                   </li>
                   <li>
                     <a href="#ip-whitelist" class="toc-h2 toc-link" data-title="IP whitelist">IP whitelist</a>
                   </li>
                   <li>
-                    <a href="#api-authentication" class="toc-h2 toc-link" data-title="API Authentication *">API Authentication *</a>
+                    <a href="#api-authentication" class="toc-h2 toc-link" data-title="API Authentication">API Authentication</a>
+                  </li>
+                  <li>
+                    <a href="#authentication-example" class="toc-h2 toc-link" data-title="Authentication example">Authentication example</a>
                   </li>
                   <li>
                     <a href="#general-info" class="toc-h2 toc-link" data-title="General Info">General Info</a>
@@ -331,7 +342,18 @@
               </ul>
           </li>
           <li>
-            <a href="#c2c" class="toc-h1 toc-link" data-title="C2C  *">C2C  *</a>
+            <a href="#c2c" class="toc-h1 toc-link" data-title="C2C">C2C</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#get-rate" class="toc-h2 toc-link" data-title="Get Rate">Get Rate</a>
+                  </li>
+                  <li>
+                    <a href="#create-order" class="toc-h2 toc-link" data-title="Create Order">Create Order</a>
+                  </li>
+                  <li>
+                    <a href="#fund-collection" class="toc-h2 toc-link" data-title="Fund collection">Fund collection</a>
+                  </li>
+              </ul>
           </li>
           <li>
             <a href="#mpc-co-signer" class="toc-h1 toc-link" data-title="MPC Co-Signer">MPC Co-Signer</a>
@@ -340,16 +362,16 @@
                     <a href="#overview" class="toc-h2 toc-link" data-title="Overview">Overview</a>
                   </li>
                   <li>
-                    <a href="#download-the-piece" class="toc-h2 toc-link" data-title="Download the piece">Download the piece</a>
+                    <a href="#download-the-pk-shard" class="toc-h2 toc-link" data-title="Download the PK Shard">Download the PK Shard</a>
                   </li>
                   <li>
-                    <a href="#signature-algorithm" class="toc-h2 toc-link" data-title="Signature Algorithm *">Signature Algorithm *</a>
+                    <a href="#signature-algorithm" class="toc-h2 toc-link" data-title="Signature Algorithm">Signature Algorithm</a>
                   </li>
                   <li>
-                    <a href="#get-list-of-pending-signatures" class="toc-h2 toc-link" data-title="Get list of pending signatures *">Get list of pending signatures *</a>
+                    <a href="#get-list-of-pending-signatures" class="toc-h2 toc-link" data-title="Get list of pending signatures">Get list of pending signatures</a>
                   </li>
                   <li>
-                    <a href="#sign" class="toc-h2 toc-link" data-title="Sign *">Sign *</a>
+                    <a href="#sign" class="toc-h2 toc-link" data-title="Sign">Sign</a>
                   </li>
               </ul>
           </li>
@@ -357,7 +379,7 @@
             <a href="#mpc-waas" class="toc-h1 toc-link" data-title="MPC WaaS">MPC WaaS</a>
           </li>
           <li>
-            <a href="#errors" class="toc-h1 toc-link" data-title="Errors *">Errors *</a>
+            <a href="#errors" class="toc-h1 toc-link" data-title="Errors">Errors</a>
           </li>
       </ul>
         <ul class="toc-footer">
@@ -370,48 +392,782 @@
       <div class="content">
         <h1 id='introduction'>Introduction</h1>
 <p>Welcome to 1BitPay API, you can use our API to manage transactions, automate signatures, manage assets, etc., and more functions will come soon.</p>
-<h1 id='quick-start'>Quick Start</h1><h2 id='create-an-api-key'>Create an API Key</h2>
+<h1 id='quick-start'>Quick Start</h1><h2 id='step-by-step'>Step by step</h2>
+<ol>
+<li>Create an <a href="#api-key">API Key</a>，<a href="#ip-whitelist">IP whitelist</a> can be set as needed。</li>
+<li>Learn about <a href="#api-authentication">API Authentication</a>and<a href="#general-info">General Info</a>。</li>
+<li>Use <a href="#sandbox">Sandbox</a> Environment for testing</li>
+<li>Access the interface of <a href="#get-rate">Get Rate</a> and <a href="#create-order">Create Order</a>.</li>
+<li><a href="#download-the-pk-shard">Download the PK Shard</a>，Learn about the rules of the MPC Co-Singer <a href="#signature-algorithm">Signature Algorithm</a>.</li>
+<li>Read the <a href="#get-list-of-pending-signatures">list to be signed</a> regularly, 2 minutes/time is recommended, and sign in time according to the actual <a href="#sign">situation</a>.</li>
+<li>And regularly <a href="#fund-collection">collect funds</a>, it is recommended to 5 minutes / time</li>
+<li>After the test is completed, contact us to release the live.</li>
+</ol>
+<h2 id='create-an-api-key'>Create an API Key</h2>
 <p>Please log in to the merchant system, open &quot;ApiKey&quot; in the left navigation, click Add, and create an API Key. After the API Key is successfully created, you can use the API Key to access the 1BitPay API.</p>
 <h2 id='ip-whitelist'>IP whitelist</h2>
 <p>If you set a whitelist when creating the API Key, when calling the 1BitPay API, only requests from the IP whitelist addresses you set are allowed.</p>
-<h2 id='api-authentication'>API Authentication *</h2><h2 id='general-info'>General Info</h2><h3 id='base-url'>Base URL *</h3>
+<h2 id='api-authentication'>API Authentication</h2>
+<ul>
+<li>Merge public parameters with business parameters, remove Sign parameters, and empty parameters.</li>
+<li>After sorting the Keys of the parameter set according to ASCII, connect them with &quot;=&quot;.</li>
+<li>Splice the concatenated string with the merchant&#39;s API Secret parameter.</li>
+<li>Make the generated string into 32-bit md5 (lowercase) to generate the parameter Sign.</li>
+</ul>
+<h2 id='authentication-example'>Authentication example</h2>
+<ul>
+<li>For example business parameters:</li>
+</ul>
+
+<p>{
+   &quot;orderNo&quot;: &quot;Or12898771811&quot;,
+   &quot;name&quot;:&quot;John Li&quot;
+}</p>
+
+<ul>
+<li>Merge business parameters with public parameters and remove Sign to get the following results:</li>
+</ul>
+
+<p>{
+   &quot;orderNo&quot;: &quot;Or12898771811&quot;,
+   &quot;name&quot;: &quot;John Li&quot;,
+   &quot;TimeStamp&quot;: 1566781991111,
+   &quot;Nonce&quot;: &quot;dnasja1N&quot;,
+   &quot;MerchantNo&quot;: &quot;meraojiasdoa123&quot;,
+   &quot;Lang&quot;: &quot;en&quot;,
+   &quot;SignType&quot;: &quot;1&quot;,
+   &quot;ApiKey&quot;: &quot;asdhuasdaosd&quot;
+}</p>
+
+<ul>
+<li>After the Keys of the parameters are sorted by ASCII, the result obtained by connecting them with &quot;=&quot; is as follows:</li>
+</ul>
+
+<p>ApiKey=asdhuasdaosd&amp;Lang=en&amp;MerchantNo=meraojiasdoa123&amp;name=John Li&amp;Nonce=dnasja1N&amp;orderNo=Or12898771811&amp;SignType=1&amp;TimeStamp=1566781991111</p>
+
+<ul>
+<li>Assuming that API Secret=merasdasd, the result obtained in the previous step is stitched together with the API Secret to get the result as follows:</li>
+</ul>
+
+<p>ApiKey=asdhuasdaosd&amp;Lang=en&amp;MerchantNo=meraojiasdoa123&amp;name=John Li&amp;Nonce=dnasja1N&amp;orderNo=Or12898771811&amp;SignType=1&amp;TimeStamp=1566781991111merasdasd</p>
+
+<ul>
+<li>Perform md5 on the result obtained in the previous step to get the Sign result as follows:</li>
+</ul>
+
+<p>md5(ApiKey=asdhuasdaosd&amp;Lang=en&amp;MerchantNo=meraojiasdoa123&amp;name=John Li&amp;Nonce=dnasja1N&amp;orderNo=Or12898771811&amp;SignType=1&amp;TimeStamp=1566781991111merasdasd)</p>
+
+<ul>
+<li>Note that the last step is 32-bit lowercase md5</li>
+</ul>
+<h2 id='general-info'>General Info</h2><h3 id='base-url'>Base URL *</h3>
 <p>https://api.1bitpay.io</p>
-<h3 id='public-parameters'>Public Parameters *</h3>
-<p>The public request parameters are the request parameters that each interface needs to use. Each request needs to carry these parameters in order to initiate the request normally. The initial letters of public request parameters are all <code>uppercase</code> to distinguish them from ordinary interface request parameters</p>
+<h3 id='public-parameters'>Public Parameters</h3>
+<p>The public request parameters are the request parameters that each interface needs to use. Each request needs to carry these parameters in order to initiate the request normally.The initial letters of the public request parameters are <code>uppercase</code>,In this way, it is distinguished from ordinary interface request parameters, and public parameters need to be placed in the Header.</p>
 
 <table><thead>
 <tr>
-<th>Parameter</th>
+<th>Parameters</th>
 <th>Type</th>
 <th>Description</th>
 </tr>
 </thead><tbody>
 <tr>
 <td>Nonce</td>
-<td>int</td>
+<td>Int</td>
 <td>Random combination of 6 characters or numbers</td>
+</tr>
+<tr>
+<td>TimeStamp</td>
+<td>Int</td>
+<td>13-digit millisecond-level timestamp</td>
+</tr>
+<tr>
+<td>MerchantNo</td>
+<td>String</td>
+<td>Merchant ID</td>
+</tr>
+<tr>
+<td>SignType</td>
+<td>Int</td>
+<td>The signature type to take. 1: MD5; 2: HASH; currently only supports MD5</td>
+</tr>
+<tr>
+<td>Lang</td>
+<td>Strng</td>
+<td>language. en: English; zh: Chinese</td>
+</tr>
+<tr>
+<td>Sign</td>
+<td>String</td>
+<td>Signature value, see signature rule description for specific rules</td>
+</tr>
+<tr>
+<td>ApiKey</td>
+<td>String</td>
+<td>Merchant API Key</td>
+</tr>
+</tbody></table>
+<h3 id='public-response'>Public Response</h3>
+<p>The public response parameters are as follows, code is the status code, data is the business response parameter, and message is the response result</p>
+
+<table><thead>
+<tr>
+<th>Parameters</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>code</td>
+<td>Int</td>
+<td>200 Success, See status description for details</td>
+</tr>
+<tr>
+<td>message</td>
+<td>String</td>
+<td>Success</td>
+</tr>
+<tr>
+<td>data</td>
+<td>Object</td>
+<td>The specific business will display different data structures, please refer to the specific business for details</td>
 </tr>
 </tbody></table>
 <h3 id='sandbox'>Sandbox</h3>
 <p>https://sandbox.1bitpay.io</p>
-<h1 id='c2c'>C2C  *</h1><h1 id='mpc-co-signer'>MPC Co-Signer</h1><h2 id='overview'>Overview</h2>
+<h1 id='c2c'>C2C</h1><h2 id='get-rate'>Get Rate</h2><h3 id='http-request'>HTTP Request</h3>
+<p>POST <code>/api/otc/rate</code></p>
+<h3 id='request-method'>Request Method</h3>
+<ul>
+<li>Method: POST </li>
+<li>Content-Type: application/json</li>
+</ul>
+<h3 id='query-parameters'>Query Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameters</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>cryptoCurrency</td>
+<td>String</td>
+<td>Y</td>
+<td>Transaction currency</td>
+</tr>
+<tr>
+<td>legalCurrency</td>
+<td>String</td>
+<td>Y</td>
+<td>Payment currency</td>
+</tr>
+</tbody></table>
+
+<blockquote>
+<p>Request example:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"cryptoCurrency"</span><span class="p">:</span><span class="s2">"USDT"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"legalCurrency"</span><span class="p">:</span><span class="s2">"CNY"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div><h3 id='response-parameters'>Response Parameters</h3>
+<p>The data parameter is as follows:</p>
+
+<table><thead>
+<tr>
+<th>Parameters</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>buyRate</td>
+<td>Decimal</td>
+<td>The latest rate for buy orders</td>
+</tr>
+<tr>
+<td>sellRate</td>
+<td>Decimal</td>
+<td>The latest rate for sell orders</td>
+</tr>
+</tbody></table>
+
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"code"</span><span class="p">:</span><span class="w"> </span><span class="mi">200</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Success"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"buyRate"</span><span class="p">:</span><span class="s2">"6.47"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"sellRate"</span><span class="p">:</span><span class="s2">"6.9"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div><h2 id='create-order'>Create Order</h2><h3 id='http-request-2'>HTTP Request</h3>
+<p>POST <code>/api/otc/create</code></p>
+<h3 id='request-method-2'>Request Method</h3>
+<ul>
+<li>Method: POST </li>
+<li>Content-Type: application/json</li>
+</ul>
+<h3 id='query-parameters-2'>Query Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameters</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>userName</td>
+<td>String</td>
+<td>Y</td>
+<td>User name</td>
+</tr>
+<tr>
+<td>areaCode</td>
+<td>String</td>
+<td>Y</td>
+<td>User phone area code</td>
+</tr>
+<tr>
+<td>phone</td>
+<td>String</td>
+<td>Y</td>
+<td>User phone number</td>
+</tr>
+<tr>
+<td>syncUrl</td>
+<td>String</td>
+<td>N</td>
+<td>Synchronous callback address</td>
+</tr>
+<tr>
+<td>asyncUrl</td>
+<td>String</td>
+<td>N</td>
+<td>Asynchronous callback address</td>
+</tr>
+<tr>
+<td>cryptoAmount</td>
+<td>Decimal</td>
+<td>Y</td>
+<td>Buy or sell quantity</td>
+</tr>
+<tr>
+<td>cryptoCurrency</td>
+<td>String</td>
+<td>Y</td>
+<td>Transaction currency</td>
+</tr>
+<tr>
+<td>legalCurrency</td>
+<td>String</td>
+<td>Y</td>
+<td>Payment currency</td>
+</tr>
+<tr>
+<td>idCardType</td>
+<td>Int</td>
+<td>Y</td>
+<td>Type of certificate. 1: ID card; 2: Passport</td>
+</tr>
+<tr>
+<td>idCard</td>
+<td>String</td>
+<td>Y</td>
+<td>ID number</td>
+</tr>
+<tr>
+<td>kyc</td>
+<td>Int</td>
+<td>Y</td>
+<td>KYC level, currently KYC level pass 2</td>
+</tr>
+<tr>
+<td>merchantOrderNo</td>
+<td>String</td>
+<td>Y</td>
+<td>Merchant order number</td>
+</tr>
+<tr>
+<td>orderType</td>
+<td>Int</td>
+<td>Y</td>
+<td>Order Type. 1: buy ; 2: sell</td>
+</tr>
+<tr>
+<td>payWay</td>
+<td>Int</td>
+<td>Y</td>
+<td>payment method. 1: bank card; 2: Alipay; 3: WeChat payment. User sell order currently only supports 1: bank card</td>
+</tr>
+<tr>
+<td>bank</td>
+<td>String</td>
+<td>N</td>
+<td>Account opening bank for user&#39;s receiving payment, required for selling orders</td>
+</tr>
+<tr>
+<td>bankAccount</td>
+<td>String</td>
+<td>N</td>
+<td>The user&#39;s receiving account, which is required for selling orders</td>
+</tr>
+<tr>
+<td>bankBranch</td>
+<td>String</td>
+<td>N</td>
+<td>Account opening sub-branch for user collection</td>
+</tr>
+<tr>
+<td>h5</td>
+<td>Bool</td>
+<td>Y</td>
+<td>Cash register display type. true: mobile ; false: PC</td>
+</tr>
+</tbody></table>
+
+<blockquote>
+<p>Request example:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"userName"</span><span class="p">:</span><span class="s2">"Chen"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"areaCode"</span><span class="p">:</span><span class="s2">"+86"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"phone"</span><span class="p">:</span><span class="s2">"18848820305"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"syncUrl"</span><span class="p">:</span><span class="s2">"https://example.com"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"asyncUrl"</span><span class="p">:</span><span class="s2">"https://example.com"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"cryptoAmount"</span><span class="p">:</span><span class="s2">"10"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"cryptoCurrency"</span><span class="p">:</span><span class="s2">"USDT"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"legalCurrency"</span><span class="p">:</span><span class="s2">"CNY"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"idCardType"</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"idCard"</span><span class="p">:</span><span class="s2">"412627288918989891"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"merchantNo"</span><span class="p">:</span><span class="s2">"mer1c92b0319ef5b794"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"merchantOrderNo"</span><span class="p">:</span><span class="s2">"1231222112d8"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"orderType"</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"payWay"</span><span class="p">:</span><span class="s2">"1"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"bank"</span><span class="p">:</span><span class="s2">"建设银行"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"bankAccount"</span><span class="p">:</span><span class="s2">"6217229282829299111"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"bankBranch"</span><span class="p">:</span><span class="s2">"建设支行"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"h5"</span><span class="p">:</span><span class="kc">false</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div><h3 id='response-parameters-2'>Response Parameters</h3>
+<p>The data parameter is as follows:</p>
+
+<table><thead>
+<tr>
+<th>Parameters</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>url</td>
+<td>String</td>
+<td>Cash register address</td>
+</tr>
+<tr>
+<td>isNew</td>
+<td>Bool</td>
+<td>Is it a new order</td>
+</tr>
+<tr>
+<td>orderNo</td>
+<td>String</td>
+<td>Order number</td>
+</tr>
+</tbody></table>
+
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"code"</span><span class="p">:</span><span class="w"> </span><span class="mi">200</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Success"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://sanbox.1bitpay.io/1bitpay-open-api-h5/otc.html?t=02d457b0ced0576a69282054911585aa&amp;o=335793449653514240&amp;l=zh"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"isNew"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"orderNo"</span><span class="p">:</span><span class="w"> </span><span class="s2">"335793449653514240"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div><h2 id='fund-collection'>Fund collection</h2>
+<aside class="notice">
+ Note: It is recommended that merchants call this interface every 5 minutes for fund collection, otherwise normal transactions may be affected
+</aside>
+<h3 id='http-request-3'>HTTP Request</h3>
+<p>POST <code>/api/transaction/assets/collect</code></p>
+<h3 id='request-method-3'>Request Method</h3>
+<ul>
+<li>Method: POST </li>
+<li>Content-Type: application/json</li>
+</ul>
+<h3 id='query-parameters-3'>Query Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameters</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>isMain</td>
+<td>Int</td>
+<td>Y</td>
+<td>Whether the collection is the main chain currency. 1: yes; 0: no</td>
+</tr>
+</tbody></table>
+
+<blockquote>
+<p>Request example:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"isMain"</span><span class="p">:</span><span class="mi">1</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"code"</span><span class="p">:</span><span class="w"> </span><span class="mi">200</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Success"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div><h1 id='mpc-co-signer'>MPC Co-Signer</h1><h2 id='overview'>Overview</h2>
 <p>The full name of MPC is <a href="https://en.wikipedia.org/wiki/Secure_multi-party_computation">Secure Multi-Party Computation</a>. Through MPC, the private key is available and invisible throughout the entire life cycle from generation, use, and storage. 1BitPay uses MPC technology to transform the traditional single private key into distributed private key sharding, which can effectively avoid the single-point risk brought by a single private key, realize the joint management of funds by multiple people in the team, and support social recovery. For detailed private key management scheme, please refer to <a href="https://support.1bitpay.io/mpcwallet/key-management">Private key management</a>.</p>
 
-<p>MPC Co-Signer can allow automatic transaction approval and signing transactions through API, replacing manual approval with mobile devices. It is very suitable for frequent transaction scenarios and realizes automatic approval and signature.</p>
-<h2 id='download-the-piece'>Download the piece</h2>
-<p>According to 1BitPay <a href="https://support.1bitpay.io/mpcwallet/key-management">Private key management</a>, after the user creates a wallet, the private key is divided into three parts, and the fragment 1 is stored in the user Device, piece 2 is backed up to iCloud or Google Drive, piece 3 is saved in 1BitPay SGX trusted server, when you need to use the MPC Co-Signer function, you need to apply for downloading the private key piece in the merchant background -&gt; ApiKey module, After the APP confirms the approval, it is allowed to download the encrypted private key fragment 1 stored on the user device.</p>
+<p><aside class="notice">
+  MPC Co-Signer can allow automatic transaction approval and signing transactions through API, replacing manual approval with mobile devices. It is very suitable for frequent transaction scenarios and realizes automatic approval and signature.
+  </aside></p>
+<h2 id='download-the-pk-shard'>Download the PK Shard</h2>
+<p>According to 1BitPay <a href="https://support.1bitpay.io/mpcwallet/key-management">Private key management</a>, after the user creates a wallet, the private key is divided into three parts, and the fragment 1 is stored in the user Device, PK Shard 2 is backed up to iCloud or Google Drive, PK Shard 3 is saved in 1BitPay SGX trusted server, when you need to use the MPC Co-Signer function, you need to apply for downloading the private key PK Shard in the merchant background -&gt; ApiKey module, After the APP confirms the approval, it is allowed to download the encrypted private key fragment 1 stored on the user device.</p>
 
 <p><aside class="warning">
   Although private key sharding is not a complete private key, it is also an important part of asset management. It is recommended to be operated by a dedicated person and deployed in a secure environment.
   </aside></p>
-<h2 id='signature-algorithm'>Signature Algorithm *</h2><h2 id='get-list-of-pending-signatures'>Get list of pending signatures *</h2><h2 id='sign'>Sign *</h2><h1 id='mpc-waas'>MPC WaaS</h1>
+<h2 id='signature-algorithm'>Signature Algorithm</h2>
+<p>The parameters involved in the signature are as follows:</p>
+
+<table><thead>
+<tr>
+<th>Parameters</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>id</td>
+<td>Int</td>
+<td>Y</td>
+<td>Pending signature list id</td>
+</tr>
+<tr>
+<td>from</td>
+<td>String</td>
+<td>N</td>
+<td>Pending signature list fromAddress: Transfer-out address</td>
+</tr>
+<tr>
+<td>to</td>
+<td>String</td>
+<td>N</td>
+<td>Pending signature list toAddress: transfer address</td>
+</tr>
+<tr>
+<td>value</td>
+<td>String</td>
+<td>N</td>
+<td>Pending signature list amount: Transfer amount</td>
+</tr>
+<tr>
+<td>chainId</td>
+<td>String</td>
+<td>N</td>
+<td>Pending signature list chainId: chainId</td>
+</tr>
+<tr>
+<td>status</td>
+<td>String</td>
+<td>Y</td>
+<td>Sign status. 1: approved; 2: rejected</td>
+</tr>
+</tbody></table>
+<h3 id='signature-steps'>Signature steps:</h3>
+<ul>
+<li>Obtain the merchant MPC private key and download it from the merchant background</li>
+<li>Encrypt the string of the parameter JSON structure with the MPC private key.</li>
+<li>The signature parameter data generated in the previous step is passed to the apprvoe interface together with the business data for transaction signature</li>
+</ul>
+<h3 id='signature-example'>Signature example:</h3>
+<ul>
+<li>For example, the json structure of the data signObject whose id is 1 is as follows:</li>
+</ul>
+
+<p>signObject:{
+  &quot;id&quot;:1,
+  &quot;from&quot;:&quot;TGGh3cGp9P21Ebvg9JitjHoeJaKqrg3bRg&quot;,
+  &quot;to&quot;:&quot;TFMQrPdFWuPzFRXb42sxB22ABCVL6xSopV&quot;,
+  &quot;value&quot;:&quot;4.1&quot;,
+  &quot;chainId&quot;:&quot;56&quot;,
+  &quot;status&quot;:1
+}</p>
+
+<ul>
+<li>Convert the json structure in the previous step to json string to get signObjectString</li>
+</ul>
+
+<p>signObjectString = toString(signObj)</p>
+
+<ul>
+<li>At this time, use the private key file to encrypt the signObjectString string to obtain data</li>
+</ul>
+
+<p>data = &quot;HUSDISJDSNDJSJDKSDJSIDJISOADIASLJDALSIDJISALDHAUSIDHA\ASDUAKSD|ADSADAdasdYGYASDHASDJASID&quot;</p>
+
+<aside class="notice">
+Explanation
+<br>
+&emsp;&emsp;1. The password of the private key is "1bitpay" + the merchant's number
+<br>
+&emsp;&emsp;2. The encryption type adopts PKCS12
+<br>
+&emsp;&emsp;3. UTF-8 encoding is used for encryption
+</aside>
+<div class="highlight"><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">base64</span>
+<span class="kn">from</span> <span class="nn">cryptography.hazmat.primitives.ciphers</span> <span class="kn">import</span> <span class="n">Cipher</span><span class="p">,</span> <span class="n">algorithms</span><span class="p">,</span> <span class="n">modes</span>
+<span class="kn">from</span> <span class="nn">cryptography.hazmat.primitives.asymmetric</span> <span class="kn">import</span> <span class="n">padding</span>
+<span class="kn">from</span> <span class="nn">cryptography.hazmat.primitives.serialization</span> <span class="kn">import</span> <span class="n">pkcs12</span>
+<span class="n">pfx_password</span> <span class="o">=</span> <span class="s">"1bitpay"</span> <span class="o">+</span> <span class="n">Merchant</span> <span class="n">ID</span>
+<span class="n">srcSouse</span> <span class="o">=</span> <span class="s">"data to be encrypted"</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s">"/1bitpay.pfx"</span><span class="p">,</span> <span class="s">"rb"</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+  <span class="n">pfx</span><span class="p">,</span> <span class="o">*</span><span class="n">_</span> <span class="o">=</span> <span class="n">pkcs12</span><span class="p">.</span><span class="n">load_key_and_certificates</span><span class="p">(</span><span class="n">f</span><span class="p">.</span><span class="n">read</span><span class="p">(),</span> <span class="n">pfx_password</span><span class="p">.</span><span class="n">encode</span><span class="p">())</span>
+<span class="n">cipher</span> <span class="o">=</span> <span class="n">Cipher</span><span class="p">(</span><span class="n">algorithms</span><span class="p">.</span><span class="n">TripleDES</span><span class="p">(</span><span class="n">pfx</span><span class="p">[:</span><span class="mi">24</span><span class="p">]),</span> <span class="n">modes</span><span class="p">.</span><span class="n">ECB</span><span class="p">()).</span><span class="n">encryptor</span><span class="p">()</span>
+<span class="nb">bytes</span> <span class="o">=</span> <span class="n">cipher</span><span class="p">.</span><span class="n">update</span><span class="p">(</span><span class="n">srcSouse</span><span class="p">.</span><span class="n">encode</span><span class="p">())</span> <span class="o">+</span> <span class="n">cipher</span><span class="p">.</span><span class="n">finalize</span><span class="p">()</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">base64</span><span class="p">.</span><span class="n">b64encode</span><span class="p">(</span><span class="n">pfx</span><span class="p">.</span><span class="n">sign</span><span class="p">(</span><span class="nb">bytes</span><span class="p">,</span> <span class="n">padding</span><span class="p">.</span><span class="n">PKCS1v15</span><span class="p">(),</span> <span class="n">pfx</span><span class="p">.</span><span class="n">private_bytes</span><span class="p">(</span>
+    <span class="n">encoding</span><span class="o">=</span><span class="n">serialization</span><span class="p">.</span><span class="n">Encoding</span><span class="p">.</span><span class="n">DER</span><span class="p">,</span>
+    <span class="nb">format</span><span class="o">=</span><span class="n">serialization</span><span class="p">.</span><span class="n">PrivateFormat</span><span class="p">.</span><span class="n">PKCS8</span><span class="p">,</span>
+    <span class="n">encryption_algorithm</span><span class="o">=</span><span class="n">serialization</span><span class="p">.</span><span class="n">NoEncryption</span><span class="p">(),</span>
+<span class="p">))).</span><span class="n">decode</span><span class="p">()</span>
+</code></pre></div><div class="highlight"><pre class="highlight java tab-java"><code><span class="kn">import</span> <span class="nn">java.io.InputStream</span>
+<span class="kn">import</span> <span class="nn">java.crypto.Cipher</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.security.KeyStore</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.security.PrivateKey</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">sun.misc.BASE64Encoder</span><span class="o">;</span>
+
+<span class="nc">InputStream</span> <span class="n">inputStream</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">FileInputStream</span><span class="o">(</span><span class="s">"/1bitpay.pfx"</span><span class="o">);</span> <span class="c1">// Convert private key file to file stream</span>
+<span class="nc">KeyStore</span>  <span class="n">store</span> <span class="o">=</span> <span class="nc">KeyStore</span><span class="o">.</span><span class="na">getInstance</span><span class="o">(</span><span class="s">"PKCS12"</span><span class="o">,</span> <span class="s">"BC"</span><span class="o">);</span> <span class="c1">// Define the key store</span>
+<span class="n">store</span><span class="o">.</span><span class="na">load</span><span class="o">(</span><span class="n">inputStream</span><span class="o">,</span> <span class="n">pfxPassword</span><span class="o">.</span><span class="na">toCharArray</span><span class="o">());</span> <span class="c1">// Load the private key, pfxPassword = "1bitpay" + merchant ID</span>
+<span class="nc">PrivateKey</span> <span class="n">privateKey</span> <span class="o">=</span> <span class="o">(</span><span class="nc">PrivateKey</span><span class="o">)</span> <span class="n">store</span><span class="o">.</span><span class="na">getKey</span><span class="o">(</span><span class="s">"1BitPay"</span><span class="o">,</span> <span class="n">pfxPassword</span><span class="o">.</span><span class="na">toCharArray</span><span class="o">())</span> <span class="c1">// Get the private key object</span>
+<span class="nc">Cipher</span> <span class="n">cipher</span> <span class="o">=</span> <span class="nc">Cipher</span><span class="o">.</span><span class="na">getInstance</span><span class="o">(</span><span class="n">privateKey</span><span class="o">.</span><span class="na">getAlgorithm</span><span class="o">());</span> <span class="c1">// Get the private key Cipher object</span>
+<span class="n">cipher</span><span class="o">.</span><span class="na">init</span><span class="o">(</span><span class="nc">Cipher</span><span class="o">.</span><span class="na">ENCRYPT_MODE</span><span class="o">,</span> <span class="n">privateKey</span><span class="o">);</span>  <span class="c1">// Initialize Cipher</span>
+<span class="kt">byte</span><span class="o">[]</span> <span class="n">bytes</span> <span class="o">=</span> <span class="n">cipher</span><span class="o">.</span><span class="na">doFinal</span><span class="o">(</span><span class="n">srcSouse</span><span class="o">.</span><span class="na">getBytes</span><span class="o">(</span><span class="s">"UTF-8"</span><span class="o">));</span> <span class="c1">// start encryption</span>
+<span class="nc">String</span> <span class="n">data</span> <span class="o">=</span> <span class="n">encryptBASE64</span><span class="o">(</span><span class="n">bytes</span><span class="o">);</span> <span class="c1">// base64 encoding to get the signature string</span>
+</code></pre></div><h2 id='get-list-of-pending-signatures'>Get list of pending signatures</h2><h3 id='http-request-4'>HTTP Request</h3>
+<p>POST <code>/api/transaction/pending</code></p>
+<h3 id='request-method-4'>Request Method</h3>
+<ul>
+<li>Method: POST </li>
+<li>Content-Type: application/json</li>
+</ul>
+<h3 id='query-parameters-4'>Query Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameters</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>pageNum</td>
+<td>Int</td>
+<td>Y</td>
+<td>Page number</td>
+</tr>
+<tr>
+<td>pageSize</td>
+<td>Int</td>
+<td>Y</td>
+<td>Page size</td>
+</tr>
+</tbody></table>
+
+<blockquote>
+<p>Request example:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"pageNum"</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"pageSize"</span><span class="p">:</span><span class="mi">20</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div><h3 id='response-parameters-3'>Response Parameters</h3>
+<p>The data structure is as follows:</p>
+
+<table><thead>
+<tr>
+<th>Parameters</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>total</td>
+<td>Int</td>
+<td>The total amount</td>
+</tr>
+<tr>
+<td>list</td>
+<td>List</td>
+<td>Pending signature list</td>
+</tr>
+</tbody></table>
+
+<p>The list structure is as follows:</p>
+
+<table><thead>
+<tr>
+<th>Parameters</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>id</td>
+<td>Int</td>
+<td>ID</td>
+</tr>
+<tr>
+<td>fromAddress</td>
+<td>String</td>
+<td>from Address</td>
+</tr>
+<tr>
+<td>toAddress</td>
+<td>String</td>
+<td>to Address</td>
+</tr>
+<tr>
+<td>amount</td>
+<td>Decimal</td>
+<td>Amount of the transaction</td>
+</tr>
+<tr>
+<td>chainId</td>
+<td>String</td>
+<td>Chain Id</td>
+</tr>
+</tbody></table>
+
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"code"</span><span class="p">:</span><span class="w"> </span><span class="mi">200</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Success"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+     </span><span class="err">total:</span><span class="mi">25</span><span class="p">,</span><span class="w">
+     </span><span class="err">list:</span><span class="p">[</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"id"</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"fromAddress"</span><span class="p">:</span><span class="s2">"TGGh3cGp9P21Ebvg9JitjHoeJaKqrg3bRg"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"toAddress"</span><span class="p">:</span><span class="s2">"TFMQrPdFWuPzFRXb42sxB22ABCVL6xSopV"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"amount"</span><span class="p">:</span><span class="s2">"4.1"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"chainId"</span><span class="p">:</span><span class="s2">"56"</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+     </span><span class="p">]</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div><h2 id='sign'>Sign</h2><h3 id='http-request-5'>HTTP Request</h3>
+<p>POST <code>/api/transaction/approve</code></p>
+<h3 id='request-method-5'>Request Method</h3>
+<ul>
+<li>Method: POST </li>
+<li>Content-Type: application/json</li>
+</ul>
+<h3 id='query-parameters-5'>Query Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameters</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>id</td>
+<td>Int</td>
+<td>Y</td>
+<td>Pending signature list id</td>
+</tr>
+<tr>
+<td>from</td>
+<td>String</td>
+<td>N</td>
+<td>Pending signature list fromAddress: Transfer-out address</td>
+</tr>
+<tr>
+<td>to</td>
+<td>String</td>
+<td>N</td>
+<td>Pending signature list toAddress: transfer address</td>
+</tr>
+<tr>
+<td>value</td>
+<td>String</td>
+<td>N</td>
+<td>Pending signature list amount: Transfer amount</td>
+</tr>
+<tr>
+<td>chainId</td>
+<td>String</td>
+<td>N</td>
+<td>Pending signature list chainId: chainId</td>
+</tr>
+<tr>
+<td>status</td>
+<td>String</td>
+<td>Y</td>
+<td>Sign status. 1: approved; 2: rejected</td>
+</tr>
+<tr>
+<td>data</td>
+<td>String</td>
+<td>Y</td>
+<td>Signature data</td>
+</tr>
+</tbody></table>
+
+<blockquote>
+<p>Request example:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"id"</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"from"</span><span class="p">:</span><span class="s2">"TGGh3cGp9P21Ebvg9JitjHoeJaKqrg3bRg"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"to"</span><span class="p">:</span><span class="s2">"TFMQrPdFWuPzFRXb42sxB22ABCVL6xSopV"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"value"</span><span class="p">:</span><span class="s2">"67.2"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"chainId"</span><span class="p">:</span><span class="s2">"20"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"status"</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"data"</span><span class="p">:</span><span class="s2">"dahsudiasdoaasidoasdaosdasd9as8d9a0s8d90as8d9a0s8d09asduashdkasdjaksdajksdasjdhakjdha"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"code"</span><span class="p">:</span><span class="w"> </span><span class="mi">200</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Success"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div><h1 id='mpc-waas'>MPC WaaS</h1>
 <p>MPC WaaS, coming soon！</p>
-<h1 id='errors'>Errors *</h1>
+<h1 id='errors'>Errors</h1>
 <p>The 1BitPay API uses the following error codes:</p>
 
 <table><thead>
 <tr>
-<th>Error Code</th>
+<th><div style="width:80px">Error Code</div></th>
 <th>Meaning</th>
 </tr>
 </thead><tbody>
@@ -463,6 +1219,11 @@
 
       </div>
       <div class="dark-box">
+          <div class="lang-selector">
+                <a href="#" data-language-name="json">json</a>
+                <a href="#" data-language-name="java">java</a>
+                <a href="#" data-language-name="python">python</a>
+          </div>
       </div>
     </div>
   </body>
