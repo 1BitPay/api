@@ -1,8 +1,8 @@
-# Errors *
+# Errors
 
 The 1BitPay API uses the following error codes:
 
-Error Code | Meaning
+<div style="width:80px">Error Code</div> | Meaning
 ---------- | -------
 400 | Bad Request -- Your request is invalid.
 401 | Unauthorized -- Your API key is wrong.

@@ -1,7 +1,6 @@
 ---
 title: API Reference
 
-
 language_tabs: # must be one of https://github.com/rouge-ruby/rouge/wiki/List-of-supported-languages-and-lexers
   - json
   - java
@@ -30,6 +29,17 @@ meta:
 
 # Quick Start
 
+## 步骤
+
+1. 创建 [API Key](#api-key)，根据需要可以设置[IP白名单](#ip)。
+2. 了解[鉴权规则](#17790fda8b)及[基本信息](#b122f813d5)。
+3. 使用[沙盒环境](#sandbox)进行测试。
+4. 对接[获取汇率](#9a50d939a9)及[创建订单](#5ac84906d9)接口。
+5. [下载私钥分片](#45d6c048a4)，了解 MPC Co-Singer [签名算法](#7b81b8ce22)的规则。
+6. 定时读取[待签名的列表](#f7c93cd51a)，建议2分钟/次，并根据实际情况及时进行[签名](#8ba46c43fe)。
+7. 并定时进行[资金归集](#e83639625f)，建议5分钟/次。
+8. 测试完成后，联系我们正式上线。
+
 ## 创建API Key
 
 请登录商户后台, 左侧导航打开 "ApiKey"，点击新增，创建API Key ，API Key创建成功后，可以使用API Key访问 1BitPay API。
@@ -41,9 +51,9 @@ meta:
 
 ## 鉴权规则 
 - 把公共参数与业务参数合并，去除Sign参数，以及空的参数。
-- 把上一步中参数集合的Key按照ASCII排序以后用“=”连接到一块以后。
-- 把上一步中做好的串后拼接商户的secret参数。
-- 把上一步中生成的串做32位md5小写即可生成参数Sign。
+- 把参数集合的Key按照ASCII排序以后用“=”连接。
+- 把连接好的串后面拼接商户的API Secret参数。
+- 把生成的字符串做32位md5（小写）即可生成参数Sign。
 
 ## 签名示例
 - 例如业务参数:
@@ -88,6 +98,7 @@ meta:
 
 
 ### 公共参数
+
 公共请求参数是每个接口都需要使用到的请求参数，每次请求均需要携带这些参数, 才能正常发起请求。公共请求参数的首字母均为`大写`，以此区分于普通接口请求参数，并且公共参数需要放入到Header中。
 
 参数名 | 类型 | 描述
@@ -106,13 +117,13 @@ ApiKey|String|商户API Key
 
 参数名 | 类型 | 描述
 --------- | ----------- | -----------
-code | Int  | 200 成功 详见状态描述
+code | Int  | 200 成功，详见状态描述
 message | String| Success
 data|Object| 具体根绝业务会展现不同的数据结构，详见具体业务即可
 
 
 
-### 沙盒环境 
+### <span id="sandbox">沙盒环境</span> 
 
   https://sandbox.1bitpay.io
 
@@ -323,7 +334,7 @@ POST `/api/transaction/assets/collect`
 | to             | String    |N|待签名列表toAddress：转入地址
 | value          | String    |N|待签名列表amount： 转入金额
 | chainId        | String    |N|待签名列表chainId: 链id
-| status         | String    |Y|交易状态. 1：通过交易；2:拒绝交易
+| status         | String    |Y|签名状态. 1：通过；2:拒绝
 
 ### 签名步骤：
 
@@ -484,8 +495,8 @@ POST `/api/transaction/approve`
 | to          | String    |N|待签名列表toAddress，转入地址
 | value       | String    |N|待签名列表amount，转入金额
 | chainId     | String    |N|待签名列表chainId，链id
-| status      | String    |Y|交易状态。1：通过交易；2:拒绝交易
-|data|String|Y|交易签名数据
+| status      | String    |Y|签名状态. 1：通过；2:拒绝
+|data         |String     |Y|签名数据
 
 > 请求示例:
 
