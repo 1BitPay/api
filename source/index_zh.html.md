@@ -1,6 +1,12 @@
 ---
 title: API Reference
 
+
+language_tabs: # must be one of https://github.com/rouge-ruby/rouge/wiki/List-of-supported-languages-and-lexers
+  - json
+  - java
+  - python
+
 toc_footers:
   - <div id="language-selector">
     <a href="index.html">English</a> |
@@ -132,7 +138,7 @@ POST `/api/otc/rate`
 
 > 请求示例:
 
-```
+```json
 {
   "cryptoCurrency":"USDT",
   "legalCurrency":"CNY"
@@ -151,7 +157,7 @@ sellRate | Decimal| 卖单最新汇率
 
 > 响应示例:
 
-```
+```json
 {
   "code": 200,
   "message": "Success",
@@ -197,7 +203,7 @@ POST `/api/otc/create`
 
 > 请求示例:
 
-```
+```json
 {
   "userName":"陈先生",
   "areaCode":"+86",
@@ -233,7 +239,7 @@ orderNo|String| 订单号
 
 >  响应示例:
 
-```
+```json
 {
   "code": 200,
   "message": "Success",
@@ -271,7 +277,7 @@ POST `/api/transaction/assets/collect`
 
 > 请求示例:
 
-```
+```json
 {
   "isMain":1
 }
@@ -280,7 +286,7 @@ POST `/api/transaction/assets/collect`
 
 >  响应示例:
 
-```
+```json
 {
   "code": 200,
   "message": "Success"
@@ -358,6 +364,41 @@ data = "HUSDISJDSNDJSJDKSDJSIDJISOADIASLJDALSIDJISALDHAUSIDHA\ASDUAKSD|ADSADAdas
 </aside>
 
 
+```python
+import base64
+from cryptography.hazmat.primitives.ciphers import Cipher, algorithms, modes
+from cryptography.hazmat.primitives.asymmetric import padding
+from cryptography.hazmat.primitives.serialization import pkcs12
+pfx_password = "1bitpay" + 商户编号
+srcSouse = "待加密的数据"
+with open("/1bitpay.pfx", "rb") as f:
+  pfx, *_ = pkcs12.load_key_and_certificates(f.read(), pfx_password.encode())
+cipher = Cipher(algorithms.TripleDES(pfx[:24]), modes.ECB()).encryptor()
+bytes = cipher.update(srcSouse.encode()) + cipher.finalize()
+data = base64.b64encode(pfx.sign(bytes, padding.PKCS1v15(), pfx.private_bytes(
+    encoding=serialization.Encoding.DER,
+    format=serialization.PrivateFormat.PKCS8,
+    encryption_algorithm=serialization.NoEncryption(),
+))).decode()
+```
+
+```java
+import java.io.InputStream
+import java.crypto.Cipher;
+import java.security.KeyStore;
+import java.security.PrivateKey;
+import sun.misc.BASE64Encoder;
+
+InputStream inputStream = new FileInputStream("/1bitpay.pfx"); // 将私钥文件转文件流
+KeyStore  store = KeyStore.getInstance("PKCS12", "BC"); // 定义密钥存储
+store.load(inputStream, pfxPassword.toCharArray()); // 加载私钥，pfxPassword = “1bitpay”+商户编号
+PrivateKey privateKey = (PrivateKey) store.getKey("1BitPay", pfxPassword.toCharArray()) // 获取私钥对象
+Cipher cipher = Cipher.getInstance(privateKey.getAlgorithm()); // 获取私钥Cipher对象
+cipher.init(Cipher.ENCRYPT_MODE, privateKey);  // 初始化Cipher
+byte[] bytes = cipher.doFinal(srcSouse.getBytes("UTF-8")); // 开始加密
+String data = encryptBASE64(bytes); // base64编码即得签名串
+```
+
 
 ## 获得待签名列表 
 
@@ -378,7 +419,7 @@ POST `/api/transaction/pending`
 
 > 请求示例:
 
-```
+```json
 {
   "pageNum":1,
   "pageSize":20
@@ -405,7 +446,7 @@ chainId|String|链ID
 
 >  响应示例:
 
-```
+```json
 {
   "code": 200,
   "message": "Success",
@@ -448,7 +489,7 @@ POST `/api/transaction/approve`
 
 > 请求示例:
 
-```
+```json
 {
   "id":1,
   "from":"TGGh3cGp9P21Ebvg9JitjHoeJaKqrg3bRg",
@@ -463,7 +504,7 @@ POST `/api/transaction/approve`
 
 >  响应示例:
 
-```
+```json
 {
   "code": 200,
   "message": "Success"
