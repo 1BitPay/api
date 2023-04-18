@@ -296,7 +296,7 @@
     </script>
   </head>
 
-  <body class="index_zh" data-languages="[]">
+  <body class="index_zh" data-languages="[&quot;json&quot;,&quot;java&quot;,&quot;python&quot;]">
     <a href="#" id="nav-button">
       <span>
         NAV
@@ -305,6 +305,11 @@
     </a>
     <div class="toc-wrapper">
       <a href="https://1bitpay.io" target="_blank"><img src="images/logo-eb94684b.png" class="logo" alt="" /></a>
+        <div class="lang-selector">
+              <a href="#" data-language-name="json">json</a>
+              <a href="#" data-language-name="java">java</a>
+              <a href="#" data-language-name="python">python</a>
+        </div>
         <div class="search">
           <input type="text" class="search" id="input-search" placeholder="Search">
         </div>
@@ -549,11 +554,11 @@
 <blockquote>
 <p>请求示例:</p>
 </blockquote>
-<div class="highlight"><pre class="highlight plaintext"><code>{
-  "cryptoCurrency":"USDT",
-  "legalCurrency":"CNY"
-}
-</code></pre></div><h3 id='50faad05f3'>响应参数</h3>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"cryptoCurrency"</span><span class="p">:</span><span class="s2">"USDT"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"legalCurrency"</span><span class="p">:</span><span class="s2">"CNY"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div><h3 id='50faad05f3'>响应参数</h3>
 <p>data参数如下：</p>
 
 <table><thead>
@@ -578,15 +583,15 @@
 <blockquote>
 <p>响应示例:</p>
 </blockquote>
-<div class="highlight"><pre class="highlight plaintext"><code>{
-  "code": 200,
-  "message": "Success",
-  "data": {
-    "buyRate":"6.47",
-    "sellRate":"6.9"
-  }
-}
-</code></pre></div><h2 id='5ac84906d9'>创建订单</h2><h3 id='86e489d578'>请求地址：</h3>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"code"</span><span class="p">:</span><span class="w"> </span><span class="mi">200</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Success"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"buyRate"</span><span class="p">:</span><span class="s2">"6.47"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"sellRate"</span><span class="p">:</span><span class="s2">"6.9"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div><h2 id='5ac84906d9'>创建订单</h2><h3 id='86e489d578'>请求地址：</h3>
 <p>POST <code>/api/otc/create</code></p>
 <h3 id='af989d8988-2'>请求方式</h3>
 <ul>
@@ -715,27 +720,27 @@
 <blockquote>
 <p>请求示例:</p>
 </blockquote>
-<div class="highlight"><pre class="highlight plaintext"><code>{
-  "userName":"陈先生",
-  "areaCode":"+86",
-  "phone":"18848820305",
-  "syncUrl":"https://example.com",
-  "asyncUrl":"https://example.com",
-  "cryptoAmount":"10",
-  "cryptoCurrency":"USDT",
-  "legalCurrency":"CNY",
-  "idCardType":1,
-  "idCard":"412627288918989891",
-  "merchantNo":"mer1c92b0319ef5b794",
-  "merchantOrderNo":"1231222112d8",
-  "orderType":1,
-  "payWay":"1",
-  "bank":"建设银行",
-  "bankAccount":"6217229282829299111",
-  "bankBranch":"建设支行",
-  "h5":false
-}
-</code></pre></div><h3 id='50faad05f3-2'>响应参数</h3>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"userName"</span><span class="p">:</span><span class="s2">"陈先生"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"areaCode"</span><span class="p">:</span><span class="s2">"+86"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"phone"</span><span class="p">:</span><span class="s2">"18848820305"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"syncUrl"</span><span class="p">:</span><span class="s2">"https://example.com"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"asyncUrl"</span><span class="p">:</span><span class="s2">"https://example.com"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"cryptoAmount"</span><span class="p">:</span><span class="s2">"10"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"cryptoCurrency"</span><span class="p">:</span><span class="s2">"USDT"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"legalCurrency"</span><span class="p">:</span><span class="s2">"CNY"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"idCardType"</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"idCard"</span><span class="p">:</span><span class="s2">"412627288918989891"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"merchantNo"</span><span class="p">:</span><span class="s2">"mer1c92b0319ef5b794"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"merchantOrderNo"</span><span class="p">:</span><span class="s2">"1231222112d8"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"orderType"</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"payWay"</span><span class="p">:</span><span class="s2">"1"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"bank"</span><span class="p">:</span><span class="s2">"建设银行"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"bankAccount"</span><span class="p">:</span><span class="s2">"6217229282829299111"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"bankBranch"</span><span class="p">:</span><span class="s2">"建设支行"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"h5"</span><span class="p">:</span><span class="kc">false</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div><h3 id='50faad05f3-2'>响应参数</h3>
 <p>data参数如下：</p>
 
 <table><thead>
@@ -765,16 +770,16 @@
 <blockquote>
 <p>响应示例:</p>
 </blockquote>
-<div class="highlight"><pre class="highlight plaintext"><code>{
-  "code": 200,
-  "message": "Success",
-  "data": {
-      "url": "http://sanbox.1bitpay.io/1bitpay-open-api-h5/otc.html?t=02d457b0ced0576a69282054911585aa&amp;o=335793449653514240&amp;l=zh",
-      "isNew": true,
-      "orderNo": "335793449653514240"
-  }
-}
-</code></pre></div><h2 id='e83639625f'>资金归集</h2>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"code"</span><span class="p">:</span><span class="w"> </span><span class="mi">200</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Success"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://sanbox.1bitpay.io/1bitpay-open-api-h5/otc.html?t=02d457b0ced0576a69282054911585aa&amp;o=335793449653514240&amp;l=zh"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"isNew"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"orderNo"</span><span class="p">:</span><span class="w"> </span><span class="s2">"335793449653514240"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div><h2 id='e83639625f'>资金归集</h2>
 <aside class="notice">
  注意：建议商户每5分钟调用一次该接口进行资金归集，否则可能影响正常交易
 </aside>
@@ -805,18 +810,18 @@
 <blockquote>
 <p>请求示例:</p>
 </blockquote>
-<div class="highlight"><pre class="highlight plaintext"><code>{
-  "isMain":1
-}
-</code></pre></div>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"isMain"</span><span class="p">:</span><span class="mi">1</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
 <blockquote>
 <p>响应示例:</p>
 </blockquote>
-<div class="highlight"><pre class="highlight plaintext"><code>{
-  "code": 200,
-  "message": "Success"
-}
-</code></pre></div><h1 id='mpc-co-signer'>MPC Co-Signer</h1><h2 id='153042ed9e'>概述</h2>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"code"</span><span class="p">:</span><span class="w"> </span><span class="mi">200</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Success"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div><h1 id='mpc-co-signer'>MPC Co-Signer</h1><h2 id='153042ed9e'>概述</h2>
 <p>MPC 全称为 Security Multi-Party Computation（<a href="https://zh.wikipedia.org/wiki/安全多方计算">安全多方计算</a>）。通过 MPC 可以做到从生成、使用、存储整个生命周期中，私钥可用不可见。1BitPay 使用 MPC 技术将传统的单私钥变成了分布式的私钥分片，可以有效避免单私钥带来的单点风险，实现团队多人共同管理资金，并支持社交恢复。详细的私钥管理方案可参考 <a href="https://support.1bitpay.io/v/zh/mpcwalletcn/key-management-cn">私钥管理方案</a>.</p>
 
 <p><aside class="notice">
@@ -917,7 +922,36 @@
 <br>
 &emsp;&emsp;3、加密时均采用UTF-8编码
 </aside>
-<h2 id='f7c93cd51a'>获得待签名列表</h2><h3 id='86e489d578-3'>请求地址：</h3>
+<div class="highlight"><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">base64</span>
+<span class="kn">from</span> <span class="nn">cryptography.hazmat.primitives.ciphers</span> <span class="kn">import</span> <span class="n">Cipher</span><span class="p">,</span> <span class="n">algorithms</span><span class="p">,</span> <span class="n">modes</span>
+<span class="kn">from</span> <span class="nn">cryptography.hazmat.primitives.asymmetric</span> <span class="kn">import</span> <span class="n">padding</span>
+<span class="kn">from</span> <span class="nn">cryptography.hazmat.primitives.serialization</span> <span class="kn">import</span> <span class="n">pkcs12</span>
+<span class="n">pfx_password</span> <span class="o">=</span> <span class="s">"1bitpay"</span> <span class="o">+</span> <span class="n">商户编号</span>
+<span class="n">srcSouse</span> <span class="o">=</span> <span class="s">"待加密的数据"</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s">"/1bitpay.pfx"</span><span class="p">,</span> <span class="s">"rb"</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+  <span class="n">pfx</span><span class="p">,</span> <span class="o">*</span><span class="n">_</span> <span class="o">=</span> <span class="n">pkcs12</span><span class="p">.</span><span class="n">load_key_and_certificates</span><span class="p">(</span><span class="n">f</span><span class="p">.</span><span class="n">read</span><span class="p">(),</span> <span class="n">pfx_password</span><span class="p">.</span><span class="n">encode</span><span class="p">())</span>
+<span class="n">cipher</span> <span class="o">=</span> <span class="n">Cipher</span><span class="p">(</span><span class="n">algorithms</span><span class="p">.</span><span class="n">TripleDES</span><span class="p">(</span><span class="n">pfx</span><span class="p">[:</span><span class="mi">24</span><span class="p">]),</span> <span class="n">modes</span><span class="p">.</span><span class="n">ECB</span><span class="p">()).</span><span class="n">encryptor</span><span class="p">()</span>
+<span class="nb">bytes</span> <span class="o">=</span> <span class="n">cipher</span><span class="p">.</span><span class="n">update</span><span class="p">(</span><span class="n">srcSouse</span><span class="p">.</span><span class="n">encode</span><span class="p">())</span> <span class="o">+</span> <span class="n">cipher</span><span class="p">.</span><span class="n">finalize</span><span class="p">()</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">base64</span><span class="p">.</span><span class="n">b64encode</span><span class="p">(</span><span class="n">pfx</span><span class="p">.</span><span class="n">sign</span><span class="p">(</span><span class="nb">bytes</span><span class="p">,</span> <span class="n">padding</span><span class="p">.</span><span class="n">PKCS1v15</span><span class="p">(),</span> <span class="n">pfx</span><span class="p">.</span><span class="n">private_bytes</span><span class="p">(</span>
+    <span class="n">encoding</span><span class="o">=</span><span class="n">serialization</span><span class="p">.</span><span class="n">Encoding</span><span class="p">.</span><span class="n">DER</span><span class="p">,</span>
+    <span class="nb">format</span><span class="o">=</span><span class="n">serialization</span><span class="p">.</span><span class="n">PrivateFormat</span><span class="p">.</span><span class="n">PKCS8</span><span class="p">,</span>
+    <span class="n">encryption_algorithm</span><span class="o">=</span><span class="n">serialization</span><span class="p">.</span><span class="n">NoEncryption</span><span class="p">(),</span>
+<span class="p">))).</span><span class="n">decode</span><span class="p">()</span>
+</code></pre></div><div class="highlight"><pre class="highlight java tab-java"><code><span class="kn">import</span> <span class="nn">java.io.InputStream</span>
+<span class="kn">import</span> <span class="nn">java.crypto.Cipher</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.security.KeyStore</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.security.PrivateKey</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">sun.misc.BASE64Encoder</span><span class="o">;</span>
+
+<span class="nc">InputStream</span> <span class="n">inputStream</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">FileInputStream</span><span class="o">(</span><span class="s">"/1bitpay.pfx"</span><span class="o">);</span> <span class="c1">// 将私钥文件转文件流</span>
+<span class="nc">KeyStore</span>  <span class="n">store</span> <span class="o">=</span> <span class="nc">KeyStore</span><span class="o">.</span><span class="na">getInstance</span><span class="o">(</span><span class="s">"PKCS12"</span><span class="o">,</span> <span class="s">"BC"</span><span class="o">);</span> <span class="c1">// 定义密钥存储</span>
+<span class="n">store</span><span class="o">.</span><span class="na">load</span><span class="o">(</span><span class="n">inputStream</span><span class="o">,</span> <span class="n">pfxPassword</span><span class="o">.</span><span class="na">toCharArray</span><span class="o">());</span> <span class="c1">// 加载私钥，pfxPassword = “1bitpay”+商户编号</span>
+<span class="nc">PrivateKey</span> <span class="n">privateKey</span> <span class="o">=</span> <span class="o">(</span><span class="nc">PrivateKey</span><span class="o">)</span> <span class="n">store</span><span class="o">.</span><span class="na">getKey</span><span class="o">(</span><span class="s">"1BitPay"</span><span class="o">,</span> <span class="n">pfxPassword</span><span class="o">.</span><span class="na">toCharArray</span><span class="o">())</span> <span class="c1">// 获取私钥对象</span>
+<span class="nc">Cipher</span> <span class="n">cipher</span> <span class="o">=</span> <span class="nc">Cipher</span><span class="o">.</span><span class="na">getInstance</span><span class="o">(</span><span class="n">privateKey</span><span class="o">.</span><span class="na">getAlgorithm</span><span class="o">());</span> <span class="c1">// 获取私钥Cipher对象</span>
+<span class="n">cipher</span><span class="o">.</span><span class="na">init</span><span class="o">(</span><span class="nc">Cipher</span><span class="o">.</span><span class="na">ENCRYPT_MODE</span><span class="o">,</span> <span class="n">privateKey</span><span class="o">);</span>  <span class="c1">// 初始化Cipher</span>
+<span class="kt">byte</span><span class="o">[]</span> <span class="n">bytes</span> <span class="o">=</span> <span class="n">cipher</span><span class="o">.</span><span class="na">doFinal</span><span class="o">(</span><span class="n">srcSouse</span><span class="o">.</span><span class="na">getBytes</span><span class="o">(</span><span class="s">"UTF-8"</span><span class="o">));</span> <span class="c1">// 开始加密</span>
+<span class="nc">String</span> <span class="n">data</span> <span class="o">=</span> <span class="n">encryptBASE64</span><span class="o">(</span><span class="n">bytes</span><span class="o">);</span> <span class="c1">// base64编码即得签名串</span>
+</code></pre></div><h2 id='f7c93cd51a'>获得待签名列表</h2><h3 id='86e489d578-3'>请求地址：</h3>
 <p>POST <code>/api/transaction/pending</code></p>
 <h3 id='af989d8988-4'>请求方式</h3>
 <ul>
@@ -950,11 +984,11 @@
 <blockquote>
 <p>请求示例:</p>
 </blockquote>
-<div class="highlight"><pre class="highlight plaintext"><code>{
-  "pageNum":1,
-  "pageSize":20
-}
-</code></pre></div><h3 id='50faad05f3-3'>响应参数</h3>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"pageNum"</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"pageSize"</span><span class="p">:</span><span class="mi">20</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div><h3 id='50faad05f3-3'>响应参数</h3>
 <p>data 结构如下：</p>
 
 <table><thead>
@@ -1015,23 +1049,23 @@
 <blockquote>
 <p>响应示例:</p>
 </blockquote>
-<div class="highlight"><pre class="highlight plaintext"><code>{
-  "code": 200,
-  "message": "Success",
-  "data": {
-     total:25,
-     list:[
-      {
-        "id":1,
-        "fromAddress":"TGGh3cGp9P21Ebvg9JitjHoeJaKqrg3bRg",
-        "toAddress":"TFMQrPdFWuPzFRXb42sxB22ABCVL6xSopV",
-        "amount":"4.1",
-        "chainId":"56"
-      }
-     ]
-  }
-}
-</code></pre></div><h2 id='8ba46c43fe'>签名</h2><h3 id='86e489d578-4'>请求地址：</h3>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"code"</span><span class="p">:</span><span class="w"> </span><span class="mi">200</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Success"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+     </span><span class="err">total:</span><span class="mi">25</span><span class="p">,</span><span class="w">
+     </span><span class="err">list:</span><span class="p">[</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"id"</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"fromAddress"</span><span class="p">:</span><span class="s2">"TGGh3cGp9P21Ebvg9JitjHoeJaKqrg3bRg"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"toAddress"</span><span class="p">:</span><span class="s2">"TFMQrPdFWuPzFRXb42sxB22ABCVL6xSopV"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"amount"</span><span class="p">:</span><span class="s2">"4.1"</span><span class="p">,</span><span class="w">
+        </span><span class="nl">"chainId"</span><span class="p">:</span><span class="s2">"56"</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+     </span><span class="p">]</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div><h2 id='8ba46c43fe'>签名</h2><h3 id='86e489d578-4'>请求地址：</h3>
 <p>POST <code>/api/transaction/approve</code></p>
 <h3 id='af989d8988-5'>请求方式</h3>
 <ul>
@@ -1094,24 +1128,24 @@
 <blockquote>
 <p>请求示例:</p>
 </blockquote>
-<div class="highlight"><pre class="highlight plaintext"><code>{
-  "id":1,
-  "from":"TGGh3cGp9P21Ebvg9JitjHoeJaKqrg3bRg",
-  "to":"TFMQrPdFWuPzFRXb42sxB22ABCVL6xSopV",
-  "value":"67.2",
-  "chainId":"20",
-  "status":1,
-  "data":"dahsudiasdoaasidoasdaosdasd9as8d9a0s8d90as8d9a0s8d09asduashdkasdjaksdajksdasjdhakjdha"
-}
-</code></pre></div>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"id"</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"from"</span><span class="p">:</span><span class="s2">"TGGh3cGp9P21Ebvg9JitjHoeJaKqrg3bRg"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"to"</span><span class="p">:</span><span class="s2">"TFMQrPdFWuPzFRXb42sxB22ABCVL6xSopV"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"value"</span><span class="p">:</span><span class="s2">"67.2"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"chainId"</span><span class="p">:</span><span class="s2">"20"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"status"</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"data"</span><span class="p">:</span><span class="s2">"dahsudiasdoaasidoasdaosdasd9as8d9a0s8d90as8d9a0s8d09asduashdkasdjaksdajksdasjdhakjdha"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
 <blockquote>
 <p>响应示例:</p>
 </blockquote>
-<div class="highlight"><pre class="highlight plaintext"><code>{
-  "code": 200,
-  "message": "Success"
-}
-</code></pre></div><h1 id='mpc'>MPC 钱包</h1>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"code"</span><span class="p">:</span><span class="w"> </span><span class="mi">200</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Success"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div><h1 id='mpc'>MPC 钱包</h1>
 <p>MPC SaaS 钱包，马上到来！</p>
 <h1 id='errors'>Errors *</h1>
 <p>The 1BitPay API uses the following error codes:</p>
@@ -1170,6 +1204,11 @@
 
       </div>
       <div class="dark-box">
+          <div class="lang-selector">
+                <a href="#" data-language-name="json">json</a>
+                <a href="#" data-language-name="java">java</a>
+                <a href="#" data-language-name="python">python</a>
+          </div>
       </div>
     </div>
   </body>
