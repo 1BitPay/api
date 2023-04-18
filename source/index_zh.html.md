@@ -505,7 +505,7 @@ POST `/api/transaction/assets/collect`
 参数名 | 类型 | 必要性 | 描述
 --------- | ----------- |  ----------- | -----------
 | isMain          | Int    |Y|归集的是否是主链币。1：是；0：否
-| data            |String  ｜Y｜加密参数，加密参考approve的data。这里加密的业务参数为:{"isMain":1}
+| data            |String  |Y|加密参数，加密参考approve的data。这里加密的业务参数为:{"isMain":1}
  
 > 请求示例:
 
