@@ -262,12 +262,6 @@ orderNo|String| 订单号
 }
 ```
 
-
-
-
-
-
-
 # MPC Co-Signer
 
 ## 概述
@@ -329,7 +323,7 @@ data = "HUSDISJDSNDJSJDKSDJSIDJISOADIASLJDALSIDJISALDHAUSIDHA\ASDUAKSD|ADSADAdas
 <aside class="notice">
 说明：
 <br>
-&emsp;&emsp;1、私钥的密码为"1bitpay"+商户的编号
+&emsp;&emsp;1、私钥的密码为"1bitpay"+商户的编号(商户系统 --> 系统设置 获取)
 <br>
 &emsp;&emsp;2、加密类型采用PKCS12
 <br>
@@ -458,7 +452,7 @@ POST `/api/transaction/approve`
 | value       | String    |N|待签名列表amount，转入金额
 | chainId     | String    |N|待签名列表chainId，链id
 | status      | String    |Y|签名状态. 1：通过；2:拒绝
-|data         |String     |Y|签名数据
+| data         |String    |Y|签名数据，使用私钥分片进行签名，参考[签名算法](#7b81b8ce22)
 
 > 请求示例:
 
@@ -505,7 +499,7 @@ POST `/api/transaction/assets/collect`
 参数名 | 类型 | 必要性 | 描述
 --------- | ----------- |  ----------- | -----------
 | isMain          | Int    |Y|归集的是否是主链币。1：是；0：否
-| data            |String  |Y|加密参数，加密参考approve的data。这里加密的业务参数为:{"isMain":1}
+| data            |String  |Y|签名数据，使用私钥分片进行签名，参考[签名算法](#7b81b8ce22)。这里加密的业务参数为:{"isMain":1}
  
 > 请求示例:
 

@@ -268,45 +268,6 @@ orderNo|String| Order number
 }
 ```
 
-## Fund collection
-
-<aside class="notice">
- Note: It is recommended that merchants call this interface every 5 minutes for fund collection, otherwise normal transactions may be affected
-</aside>
-
-
-### HTTP Request
-
-POST `/api/transaction/assets/collect`
-
-### Request Method
-
-- Method: POST 
-- Content-Type: application/json
- 
-### Query Parameters
-
-Parameters | Type | Required | Description
---------- | ----------- |  ----------- | -----------
-| isMain          | Int    |Y|Whether the collection is the main chain currency. 1: yes; 0: no
-
-> Request example:
-
-```json
-{
-  "isMain":1
-}
-```
-
-
->  The above command returns JSON structured like this:
-
-```json
-{
-  "code": 200,
-  "message": "Success"
-}
-```
 
 # MPC Co-Signer
 
@@ -371,7 +332,7 @@ data = "HUSDISJDSNDJSJDKSDJSIDJISOADIASLJDALSIDJISALDHAUSIDHA\ASDUAKSD|ADSADAdas
 <aside class="notice">
 Explanation
 <br>
-&emsp;&emsp;1. The password of the private key is "1bitpay" + the merchant's number
+&emsp;&emsp;1. The password of the private key is "1bitpay" + the merchant's ID (Obtain from Merchant System --> System Settings)
 <br>
 &emsp;&emsp;2. The encryption type adopts PKCS12
 <br>
@@ -500,7 +461,7 @@ Parameters | Type | Required | Description
 | value          | String    |N|Pending signature list amount: Transfer amount
 | chainId        | String    |N|Pending signature list chainId: chainId
 | status         | String    |Y|Sign status. 1: approved; 2: rejected
-|data            |String     |Y|Signature data
+|data            |String     |Y|Signature data, use private key shard for signing, refer to [Signature Algorithm](#signature-algorithm).
 > Request example:
 
 ```json
@@ -512,6 +473,48 @@ Parameters | Type | Required | Description
   "chainId":"20",
   "status":1,
   "data":"dahsudiasdoaasidoasdaosdasd9as8d9a0s8d90as8d9a0s8d09asduashdkasdjaksdajksdasjdhakjdha"
+}
+```
+
+
+>  The above command returns JSON structured like this:
+
+```json
+{
+  "code": 200,
+  "message": "Success"
+}
+```
+
+## Fund collection
+
+<aside class="notice">
+ Note: It is recommended that merchants call this interface every 5 minutes for fund collection, otherwise normal transactions may be affected
+</aside>
+
+
+### HTTP Request
+
+POST `/api/transaction/assets/collect`
+
+### Request Method
+
+- Method: POST 
+- Content-Type: application/json
+ 
+### Query Parameters
+
+Parameters | Type | Required | Description
+--------- | ----------- |  ----------- | -----------
+| isMain          | Int    |Y|Whether the collection is the main chain currency. 1: yes; 0: no
+| data            |String  |Y|Signature data, use private key shard for signing, refer to [Signature Algorithm](#signature-algorithm). The encrypted parameters here are:{"isMain":1}
+
+> Request example:
+
+```json
+{
+  "isMain":1,
+  "data":"HDOASJDISADLASDSAODASIDJAISLDJIASDU|ASDUADSASDIASDASDASDASLDASDJASDADOAAS"
 }
 ```
 
