@@ -34,7 +34,7 @@ Welcome to 1BitPay API, you can use our API to manage transactions, automate sig
 ## Step by step
 
 1. Create an [API Key](#api-key)，[IP whitelist](#ip-whitelist) can be set as needed。
-2. Learn about [API Authentication](#api-authentication)and[General Info](#general-info)。
+2. Learn about [API Authentication](#api-authentication) and [General Info](#general-info)。
 3. Use [Sandbox](#sandbox) Environment for testing
 4. Access the interface of [Get Rate](#get-rate) and [Create Order](#create-order).
 5. [Download the PK Shard](#download-the-pk-shard)，Learn about the rules of the MPC Co-Singer [Signature Algorithm](#signature-algorithm).
