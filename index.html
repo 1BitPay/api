@@ -350,9 +350,6 @@
                   <li>
                     <a href="#create-order" class="toc-h2 toc-link" data-title="Create Order">Create Order</a>
                   </li>
-                  <li>
-                    <a href="#fund-collection" class="toc-h2 toc-link" data-title="Fund collection">Fund collection</a>
-                  </li>
               </ul>
           </li>
           <li>
@@ -372,6 +369,9 @@
                   </li>
                   <li>
                     <a href="#sign" class="toc-h2 toc-link" data-title="Sign">Sign</a>
+                  </li>
+                  <li>
+                    <a href="#fund-collection" class="toc-h2 toc-link" data-title="Fund collection">Fund collection</a>
                   </li>
               </ul>
           </li>
@@ -794,48 +794,6 @@
       </span><span class="nl">"orderNo"</span><span class="p">:</span><span class="w"> </span><span class="s2">"335793449653514240"</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre></div><h2 id='fund-collection'>Fund collection</h2>
-<aside class="notice">
- Note: It is recommended that merchants call this interface every 5 minutes for fund collection, otherwise normal transactions may be affected
-</aside>
-<h3 id='http-request-3'>HTTP Request</h3>
-<p>POST <code>/api/transaction/assets/collect</code></p>
-<h3 id='request-method-3'>Request Method</h3>
-<ul>
-<li>Method: POST </li>
-<li>Content-Type: application/json</li>
-</ul>
-<h3 id='query-parameters-3'>Query Parameters</h3>
-<table><thead>
-<tr>
-<th>Parameters</th>
-<th>Type</th>
-<th>Required</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>isMain</td>
-<td>Int</td>
-<td>Y</td>
-<td>Whether the collection is the main chain currency. 1: yes; 0: no</td>
-</tr>
-</tbody></table>
-
-<blockquote>
-<p>Request example:</p>
-</blockquote>
-<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="nl">"isMain"</span><span class="p">:</span><span class="mi">1</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre></div>
-<blockquote>
-<p>The above command returns JSON structured like this:</p>
-</blockquote>
-<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="nl">"code"</span><span class="p">:</span><span class="w"> </span><span class="mi">200</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Success"</span><span class="w">
-</span><span class="p">}</span><span class="w">
 </span></code></pre></div><h1 id='mpc-co-signer'>MPC Co-Signer</h1><h2 id='overview'>Overview</h2>
 <p>The full name of MPC is <a href="https://en.wikipedia.org/wiki/Secure_multi-party_computation">Secure Multi-Party Computation</a>. Through MPC, the private key is available and invisible throughout the entire life cycle from generation, use, and storage. 1BitPay uses MPC technology to transform the traditional single private key into distributed private key sharding, which can effectively avoid the single-point risk brought by a single private key, realize the joint management of funds by multiple people in the team, and support social recovery. For detailed private key management scheme, please refer to <a href="https://support.1bitpay.io/mpcwallet/key-management">Private key management</a>.</p>
 
@@ -931,7 +889,7 @@
 <aside class="notice">
 Explanation
 <br>
-&emsp;&emsp;1. The password of the private key is "1bitpay" + the merchant's number
+&emsp;&emsp;1. The password of the private key is "1bitpay" + the merchant's ID (Obtain from Merchant System --> System Settings)
 <br>
 &emsp;&emsp;2. The encryption type adopts PKCS12
 <br>
@@ -966,14 +924,14 @@ Explanation
 <span class="n">cipher</span><span class="o">.</span><span class="na">init</span><span class="o">(</span><span class="nc">Cipher</span><span class="o">.</span><span class="na">ENCRYPT_MODE</span><span class="o">,</span> <span class="n">privateKey</span><span class="o">);</span>  <span class="c1">// Initialize Cipher</span>
 <span class="kt">byte</span><span class="o">[]</span> <span class="n">bytes</span> <span class="o">=</span> <span class="n">cipher</span><span class="o">.</span><span class="na">doFinal</span><span class="o">(</span><span class="n">srcSouse</span><span class="o">.</span><span class="na">getBytes</span><span class="o">(</span><span class="s">"UTF-8"</span><span class="o">));</span> <span class="c1">// start encryption</span>
 <span class="nc">String</span> <span class="n">data</span> <span class="o">=</span> <span class="n">encryptBASE64</span><span class="o">(</span><span class="n">bytes</span><span class="o">);</span> <span class="c1">// base64 encoding to get the signature string</span>
-</code></pre></div><h2 id='get-list-of-pending-signatures'>Get list of pending signatures</h2><h3 id='http-request-4'>HTTP Request</h3>
+</code></pre></div><h2 id='get-list-of-pending-signatures'>Get list of pending signatures</h2><h3 id='http-request-3'>HTTP Request</h3>
 <p>POST <code>/api/transaction/pending</code></p>
-<h3 id='request-method-4'>Request Method</h3>
+<h3 id='request-method-3'>Request Method</h3>
 <ul>
 <li>Method: POST </li>
 <li>Content-Type: application/json</li>
 </ul>
-<h3 id='query-parameters-4'>Query Parameters</h3>
+<h3 id='query-parameters-3'>Query Parameters</h3>
 <table><thead>
 <tr>
 <th>Parameters</th>
@@ -1080,14 +1038,14 @@ Explanation
      </span><span class="p">]</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre></div><h2 id='sign'>Sign</h2><h3 id='http-request-5'>HTTP Request</h3>
+</span></code></pre></div><h2 id='sign'>Sign</h2><h3 id='http-request-4'>HTTP Request</h3>
 <p>POST <code>/api/transaction/approve</code></p>
-<h3 id='request-method-5'>Request Method</h3>
+<h3 id='request-method-4'>Request Method</h3>
 <ul>
 <li>Method: POST </li>
 <li>Content-Type: application/json</li>
 </ul>
-<h3 id='query-parameters-5'>Query Parameters</h3>
+<h3 id='query-parameters-4'>Query Parameters</h3>
 <table><thead>
 <tr>
 <th>Parameters</th>
@@ -1136,7 +1094,7 @@ Explanation
 <td>data</td>
 <td>String</td>
 <td>Y</td>
-<td>Signature data</td>
+<td>Signature data, use private key shard for signing, refer to <a href="#signature-algorithm">Signature Algorithm</a>.</td>
 </tr>
 </tbody></table>
 
@@ -1151,6 +1109,55 @@ Explanation
   </span><span class="nl">"chainId"</span><span class="p">:</span><span class="s2">"20"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"status"</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span><span class="w">
   </span><span class="nl">"data"</span><span class="p">:</span><span class="s2">"dahsudiasdoaasidoasdaosdasd9as8d9a0s8d90as8d9a0s8d09asduashdkasdjaksdajksdasjdhakjdha"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"code"</span><span class="p">:</span><span class="w"> </span><span class="mi">200</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Success"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div><h2 id='fund-collection'>Fund collection</h2>
+<aside class="notice">
+ Note: It is recommended that merchants call this interface every 5 minutes for fund collection, otherwise normal transactions may be affected
+</aside>
+<h3 id='http-request-5'>HTTP Request</h3>
+<p>POST <code>/api/transaction/assets/collect</code></p>
+<h3 id='request-method-5'>Request Method</h3>
+<ul>
+<li>Method: POST </li>
+<li>Content-Type: application/json</li>
+</ul>
+<h3 id='query-parameters-5'>Query Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameters</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>isMain</td>
+<td>Int</td>
+<td>Y</td>
+<td>Whether the collection is the main chain currency. 1: yes; 0: no</td>
+</tr>
+<tr>
+<td>data</td>
+<td>String</td>
+<td>Y</td>
+<td>Signature data, use private key shard for signing, refer to <a href="#signature-algorithm">Signature Algorithm</a>. The encrypted parameters here are:{&quot;isMain&quot;:1}</td>
+</tr>
+</tbody></table>
+
+<blockquote>
+<p>Request example:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"isMain"</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"data"</span><span class="p">:</span><span class="s2">"HDOASJDISADLASDSAODASIDJAISLDJIASDU|ASDUADSASDIASDASDASDASLDASDJASDADOAAS"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
 <blockquote>

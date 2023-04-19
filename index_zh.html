@@ -888,7 +888,7 @@
 <aside class="notice">
 说明：
 <br>
-&emsp;&emsp;1、私钥的密码为"1bitpay"+商户的编号
+&emsp;&emsp;1、私钥的密码为"1bitpay"+商户的编号(商户系统 --> 系统设置 获取)
 <br>
 &emsp;&emsp;2、加密类型采用PKCS12
 <br>
@@ -1093,7 +1093,7 @@
 <td>data</td>
 <td>String</td>
 <td>Y</td>
-<td>签名数据</td>
+<td>签名数据，使用私钥分片进行签名，参考<a href="#7b81b8ce22">签名算法</a></td>
 </tr>
 </tbody></table>
 
@@ -1147,7 +1147,7 @@
 <td>data</td>
 <td>String</td>
 <td>Y</td>
-<td>加密参数，加密参考approve的data。这里加密的业务参数为:{&quot;isMain&quot;:1}</td>
+<td>签名数据，使用私钥分片进行签名，参考<a href="#7b81b8ce22">签名算法</a>。这里加密的业务参数为:{&quot;isMain&quot;:1}</td>
 </tr>
 </tbody></table>
 
