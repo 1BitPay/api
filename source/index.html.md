@@ -53,7 +53,7 @@ If you set a whitelist when creating the API Key, when calling the 1BitPay API, 
 
 ## API Authentication 
 
-- Merge public parameters with business parameters, remove Sign parameters, and empty parameters.
+- Merge [public parameters](#publicparas) with business parameters, remove Sign parameters, and empty parameters.
 - After sorting the Keys of the parameter set according to ASCII, connect them with "=".
 - Splice the concatenated string with the merchant's API Secret parameter.
 - Make the generated string into 32-bit md5 (lowercase) to generate the parameter Sign.
@@ -101,7 +101,7 @@ If you set a whitelist when creating the API Key, when calling the 1BitPay API, 
 
   https://api.1bitpay.io
 
-### Public Parameters 
+### <span id="publicparas">Public Parameters</span>
 
 The public request parameters are the request parameters that each interface needs to use. Each request needs to carry these parameters in order to initiate the request normally.The initial letters of the public request parameters are `uppercase`,In this way, it is distinguished from ordinary interface request parameters, and public parameters need to be placed in the Header.
 
