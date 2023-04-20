@@ -408,7 +408,7 @@
 <p>如果创建 API Key 时设置了白名单，则在调用 1BitPay API 时，只允许从您设置的 IP 白名单地址发起请求。</p>
 <h2 id='17790fda8b'>鉴权规则</h2>
 <ul>
-<li>把公共参数与业务参数合并，去除Sign参数，以及空的参数。</li>
+<li>把<a href="#publicparas">公共参数</a>与业务参数合并，去除Sign参数，以及空的参数。</li>
 <li>把参数集合的Key按照ASCII排序以后用“=”连接。</li>
 <li>把连接好的串后面拼接商户的API Secret参数。</li>
 <li>把生成的字符串做32位md5（小写）即可生成参数Sign。</li>
@@ -461,7 +461,7 @@
 </ul>
 <h2 id='b122f813d5'>基本信息</h2><h3 id='base-url'>Base URL</h3>
 <p>https://api.1bitpay.io</p>
-<h3 id='f45a4fe41f'>公共参数</h3>
+<h3 id='69090ff245'><span id="publicparas">公共参数</span></h3>
 <p>公共请求参数是每个接口都需要使用到的请求参数，每次请求均需要携带这些参数, 才能正常发起请求。公共请求参数的首字母均为<code>大写</code>，以此区分于普通接口请求参数，并且公共参数需要放入到Header中。</p>
 
 <table><thead>
