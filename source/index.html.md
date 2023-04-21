@@ -131,6 +131,8 @@ data|Object| The specific business will display different data structures, pleas
 
   https://sandbox.1bitpay.io
 
+  [Demo](https://1bitpay.io/)
+
 # C2C 
 
 ## Get Rate
