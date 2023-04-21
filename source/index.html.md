@@ -41,7 +41,7 @@ Welcome to 1BitPay API, you can use our API to manage transactions, automate sig
 6. Read the [list to be signed](#get-list-of-pending-signatures) regularly, 2 minutes/time is recommended, and sign in time according to the actual [situation](#sign).
 7. And regularly [collect funds](#fund-collection), it is recommended to 5 minutes / time
 8. After the test is completed, contact us to release the live.
-9. [Demo](https://demo.1bitpay.io?_blank)
+9. [Demo](https://demo.1bitpay.io?_blank){:target="_blank"}
 
 
 ## Create an API Key
@@ -132,7 +132,7 @@ data|Object| The specific business will display different data structures, pleas
 
   https://sandbox.1bitpay.io
 
-  [Demo](https://demo.1bitpay.io?_blank)
+  [Demo](https://demo.1bitpay.io?_blank){:target="_blank"}
 
 # C2C 
 
