@@ -39,7 +39,7 @@ meta:
 6. 定时读取[待签名的列表](#f7c93cd51a)，建议2分钟/次，并根据实际情况及时进行[签名](#8ba46c43fe)。
 7. 并定时进行[资金归集](#e83639625f)，建议5分钟/次。
 8. 测试完成后，联系我们正式上线。
-9. [演示](https://demo.1bitpay.io?_blank){:target="_blank"}
+9. <a href="https://demo.1bitpay.io" target="_blank">演示</a>
 
 ## 创建API Key
 
@@ -124,11 +124,11 @@ data|Object| 具体根绝业务会展现不同的数据结构，详见具体业�
 
 
 
-### <span id="sandbox">沙盒环境</span> 
+### <span id="sandbox">沙盒环境域名</span> 
 
   https://sandbox.1bitpay.io
 
-  [演示](https://demo.1bitpay.io){:target="_blank"}
+  <a href="https://demo.1bitpay.io" target="_blank">演示</a>
 
 # C2C
 
