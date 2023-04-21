@@ -39,6 +39,7 @@ meta:
 6. 定时读取[待签名的列表](#f7c93cd51a)，建议2分钟/次，并根据实际情况及时进行[签名](#8ba46c43fe)。
 7. 并定时进行[资金归集](#e83639625f)，建议5分钟/次。
 8. 测试完成后，联系我们正式上线。
+9. [演示](https://demo.1bitpay.io?_blank)
 
 ## 创建API Key
 
@@ -127,7 +128,7 @@ data|Object| 具体根绝业务会展现不同的数据结构，详见具体业�
 
   https://sandbox.1bitpay.io
 
-  [演示](https://1bitpay.io/)
+  [演示](https://demo.1bitpay.io?_blank)
 
 # C2C
 
