@@ -39,6 +39,7 @@ meta:
 6. 定时读取[待签名的列表](#f7c93cd51a)，建议2分钟/次，并根据实际情况及时进行[签名](#8ba46c43fe)。
 7. 并定时进行[资金归集](#e83639625f)，建议5分钟/次。
 8. 测试完成后，联系我们正式上线。
+9. <a href="https://demo.1bitpay.io" target="_blank">演示</a>
 
 ## 创建API Key
 
@@ -50,7 +51,7 @@ meta:
 
 
 ## 鉴权规则 
-- 把公共参数与业务参数合并，去除Sign参数，以及空的参数。
+- 把[公共参数](#publicparas)与业务参数合并，去除Sign参数，以及空的参数。
 - 把参数集合的Key按照ASCII排序以后用“=”连接。
 - 把连接好的串后面拼接商户的API Secret参数。
 - 把生成的字符串做32位md5（小写）即可生成参数Sign。
@@ -97,7 +98,7 @@ meta:
   https://api.1bitpay.io
 
 
-### 公共参数
+### <span id="publicparas">公共参数</span>
 
 公共请求参数是每个接口都需要使用到的请求参数，每次请求均需要携带这些参数, 才能正常发起请求。公共请求参数的首字母均为`大写`，以此区分于普通接口请求参数，并且公共参数需要放入到Header中。
 
@@ -123,9 +124,11 @@ data|Object| 具体根绝业务会展现不同的数据结构，详见具体业�
 
 
 
-### <span id="sandbox">沙盒环境</span> 
+### <span id="sandbox">沙盒环境域名</span> 
 
   https://sandbox.1bitpay.io
+
+  <a href="https://demo.1bitpay.io" target="_blank">演示</a>
 
 # C2C
 
@@ -262,12 +265,6 @@ orderNo|String| 订单号
 }
 ```
 
-
-
-
-
-
-
 # MPC Co-Signer
 
 ## 概述
@@ -329,7 +326,7 @@ data = "HUSDISJDSNDJSJDKSDJSIDJISOADIASLJDALSIDJISALDHAUSIDHA\ASDUAKSD|ADSADAdas
 <aside class="notice">
 说明：
 <br>
-&emsp;&emsp;1、私钥的密码为"1bitpay"+商户的编号
+&emsp;&emsp;1、私钥的密码为"1bitpay"+商户的编号(商户系统 --> 系统设置 获取)
 <br>
 &emsp;&emsp;2、加密类型采用PKCS12
 <br>
@@ -458,7 +455,7 @@ POST `/api/transaction/approve`
 | value       | String    |N|待签名列表amount，转入金额
 | chainId     | String    |N|待签名列表chainId，链id
 | status      | String    |Y|签名状态. 1：通过；2:拒绝
-|data         |String     |Y|签名数据
+| data         |String    |Y|签名数据，使用私钥分片进行签名，参考[签名算法](#7b81b8ce22)
 
 > 请求示例:
 
@@ -502,10 +499,10 @@ POST `/api/transaction/assets/collect`
  
 ### 请求参数：
 
-参数名 | 类型 | 必要性 | 描述
+参数名 | 类型 | <div style="width:50px">必要性</div> | 描述
 --------- | ----------- |  ----------- | -----------
 | isMain          | Int    |Y|归集的是否是主链币。1：是；0：否
-| data            |String  |Y|加密参数，加密参考approve的data。这里加密的业务参数为:{"isMain":1}
+| data            |String  |Y|签名数据，使用私钥分片进行签名，参考[签名算法](#7b81b8ce22)。这里加密的业务参数为:{"isMain":1}
  
 > 请求示例:
 
