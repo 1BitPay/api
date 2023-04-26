@@ -282,7 +282,7 @@ POST [创建订单](#5ac84906d9)接口定义的`asyncUrl`
 
 参数名 | 类型 | <div style="width:50px">必要性</div> | 描述
 --------- | ----------- |  ----------- | -----------
-| status        | Int              |Y|订单状态  -2：撮合失败 -1：已取消 0：初始化 1：已成交 2：进行中 3-8：处理中 9：已完成
+| status        | Int              |Y|订单状态， -2：撮合失败；-1：已取消；9：已完成
 | dealAmount    | Decimal          |Y|购买或者出售数量
 | merchantOrderNo | String         |Y|商户订单号
 | orderNo | String                 |Y|1BitPay 订单号

@@ -285,7 +285,7 @@ POST `asyncUrl` defined by the [Create Order](#create-order)
 
 Parameters | Type | Required | Description
 --------- | ----------- |  ----------- | -----------
-| status        | Int              |Y| Order status -2: Matching failed -1: Canceled 0: Initialized 1: Completed 2: In progress 3-8: Processing 9: Completed
+| status        | Int              |Y| Order status, -2: Matching failed; -1: Canceled; 9: Completed
 | dealAmount    | Decimal          |Y|buy or sell amount
 | merchantOrderNo | String         |Y|Merchant order number
 | orderNo | String                 |Y|1BitPay order number
