@@ -280,7 +280,7 @@ orderNo|String| Order number
 
 ### HTTP Request：
 
-POST [Create Order](#create-order)接口定义的`asyncUrl`
+POST `asyncUrl` defined by the [Create Order](#create-order)
 
 ### Request Method
 - Method: POST 
