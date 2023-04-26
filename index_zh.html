@@ -799,12 +799,7 @@
       </span><span class="nl">"orderNo"</span><span class="p">:</span><span class="w"> </span><span class="s2">"335793449653514240"</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre></div><h2 id='e9a612a743'>订单回调</h2>
-<aside class="notice">
-  回调规则：1BitPay 收到商户返回 code 为 "200" 的响应则认为回调成功，否则认为回调失败，并在12小时内重复回调，超过12小时将不再回调，重复回调间隔时间为：
-  第2分钟，第5分钟，第10分钟，第30分钟，第60分钟，第90分钟，第2个小时，第3个小时，第4个小时，第5个小时，第6个小时，第7个小时，第8个小时，第9个小时，第10个小时，第11个小时，第12个小时。
-</aside>
-<h3 id='0e84ef42ae-3'>请求地址</h3>
+</span></code></pre></div><h2 id='e9a612a743'>订单回调</h2><h3 id='0e84ef42ae-3'>请求地址</h3>
 <p>POST <a href="#5ac84906d9">创建订单</a>接口定义的<code>asyncUrl</code></p>
 <h3 id='af989d8988-3'>请求方式</h3>
 <ul>
@@ -898,7 +893,12 @@
   </span><span class="nl">"code"</span><span class="p">:</span><span class="w"> </span><span class="mi">200</span><span class="p">,</span><span class="w">
   </span><span class="nl">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Success"</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre></div><h1 id='mpc-co-signer'>MPC Co-Signer</h1><h2 id='153042ed9e'>概述</h2>
+</span></code></pre></div>
+<aside class="notice">
+  回调规则：1BitPay 收到商户返回 code 为 "200" 的响应则认为回调成功，否则认为回调失败，并在12小时内重复回调，超过12小时将不再回调，重复回调间隔时间为：
+  第2分钟，第5分钟，第10分钟，第30分钟，第60分钟，第90分钟，第2个小时，第3个小时，第4个小时，第5个小时，第6个小时，第7个小时，第8个小时，第9个小时，第10个小时，第11个小时，第12个小时。
+</aside>
+<h1 id='mpc-co-signer'>MPC Co-Signer</h1><h2 id='153042ed9e'>概述</h2>
 <p>MPC 全称为 Security Multi-Party Computation（<a href="https://zh.wikipedia.org/wiki/安全多方计算">安全多方计算</a>）。通过 MPC 可以做到从生成、使用、存储整个生命周期中，私钥可用不可见。1BitPay 使用 MPC 技术将传统的单私钥变成了分布式的私钥分片，可以有效避免单私钥带来的单点风险，实现团队多人共同管理资金，并支持社交恢复。详细的私钥管理方案可参考 <a href="https://support.1bitpay.io/v/zh/mpcwalletcn/key-management-cn">私钥管理方案</a>.</p>
 
 <p><aside class="notice">

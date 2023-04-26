@@ -800,12 +800,7 @@
       </span><span class="nl">"orderNo"</span><span class="p">:</span><span class="w"> </span><span class="s2">"335793449653514240"</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre></div><h2 id='order-callback'>Order Callback</h2>
-<aside class="notice">
-  Callback rules: If 1BitPay receives a response from the merchant with a code of 200, the callback will be considered successful; otherwise, the callback will be considered a failure, and the callback will be repeated within 12 hours, and no more callbacks will be made after 12 hours. The interval between repeated callbacks is:
-   Minute 2, Minute 5, Minute 10, Minute 30, Minute 60, Minute 90, Hour 2, Hour 3, Hour 4, Hour 5, Hour 6, Hour 7th hour, 8th hour, 9th hour, 10th hour, 11th hour, 12th hour.
-</aside>
-<h3 id='http-request-3'>HTTP Request：</h3>
+</span></code></pre></div><h2 id='order-callback'>Order Callback</h2><h3 id='http-request-3'>HTTP Request：</h3>
 <p>POST <code>asyncUrl</code> defined by the <a href="#create-order">Create Order</a></p>
 <h3 id='request-method-3'>Request Method</h3>
 <ul>
@@ -899,7 +894,12 @@
   </span><span class="nl">"code"</span><span class="p">:</span><span class="w"> </span><span class="mi">200</span><span class="p">,</span><span class="w">
   </span><span class="nl">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Success"</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre></div><h1 id='mpc-co-signer'>MPC Co-Signer</h1><h2 id='overview'>Overview</h2>
+</span></code></pre></div>
+<aside class="notice">
+  Callback rules: If 1BitPay receives a response from the merchant with a code of 200, the callback will be considered successful; otherwise, the callback will be considered a failure, and the callback will be repeated within 12 hours, and no more callbacks will be made after 12 hours. The interval between repeated callbacks is:
+   Minute 2, Minute 5, Minute 10, Minute 30, Minute 60, Minute 90, Hour 2, Hour 3, Hour 4, Hour 5, Hour 6, Hour 7th hour, 8th hour, 9th hour, 10th hour, 11th hour, 12th hour.
+</aside>
+<h1 id='mpc-co-signer'>MPC Co-Signer</h1><h2 id='overview'>Overview</h2>
 <p>The full name of MPC is <a href="https://en.wikipedia.org/wiki/Secure_multi-party_computation">Secure Multi-Party Computation</a>. Through MPC, the private key is available and invisible throughout the entire life cycle from generation, use, and storage. 1BitPay uses MPC technology to transform the traditional single private key into distributed private key sharding, which can effectively avoid the single-point risk brought by a single private key, realize the joint management of funds by multiple people in the team, and support social recovery. For detailed private key management scheme, please refer to <a href="https://support.1bitpay.io/mpcwallet/key-management">Private key management</a>.</p>
 
 <p><aside class="notice">
