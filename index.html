@@ -350,6 +350,9 @@
                   <li>
                     <a href="#create-order" class="toc-h2 toc-link" data-title="Create Order">Create Order</a>
                   </li>
+                  <li>
+                    <a href="#order-callback" class="toc-h2 toc-link" data-title="Order Callback">Order Callback</a>
+                  </li>
               </ul>
           </li>
           <li>
@@ -797,6 +800,105 @@
       </span><span class="nl">"orderNo"</span><span class="p">:</span><span class="w"> </span><span class="s2">"335793449653514240"</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
+</span></code></pre></div><h2 id='order-callback'>Order Callback</h2>
+<aside class="notice">
+  Callback rules: If 1BitPay receives a response from the merchant with a code of 200, the callback will be considered successful; otherwise, the callback will be considered a failure, and the callback will be repeated within 12 hours, and no more callbacks will be made after 12 hours. The interval between repeated callbacks is:
+   Minute 2, Minute 5, Minute 10, Minute 30, Minute 60, Minute 90, Hour 2, Hour 3, Hour 4, Hour 5, Hour 6, Hour 7th hour, 8th hour, 9th hour, 10th hour, 11th hour, 12th hour.
+</aside>
+<h3 id='http-request-3'>HTTP Request：</h3>
+<p>POST <a href="#create-order">Create Order</a>接口定义的<code>asyncUrl</code></p>
+<h3 id='request-method-3'>Request Method</h3>
+<ul>
+<li>Method: POST </li>
+<li>Content-Type: application/json</li>
+</ul>
+<h3 id='query-parameters-3'>Query Parameters</h3>
+<table><thead>
+<tr>
+<th>Parameters</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>status</td>
+<td>Int</td>
+<td>Y</td>
+<td>Order status -2: Matching failed -1: Canceled 0: Initialized 1: Completed 2: In progress 3-8: Processing 9: Completed</td>
+</tr>
+<tr>
+<td>dealAmount</td>
+<td>Decimal</td>
+<td>Y</td>
+<td>buy or sell amount</td>
+</tr>
+<tr>
+<td>merchantOrderNo</td>
+<td>String</td>
+<td>Y</td>
+<td>Merchant order number</td>
+</tr>
+<tr>
+<td>orderNo</td>
+<td>String</td>
+<td>Y</td>
+<td>1BitPay order number</td>
+</tr>
+<tr>
+<td>orderType</td>
+<td>Int</td>
+<td>Y</td>
+<td>Order Type. 1: buy; 2: sell</td>
+</tr>
+<tr>
+<td>signature</td>
+<td>String</td>
+<td>Y</td>
+<td>Signature: See <a href="#api-authentication">API Authentication</a> for details</td>
+</tr>
+</tbody></table>
+
+<blockquote>
+<p>Request example:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"status"</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"dealAmount"</span><span class="p">:</span><span class="mf">10.11</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"orderNo"</span><span class="p">:</span><span class="s2">"1231222112d8123"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"merchantOrderNo"</span><span class="p">:</span><span class="s2">"1231222112d8"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"orderType"</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"signature"</span><span class="p">:</span><span class="s2">"12312asdjaisldajlsdkasasdajksdjkasjdkas"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div><h3 id='response-parameters-3'>Response Parameters</h3>
+<p>The data parameter is as follows:</p>
+
+<table><thead>
+<tr>
+<th>Parameters</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>code</td>
+<td>Int</td>
+<td>200 Success, other codes are considered failure</td>
+</tr>
+<tr>
+<td>message</td>
+<td>String</td>
+<td>Success</td>
+</tr>
+</tbody></table>
+
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"code"</span><span class="p">:</span><span class="w"> </span><span class="mi">200</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Success"</span><span class="w">
+</span><span class="p">}</span><span class="w">
 </span></code></pre></div><h1 id='mpc-co-signer'>MPC Co-Signer</h1><h2 id='overview'>Overview</h2>
 <p>The full name of MPC is <a href="https://en.wikipedia.org/wiki/Secure_multi-party_computation">Secure Multi-Party Computation</a>. Through MPC, the private key is available and invisible throughout the entire life cycle from generation, use, and storage. 1BitPay uses MPC technology to transform the traditional single private key into distributed private key sharding, which can effectively avoid the single-point risk brought by a single private key, realize the joint management of funds by multiple people in the team, and support social recovery. For detailed private key management scheme, please refer to <a href="https://support.1bitpay.io/mpcwallet/key-management">Private key management</a>.</p>
 
@@ -927,14 +1029,14 @@ Explanation
 <span class="n">cipher</span><span class="o">.</span><span class="na">init</span><span class="o">(</span><span class="nc">Cipher</span><span class="o">.</span><span class="na">ENCRYPT_MODE</span><span class="o">,</span> <span class="n">privateKey</span><span class="o">);</span>  <span class="c1">// Initialize Cipher</span>
 <span class="kt">byte</span><span class="o">[]</span> <span class="n">bytes</span> <span class="o">=</span> <span class="n">cipher</span><span class="o">.</span><span class="na">doFinal</span><span class="o">(</span><span class="n">srcSouse</span><span class="o">.</span><span class="na">getBytes</span><span class="o">(</span><span class="s">"UTF-8"</span><span class="o">));</span> <span class="c1">// start encryption</span>
 <span class="nc">String</span> <span class="n">data</span> <span class="o">=</span> <span class="n">encryptBASE64</span><span class="o">(</span><span class="n">bytes</span><span class="o">);</span> <span class="c1">// base64 encoding to get the signature string</span>
-</code></pre></div><h2 id='get-list-of-pending-signatures'>Get list of pending signatures</h2><h3 id='http-request-3'>HTTP Request</h3>
+</code></pre></div><h2 id='get-list-of-pending-signatures'>Get list of pending signatures</h2><h3 id='http-request-4'>HTTP Request</h3>
 <p>POST <code>/api/transaction/pending</code></p>
-<h3 id='request-method-3'>Request Method</h3>
+<h3 id='request-method-4'>Request Method</h3>
 <ul>
 <li>Method: POST </li>
 <li>Content-Type: application/json</li>
 </ul>
-<h3 id='query-parameters-3'>Query Parameters</h3>
+<h3 id='query-parameters-4'>Query Parameters</h3>
 <table><thead>
 <tr>
 <th>Parameters</th>
@@ -964,7 +1066,7 @@ Explanation
   </span><span class="nl">"pageNum"</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span><span class="w">
   </span><span class="nl">"pageSize"</span><span class="p">:</span><span class="mi">20</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre></div><h3 id='response-parameters-3'>Response Parameters</h3>
+</span></code></pre></div><h3 id='response-parameters-4'>Response Parameters</h3>
 <p>The data structure is as follows:</p>
 
 <table><thead>
@@ -1041,14 +1143,14 @@ Explanation
      </span><span class="p">]</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre></div><h2 id='sign'>Sign</h2><h3 id='http-request-4'>HTTP Request</h3>
+</span></code></pre></div><h2 id='sign'>Sign</h2><h3 id='http-request-5'>HTTP Request</h3>
 <p>POST <code>/api/transaction/approve</code></p>
-<h3 id='request-method-4'>Request Method</h3>
+<h3 id='request-method-5'>Request Method</h3>
 <ul>
 <li>Method: POST </li>
 <li>Content-Type: application/json</li>
 </ul>
-<h3 id='query-parameters-4'>Query Parameters</h3>
+<h3 id='query-parameters-5'>Query Parameters</h3>
 <table><thead>
 <tr>
 <th>Parameters</th>
@@ -1125,14 +1227,14 @@ Explanation
 <aside class="notice">
  Note: It is recommended that merchants call this interface every 5 minutes for fund collection, otherwise normal transactions may be affected
 </aside>
-<h3 id='http-request-5'>HTTP Request</h3>
+<h3 id='http-request-6'>HTTP Request</h3>
 <p>POST <code>/api/transaction/assets/collect</code></p>
-<h3 id='request-method-5'>Request Method</h3>
+<h3 id='request-method-6'>Request Method</h3>
 <ul>
 <li>Method: POST </li>
 <li>Content-Type: application/json</li>
 </ul>
-<h3 id='query-parameters-5'>Query Parameters</h3>
+<h3 id='query-parameters-6'>Query Parameters</h3>
 <table><thead>
 <tr>
 <th>Parameters</th>
