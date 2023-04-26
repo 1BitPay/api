@@ -292,7 +292,7 @@ POST `商户定义的asyncUrl`
 | merchantOrderNo | String                |Y|商户订单号
 | orderNo | String                |Y|平台订单号
 | orderType       | Int                   |Y|订单类型。1：买单；2:卖单
-| signature       | String                   |Y|签名
+| signature       | String                   |Y|签名：详见 [鉴权规则](#17790fda8b)
 
 > 请求示例:
 
@@ -314,8 +314,8 @@ data参数如下：
 
 参数名 | 类型 | 描述
 --------- | ----------- | -----------
-code | Int  | 200 成功，详见状态描述
-message | String| Success
+code | Int  | 200 成功，其余全失败
+message | String| Success 
 
 >  响应示例:
 
