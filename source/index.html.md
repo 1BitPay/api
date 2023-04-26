@@ -271,6 +271,63 @@ orderNo|String| Order number
 }
 ```
 
+## Order Callback
+
+<aside class="notice">
+  Callback rules: If 1BitPay receives a response from the merchant with a code of 200, the callback will be considered successful; otherwise, the callback will be considered a failure, and the callback will be repeated within 12 hours, and no more callbacks will be made after 12 hours. The interval between repeated callbacks is:
+   Minute 2, Minute 5, Minute 10, Minute 30, Minute 60, Minute 90, Hour 2, Hour 3, Hour 4, Hour 5, Hour 6, Hour 7th hour, 8th hour, 9th hour, 10th hour, 11th hour, 12th hour.
+</aside>
+
+### HTTP Request：
+
+POST [Create Order](#create-order)接口定义的`asyncUrl`
+
+### Request Method
+- Method: POST 
+- Content-Type: application/json
+
+### Query Parameters
+
+Parameters | Type | Required | Description
+--------- | ----------- |  ----------- | -----------
+| status        | Int              |Y| Order status -2: Matching failed -1: Canceled 0: Initialized 1: Completed 2: In progress 3-8: Processing 9: Completed
+| dealAmount    | Decimal          |Y|buy or sell amount
+| merchantOrderNo | String         |Y|Merchant order number
+| orderNo | String                 |Y|1BitPay order number
+| orderType       | Int            |Y|Order Type. 1: buy; 2: sell
+| signature       | String         |Y|Signature: See [API Authentication](#api-authentication) for details
+
+> Request example:
+
+```json
+{
+  "status":1,
+  "dealAmount":10.11,
+  "orderNo":"1231222112d8123",
+  "merchantOrderNo":"1231222112d8",
+  "orderType":1,
+  "signature":"12312asdjaisldajlsdkasasdajksdjkasjdkas"
+}
+```
+
+
+### Response Parameters
+
+The data parameter is as follows:
+
+Parameters | Type | Description
+--------- | ----------- | -----------
+code | Int  | 200 Success, other codes are considered failure
+message | String| Success 
+
+>  The above command returns JSON structured like this:
+
+```json
+{
+  "code": 200,
+  "message": "Success"
+}
+```
 
 # MPC Co-Signer
 
