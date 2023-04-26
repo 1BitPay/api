@@ -182,6 +182,7 @@ sellRate | Decimal| 卖单最新汇率
 }
 ```
 
+
 ## 创建订单
 
 ### 请求地址：
@@ -264,6 +265,68 @@ orderNo|String| 订单号
   }
 }
 ```
+
+
+
+## 回调
+
+<aside class="notice">
+  注意：回调规则如果平台收到商户响应失败，12小时内调用17次，超过17次将不再回调，以下是调用间隔时间
+  2分 3分 5分 20分 30分 30分 30分 1小时 1小时 1小时 1小时 1小时 1小时 1小时 1小时 1小时 1小时
+</aside>
+
+### 请求地址：
+
+POST `商户定义的asyncUrl`
+
+### 请求方式
+- Method: POST 
+- Content-Type: application/json
+
+### 请求参数：
+
+参数名 | 类型 | <div style="width:50px">必要性</div> | 描述
+--------- | ----------- |  ----------- | -----------
+| status        | Int              |Y|订单状态  -2：撮合失败 -1：已取消 0：初始化 1：已成交 2：进行中 3-8：处理中 9：已完成
+| dealAmount    | Decimal              |Y|购买或者出售数量
+| merchantOrderNo | String                |Y|商户订单号
+| orderNo | String                |Y|平台订单号
+| orderType       | Int                   |Y|订单类型。1：买单；2:卖单
+| signature       | String                   |Y|签名
+
+> 请求示例:
+
+```json
+{
+  "status":1,
+  "dealAmount":10.11,
+  "orderNo":"1231222112d8123",
+  "merchantOrderNo":"1231222112d8",
+  "orderType":1,
+  "signature":"12312asdjaisldajlsdkasasdajksdjkasjdkas"
+}
+```
+
+
+### 响应参数
+
+data参数如下：
+
+参数名 | 类型 | 描述
+--------- | ----------- | -----------
+code | Int  | 200 成功，详见状态描述
+message | String| Success
+
+>  响应示例:
+
+```json
+{
+  "code": 200,
+  "message": "Success"
+}
+```
+
+
 
 # MPC Co-Signer
 
