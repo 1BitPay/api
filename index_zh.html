@@ -350,6 +350,9 @@
                   <li>
                     <a href="#5ac84906d9" class="toc-h2 toc-link" data-title="创建订单">创建订单</a>
                   </li>
+                  <li>
+                    <a href="#c76b97433d" class="toc-h2 toc-link" data-title="回调">回调</a>
+                  </li>
               </ul>
           </li>
           <li>
@@ -796,6 +799,105 @@
       </span><span class="nl">"orderNo"</span><span class="p">:</span><span class="w"> </span><span class="s2">"335793449653514240"</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
+</span></code></pre></div><h2 id='c76b97433d'>回调</h2>
+<aside class="notice">
+  注意：回调规则如果平台收到商户响应失败，12小时内调用17次，超过17次将不再回调，以下是调用间隔时间
+  2分 3分 5分 20分 30分 30分 30分 1小时 1小时 1小时 1小时 1小时 1小时 1小时 1小时 1小时 1小时
+</aside>
+<h3 id='86e489d578-2'>请求地址：</h3>
+<p>POST <code>商户定义的asyncUrl</code></p>
+<h3 id='af989d8988-3'>请求方式</h3>
+<ul>
+<li>Method: POST </li>
+<li>Content-Type: application/json</li>
+</ul>
+<h3 id='9b19f8c9cc-3'>请求参数：</h3>
+<table><thead>
+<tr>
+<th>参数名</th>
+<th>类型</th>
+<th><div style="width:50px">必要性</div></th>
+<th>描述</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>status</td>
+<td>Int</td>
+<td>Y</td>
+<td>订单状态  -2：撮合失败 -1：已取消 0：初始化 1：已成交 2：进行中 3-8：处理中 9：已完成</td>
+</tr>
+<tr>
+<td>dealAmount</td>
+<td>Decimal</td>
+<td>Y</td>
+<td>购买或者出售数量</td>
+</tr>
+<tr>
+<td>merchantOrderNo</td>
+<td>String</td>
+<td>Y</td>
+<td>商户订单号</td>
+</tr>
+<tr>
+<td>orderNo</td>
+<td>String</td>
+<td>Y</td>
+<td>平台订单号</td>
+</tr>
+<tr>
+<td>orderType</td>
+<td>Int</td>
+<td>Y</td>
+<td>订单类型。1：买单；2:卖单</td>
+</tr>
+<tr>
+<td>signature</td>
+<td>String</td>
+<td>Y</td>
+<td>签名</td>
+</tr>
+</tbody></table>
+
+<blockquote>
+<p>请求示例:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"status"</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"dealAmount"</span><span class="p">:</span><span class="mf">10.11</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"orderNo"</span><span class="p">:</span><span class="s2">"1231222112d8123"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"merchantOrderNo"</span><span class="p">:</span><span class="s2">"1231222112d8"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"orderType"</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"signature"</span><span class="p">:</span><span class="s2">"12312asdjaisldajlsdkasasdajksdjkasjdkas"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div><h3 id='50faad05f3-3'>响应参数</h3>
+<p>data参数如下：</p>
+
+<table><thead>
+<tr>
+<th>参数名</th>
+<th>类型</th>
+<th>描述</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>code</td>
+<td>Int</td>
+<td>200 成功，详见状态描述</td>
+</tr>
+<tr>
+<td>message</td>
+<td>String</td>
+<td>Success</td>
+</tr>
+</tbody></table>
+
+<blockquote>
+<p>响应示例:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"code"</span><span class="p">:</span><span class="w"> </span><span class="mi">200</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Success"</span><span class="w">
+</span><span class="p">}</span><span class="w">
 </span></code></pre></div><h1 id='mpc-co-signer'>MPC Co-Signer</h1><h2 id='153042ed9e'>概述</h2>
 <p>MPC 全称为 Security Multi-Party Computation（<a href="https://zh.wikipedia.org/wiki/安全多方计算">安全多方计算</a>）。通过 MPC 可以做到从生成、使用、存储整个生命周期中，私钥可用不可见。1BitPay 使用 MPC 技术将传统的单私钥变成了分布式的私钥分片，可以有效避免单私钥带来的单点风险，实现团队多人共同管理资金，并支持社交恢复。详细的私钥管理方案可参考 <a href="https://support.1bitpay.io/v/zh/mpcwalletcn/key-management-cn">私钥管理方案</a>.</p>
 
@@ -926,14 +1028,14 @@
 <span class="n">cipher</span><span class="o">.</span><span class="na">init</span><span class="o">(</span><span class="nc">Cipher</span><span class="o">.</span><span class="na">ENCRYPT_MODE</span><span class="o">,</span> <span class="n">privateKey</span><span class="o">);</span>  <span class="c1">// 初始化Cipher</span>
 <span class="kt">byte</span><span class="o">[]</span> <span class="n">bytes</span> <span class="o">=</span> <span class="n">cipher</span><span class="o">.</span><span class="na">doFinal</span><span class="o">(</span><span class="n">srcSouse</span><span class="o">.</span><span class="na">getBytes</span><span class="o">(</span><span class="s">"UTF-8"</span><span class="o">));</span> <span class="c1">// 开始加密</span>
 <span class="nc">String</span> <span class="n">data</span> <span class="o">=</span> <span class="n">encryptBASE64</span><span class="o">(</span><span class="n">bytes</span><span class="o">);</span> <span class="c1">// base64编码即得签名串</span>
-</code></pre></div><h2 id='f7c93cd51a'>获得待签名列表</h2><h3 id='86e489d578-2'>请求地址：</h3>
+</code></pre></div><h2 id='f7c93cd51a'>获得待签名列表</h2><h3 id='86e489d578-3'>请求地址：</h3>
 <p>POST <code>/api/transaction/pending</code></p>
-<h3 id='af989d8988-3'>请求方式</h3>
+<h3 id='af989d8988-4'>请求方式</h3>
 <ul>
 <li>Method: POST </li>
 <li>Content-Type: application/json</li>
 </ul>
-<h3 id='9b19f8c9cc-3'>请求参数：</h3>
+<h3 id='9b19f8c9cc-4'>请求参数：</h3>
 <table><thead>
 <tr>
 <th>参数名</th>
@@ -963,7 +1065,7 @@
   </span><span class="nl">"pageNum"</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span><span class="w">
   </span><span class="nl">"pageSize"</span><span class="p">:</span><span class="mi">20</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre></div><h3 id='50faad05f3-3'>响应参数</h3>
+</span></code></pre></div><h3 id='50faad05f3-4'>响应参数</h3>
 <p>data 结构如下：</p>
 
 <table><thead>
@@ -1040,14 +1142,14 @@
      </span><span class="p">]</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre></div><h2 id='8ba46c43fe'>签名</h2><h3 id='86e489d578-3'>请求地址：</h3>
+</span></code></pre></div><h2 id='8ba46c43fe'>签名</h2><h3 id='86e489d578-4'>请求地址：</h3>
 <p>POST <code>/api/transaction/approve</code></p>
-<h3 id='af989d8988-4'>请求方式</h3>
+<h3 id='af989d8988-5'>请求方式</h3>
 <ul>
 <li>Method: POST </li>
 <li>Content-Type: application/json</li>
 </ul>
-<h3 id='9b19f8c9cc-4'>请求参数：</h3>
+<h3 id='9b19f8c9cc-5'>请求参数：</h3>
 <table><thead>
 <tr>
 <th>参数名</th>
@@ -1124,14 +1226,14 @@
 <aside class="notice">
  注意：建议商户每5分钟调用一次该接口进行资金归集，否则可能影响正常交易
 </aside>
-<h3 id='86e489d578-4'>请求地址：</h3>
+<h3 id='86e489d578-5'>请求地址：</h3>
 <p>POST <code>/api/transaction/assets/collect</code></p>
-<h3 id='af989d8988-5'>请求方式</h3>
+<h3 id='af989d8988-6'>请求方式</h3>
 <ul>
 <li>Method: POST </li>
 <li>Content-Type: application/json</li>
 </ul>
-<h3 id='9b19f8c9cc-5'>请求参数：</h3>
+<h3 id='9b19f8c9cc-6'>请求参数：</h3>
 <table><thead>
 <tr>
 <th>参数名</th>
