@@ -266,6 +266,101 @@ orderNo|String| 订单号
 }
 ```
 
+## 批量卖单
+
+### 请求地址：
+
+POST `/api/otc/batch/sell`
+
+### 请求方式
+- Method: POST 
+- Content-Type: application/json
+
+### 请求参数：
+
+参数名 | 类型 | <div style="width:50px">必要性</div> | 描述
+--------- | ----------- |  ----------- | -----------
+| userName        | String              |Y|用户姓名
+| areaCode        | String              |Y|用户手机区号
+| phone           | String              |Y|用户手机号码
+| syncUrl         | String              |N|同步回调地址
+| asyncUrl        | String              |N|异步回调地址
+| cryptoAmount    | Decimal              |Y|购买或者出售数量
+| cryptoCurrency  | String                |Y|交易币种
+| legalCurrency   | String                |Y|付款币种
+| idCardType      | Int                   |Y| 证件类型。1：身份证；2：护照
+| idCard          | String                |Y|证件号码
+| kyc             | Int                   |Y|KYC级别，目前KYC级别传递2
+| merchantOrderNo | String                |Y|商户订单号
+| payWay          | Int                   |Y|支付方式。1：银行卡；2:支付宝；3:微信支付。用户卖单目前仅支持 1:银行卡
+| bank            | String                |N| 用户收款开户行，卖单必填
+| bankAccount     | String                |N|用户收款账户，卖单必填
+| bankBranch      | String                |N|用户收款开户支行
+
+> 请求示例:
+
+```json
+[
+  {
+    "userName":"陈先生",
+    "areaCode":"+86",
+    "phone":"18848820305",
+    "syncUrl":"https://example.com",
+    "asyncUrl":"https://example.com",
+    "cryptoAmount":"10",
+    "cryptoCurrency":"USDT",
+    "legalCurrency":"CNY",
+    "idCardType":1,
+    "idCard":"412627288918989891",
+    "merchantNo":"mer1c92b0319ef5b794",
+    "merchantOrderNo":"1231222112d8",
+    "payWay":"1",
+    "bank":"建设银行",
+    "bankAccount":"6217229282829299111",
+    "bankBranch":"建设支行"
+  },
+  {
+    "userName":"陈先生",
+    "areaCode":"+86",
+    "phone":"18848820305",
+    "syncUrl":"https://example.com",
+    "asyncUrl":"https://example.com",
+    "cryptoAmount":"10",
+    "cryptoCurrency":"USDT",
+    "legalCurrency":"CNY",
+    "idCardType":1,
+    "idCard":"412627288918989891",
+    "merchantNo":"mer1c92b0319ef5b794",
+    "merchantOrderNo":"1231222112d8",
+    "payWay":"1",
+    "bank":"建设银行",
+    "bankAccount":"6217229282829299111",
+    "bankBranch":"建设支行"
+  }
+]
+```
+
+
+### 响应参数
+
+data参数如下：
+
+参数名 | 类型 | 描述
+--------- | ----------- | -----------
+orderNo|String| 订单号
+
+>  响应示例:
+
+```json
+{
+  "code": 200,
+  "message": "Success",
+  "data": [
+    "335793449653514241",
+    "335793449653514242"
+  ]
+}
+```
 
 
 ## 回调
