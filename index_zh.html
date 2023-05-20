@@ -351,6 +351,9 @@
                     <a href="#5ac84906d9" class="toc-h2 toc-link" data-title="创建订单">创建订单</a>
                   </li>
                   <li>
+                    <a href="#dd767af054" class="toc-h2 toc-link" data-title="批量卖单">批量卖单</a>
+                  </li>
+                  <li>
                     <a href="#e9a612a743" class="toc-h2 toc-link" data-title="订单回调">订单回调</a>
                   </li>
               </ul>
@@ -799,9 +802,192 @@
       </span><span class="nl">"orderNo"</span><span class="p">:</span><span class="w"> </span><span class="s2">"335793449653514240"</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
+</span></code></pre></div><h2 id='dd767af054'>批量卖单</h2><h3 id='86e489d578'>请求地址：</h3>
+<p>POST <code>/api/otc/batch/sell</code></p>
+<h3 id='af989d8988-3'>请求方式</h3>
+<ul>
+<li>Method: POST </li>
+<li>Content-Type: application/json</li>
+</ul>
+<h3 id='9b19f8c9cc'>请求参数：</h3>
+<table><thead>
+<tr>
+<th>参数名</th>
+<th>类型</th>
+<th><div style="width:50px">必要性</div></th>
+<th>描述</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>userName</td>
+<td>String</td>
+<td>Y</td>
+<td>用户姓名</td>
+</tr>
+<tr>
+<td>areaCode</td>
+<td>String</td>
+<td>Y</td>
+<td>用户手机区号</td>
+</tr>
+<tr>
+<td>phone</td>
+<td>String</td>
+<td>Y</td>
+<td>用户手机号码</td>
+</tr>
+<tr>
+<td>syncUrl</td>
+<td>String</td>
+<td>N</td>
+<td>同步回调地址</td>
+</tr>
+<tr>
+<td>asyncUrl</td>
+<td>String</td>
+<td>N</td>
+<td>异步回调地址</td>
+</tr>
+<tr>
+<td>cryptoAmount</td>
+<td>Decimal</td>
+<td>Y</td>
+<td>购买或者出售数量</td>
+</tr>
+<tr>
+<td>cryptoCurrency</td>
+<td>String</td>
+<td>Y</td>
+<td>交易币种</td>
+</tr>
+<tr>
+<td>legalCurrency</td>
+<td>String</td>
+<td>Y</td>
+<td>付款币种</td>
+</tr>
+<tr>
+<td>idCardType</td>
+<td>Int</td>
+<td>Y</td>
+<td>证件类型。1：身份证；2：护照</td>
+</tr>
+<tr>
+<td>idCard</td>
+<td>String</td>
+<td>Y</td>
+<td>证件号码</td>
+</tr>
+<tr>
+<td>kyc</td>
+<td>Int</td>
+<td>Y</td>
+<td>KYC级别，目前KYC级别传递2</td>
+</tr>
+<tr>
+<td>merchantOrderNo</td>
+<td>String</td>
+<td>Y</td>
+<td>商户订单号</td>
+</tr>
+<tr>
+<td>payWay</td>
+<td>Int</td>
+<td>Y</td>
+<td>支付方式。1：银行卡；2:支付宝；3:微信支付。用户卖单目前仅支持 1:银行卡</td>
+</tr>
+<tr>
+<td>bank</td>
+<td>String</td>
+<td>N</td>
+<td>用户收款开户行，卖单必填</td>
+</tr>
+<tr>
+<td>bankAccount</td>
+<td>String</td>
+<td>N</td>
+<td>用户收款账户，卖单必填</td>
+</tr>
+<tr>
+<td>bankBranch</td>
+<td>String</td>
+<td>N</td>
+<td>用户收款开户支行</td>
+</tr>
+</tbody></table>
+
+<blockquote>
+<p>请求示例:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">[</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"userName"</span><span class="p">:</span><span class="s2">"陈先生"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"areaCode"</span><span class="p">:</span><span class="s2">"+86"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"phone"</span><span class="p">:</span><span class="s2">"18848820305"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"syncUrl"</span><span class="p">:</span><span class="s2">"https://example.com"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"asyncUrl"</span><span class="p">:</span><span class="s2">"https://example.com"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"cryptoAmount"</span><span class="p">:</span><span class="s2">"10"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"cryptoCurrency"</span><span class="p">:</span><span class="s2">"USDT"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"legalCurrency"</span><span class="p">:</span><span class="s2">"CNY"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"idCardType"</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"idCard"</span><span class="p">:</span><span class="s2">"412627288918989891"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"merchantNo"</span><span class="p">:</span><span class="s2">"mer1c92b0319ef5b794"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"merchantOrderNo"</span><span class="p">:</span><span class="s2">"1231222112d8"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"payWay"</span><span class="p">:</span><span class="s2">"1"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"bank"</span><span class="p">:</span><span class="s2">"建设银行"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"bankAccount"</span><span class="p">:</span><span class="s2">"6217229282829299111"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"bankBranch"</span><span class="p">:</span><span class="s2">"建设支行"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"userName"</span><span class="p">:</span><span class="s2">"陈先生"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"areaCode"</span><span class="p">:</span><span class="s2">"+86"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"phone"</span><span class="p">:</span><span class="s2">"18848820305"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"syncUrl"</span><span class="p">:</span><span class="s2">"https://example.com"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"asyncUrl"</span><span class="p">:</span><span class="s2">"https://example.com"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"cryptoAmount"</span><span class="p">:</span><span class="s2">"10"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"cryptoCurrency"</span><span class="p">:</span><span class="s2">"USDT"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"legalCurrency"</span><span class="p">:</span><span class="s2">"CNY"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"idCardType"</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"idCard"</span><span class="p">:</span><span class="s2">"412627288918989891"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"merchantNo"</span><span class="p">:</span><span class="s2">"mer1c92b0319ef5b794"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"merchantOrderNo"</span><span class="p">:</span><span class="s2">"1231222112d8"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"payWay"</span><span class="p">:</span><span class="s2">"1"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"bank"</span><span class="p">:</span><span class="s2">"建设银行"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"bankAccount"</span><span class="p">:</span><span class="s2">"6217229282829299111"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"bankBranch"</span><span class="p">:</span><span class="s2">"建设支行"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">]</span><span class="w">
+</span></code></pre></div><h3 id='50faad05f3-3'>响应参数</h3>
+<p>data参数如下：</p>
+
+<table><thead>
+<tr>
+<th>参数名</th>
+<th>类型</th>
+<th>描述</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>orderNo</td>
+<td>String</td>
+<td>订单号</td>
+</tr>
+</tbody></table>
+
+<blockquote>
+<p>响应示例:</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"code"</span><span class="p">:</span><span class="w"> </span><span class="mi">200</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Success"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="s2">"335793449653514241"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"335793449653514242"</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
 </span></code></pre></div><h2 id='e9a612a743'>订单回调</h2><h3 id='0e84ef42ae-3'>请求地址</h3>
 <p>POST <a href="#5ac84906d9">创建订单</a>接口定义的<code>asyncUrl</code></p>
-<h3 id='af989d8988-3'>请求方式</h3>
+<h3 id='af989d8988-4'>请求方式</h3>
 <ul>
 <li>Method: POST </li>
 <li>Content-Type: application/json</li>
@@ -864,7 +1050,7 @@
   </span><span class="nl">"orderType"</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span><span class="w">
   </span><span class="nl">"signature"</span><span class="p">:</span><span class="s2">"12312asdjaisldajlsdkasasdajksdjkasjdkas"</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre></div><h3 id='50faad05f3-3'>响应参数</h3>
+</span></code></pre></div><h3 id='50faad05f3-4'>响应参数</h3>
 <p>data参数如下：</p>
 
 <table><thead>
@@ -1030,7 +1216,7 @@
 <span class="nc">String</span> <span class="n">data</span> <span class="o">=</span> <span class="n">encryptBASE64</span><span class="o">(</span><span class="n">bytes</span><span class="o">);</span> <span class="c1">// base64编码即得签名串</span>
 </code></pre></div><h2 id='f7c93cd51a'>获得待签名列表</h2><h3 id='0e84ef42ae-4'>请求地址</h3>
 <p>POST <code>/api/transaction/pending</code></p>
-<h3 id='af989d8988-4'>请求方式</h3>
+<h3 id='af989d8988-5'>请求方式</h3>
 <ul>
 <li>Method: POST </li>
 <li>Content-Type: application/json</li>
@@ -1065,7 +1251,7 @@
   </span><span class="nl">"pageNum"</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span><span class="w">
   </span><span class="nl">"pageSize"</span><span class="p">:</span><span class="mi">20</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre></div><h3 id='50faad05f3-4'>响应参数</h3>
+</span></code></pre></div><h3 id='50faad05f3-5'>响应参数</h3>
 <p>data 结构如下：</p>
 
 <table><thead>
@@ -1144,7 +1330,7 @@
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div><h2 id='8ba46c43fe'>签名</h2><h3 id='0e84ef42ae-5'>请求地址</h3>
 <p>POST <code>/api/transaction/approve</code></p>
-<h3 id='af989d8988-5'>请求方式</h3>
+<h3 id='af989d8988-6'>请求方式</h3>
 <ul>
 <li>Method: POST </li>
 <li>Content-Type: application/json</li>
@@ -1228,7 +1414,7 @@
 </aside>
 <h3 id='0e84ef42ae-6'>请求地址</h3>
 <p>POST <code>/api/transaction/assets/collect</code></p>
-<h3 id='af989d8988-6'>请求方式</h3>
+<h3 id='af989d8988-7'>请求方式</h3>
 <ul>
 <li>Method: POST </li>
 <li>Content-Type: application/json</li>
