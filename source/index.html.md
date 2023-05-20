@@ -36,7 +36,7 @@ Welcome to 1BitPay API, you can use our API to manage transactions, automate sig
 1. Create an [API Key](#api-key), [IP whitelist](#ip-whitelist) can be set as needed.
 2. Learn about [API Authentication](#api-authentication) and [General Info](#general-info).
 3. Use [Sandbox](#sandbox) Environment for testing
-4. Access the interface of [Get Rate](#get-rate) and [Create Order](#create-order).
+4. Access the interface of [Get Rate](#get-rate) and [Create Order](#create-order),Response to [Order Callback](#order-callback).
 5. [Download the PK Shard](#download-the-pk-shard), Learn about the rules of the MPC Co-Singer [Signature Algorithm](#signature-algorithm).
 6. Read the [list to be signed](#get-list-of-pending-signatures) regularly, 2 minutes/time is recommended, and sign in time according to the actual [situation](#sign).
 7. And regularly [collect funds](#fund-collection), it is recommended to 5 minutes / time
@@ -270,6 +270,64 @@ orderNo|String| Order number
   }
 }
 ```
+
+## Order Callback
+
+### HTTP Request：
+
+POST `asyncUrl` defined by the [Create Order](#create-order)
+
+### Request Method
+- Method: POST 
+- Content-Type: application/json
+
+### Query Parameters
+
+Parameters | Type | Required | Description
+--------- | ----------- |  ----------- | -----------
+| status        | Int              |Y| Order status, -2: Matching failed; -1: Canceled; 9: Completed
+| dealAmount    | Decimal          |Y|buy or sell amount
+| merchantOrderNo | String         |Y|Merchant order number
+| orderNo | String                 |Y|1BitPay order number
+| orderType       | Int            |Y|Order Type. 1: buy; 2: sell
+| signature       | String         |Y|Signature: See [API Authentication](#api-authentication) for details
+
+> Request example:
+
+```json
+{
+  "status":1,
+  "dealAmount":10.11,
+  "orderNo":"1231222112d8123",
+  "merchantOrderNo":"1231222112d8",
+  "orderType":1,
+  "signature":"12312asdjaisldajlsdkasasdajksdjkasjdkas"
+}
+```
+
+
+### Response Parameters
+
+The data parameter is as follows:
+
+Parameters | Type | Description
+--------- | ----------- | -----------
+code | Int  | 200 Success, other codes are considered failure
+message | String| Success 
+
+>  The above command returns JSON structured like this:
+
+```json
+{
+  "code": 200,
+  "message": "Success"
+}
+```
+
+<aside class="notice">
+  Callback rules: If 1BitPay receives a response from the merchant with a code of 200, the callback will be considered successful; otherwise, the callback will be considered a failure, and the callback will be repeated within 12 hours, and no more callbacks will be made after 12 hours. The interval between repeated callbacks is:
+   Minute 2, Minute 5, Minute 10, Minute 30, Minute 60, Minute 90, Hour 2, Hour 3, Hour 4, Hour 5, Hour 6, Hour 7th hour, 8th hour, 9th hour, 10th hour, 11th hour, 12th hour.
+</aside>
 
 
 # MPC Co-Signer

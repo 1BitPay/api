@@ -34,7 +34,7 @@ meta:
 1. 创建 [API Key](#api-key)，根据需要可以设置[IP白名单](#ip)。
 2. 了解[鉴权规则](#17790fda8b)及[基本信息](#b122f813d5)。
 3. 使用[沙盒环境](#sandbox)进行测试。
-4. 对接[获取汇率](#774ef7eb57)及[创建订单](#5ac84906d9)接口。
+4. 对接[获取汇率](#774ef7eb57)及[创建订单](#5ac84906d9)接口，响应[订单回调](#e9a612a743)
 5. [下载私钥分片](#45d6c048a4)，了解 MPC Co-Singer [签名算法](#7b81b8ce22)的规则。
 6. 定时读取[待签名的列表](#f7c93cd51a)，建议2分钟/次，并根据实际情况及时进行[签名](#8ba46c43fe)。
 7. 并定时进行[资金归集](#e83639625f)，建议5分钟/次。
@@ -142,7 +142,7 @@ POST `/api/otc/rate`
 - Method: POST 
 - Content-Type: application/json
   
-### 请求参数：
+### 请求参数
 
 
 参数名 | 类型 | 必要性 | 描述
@@ -185,7 +185,7 @@ sellRate | Decimal| 卖单最新汇率
 
 ## 创建订单
 
-### 请求地址：
+### 请求地址
 
 POST `/api/otc/create`
 
@@ -193,7 +193,7 @@ POST `/api/otc/create`
 - Method: POST 
 - Content-Type: application/json
 
-### 请求参数：
+### 请求参数
 
 参数名 | 类型 | <div style="width:50px">必要性</div> | 描述
 --------- | ----------- |  ----------- | -----------
@@ -363,31 +363,26 @@ orderNo|String| 订单号
 ```
 
 
-## 回调
+## 订单回调
 
-<aside class="notice">
-  注意：回调规则如果平台收到商户响应失败，12小时内调用17次，超过17次将不再回调，以下是调用间隔时间
-  2分 3分 5分 20分 30分 30分 30分 1小时 1小时 1小时 1小时 1小时 1小时 1小时 1小时 1小时 1小时
-</aside>
+### 请求地址
 
-### 请求地址：
-
-POST `商户定义的asyncUrl`
+POST [创建订单](#5ac84906d9)接口定义的`asyncUrl`
 
 ### 请求方式
 - Method: POST 
 - Content-Type: application/json
 
-### 请求参数：
+### 请求参数
 
 参数名 | 类型 | <div style="width:50px">必要性</div> | 描述
 --------- | ----------- |  ----------- | -----------
-| status        | Int              |Y|订单状态  -2：撮合失败 -1：已取消 0：初始化 1：已成交 2：进行中 3-8：处理中 9：已完成
-| dealAmount    | Decimal              |Y|购买或者出售数量
-| merchantOrderNo | String                |Y|商户订单号
-| orderNo | String                |Y|平台订单号
-| orderType       | Int                   |Y|订单类型。1：买单；2:卖单
-| signature       | String                   |Y|签名：详见 [鉴权规则](#17790fda8b)
+| status        | Int              |Y|订单状态， -2：撮合失败；-1：已取消；9：已完成
+| dealAmount    | Decimal          |Y|购买或者出售数量
+| merchantOrderNo | String         |Y|商户订单号
+| orderNo | String                 |Y|1BitPay 订单号
+| orderType       | Int            |Y|订单类型。1：买单；2:卖单
+| signature       | String         |Y|签名：详见 [鉴权规则](#17790fda8b)
 
 > 请求示例:
 
@@ -409,7 +404,7 @@ data参数如下：
 
 参数名 | 类型 | 描述
 --------- | ----------- | -----------
-code | Int  | 200 成功，其余全失败
+code | Int  | 200 成功，其他状态码均认为失败
 message | String| Success 
 
 >  响应示例:
@@ -421,6 +416,10 @@ message | String| Success
 }
 ```
 
+<aside class="notice">
+  回调规则：1BitPay 收到商户返回 code 为 "200" 的响应则认为回调成功，否则认为回调失败，并在12小时内重复回调，超过12小时将不再回调，重复回调间隔时间为：
+  第2分钟，第5分钟，第10分钟，第30分钟，第60分钟，第90分钟，第2个小时，第3个小时，第4个小时，第5个小时，第6个小时，第7个小时，第8个小时，第9个小时，第10个小时，第11个小时，第12个小时。
+</aside>
 
 
 # MPC Co-Signer
@@ -530,7 +529,7 @@ String data = encryptBASE64(bytes); // base64编码即得签名串
 
 ## 获得待签名列表 
 
-### 请求地址：
+### 请求地址
 
 POST `/api/transaction/pending`
 
@@ -538,7 +537,7 @@ POST `/api/transaction/pending`
 - Method: POST 
 - Content-Type: application/json
   
-### 请求参数：
+### 请求参数
 
 参数名 | 类型 | 必要性 | 描述
 --------- | ----------- |  ----------- | -----------
@@ -595,7 +594,7 @@ chainId|String|链ID
  
 ## 签名 
 
-### 请求地址：
+### 请求地址
 
 POST `/api/transaction/approve`
 
@@ -603,7 +602,7 @@ POST `/api/transaction/approve`
 - Method: POST 
 - Content-Type: application/json
   
-### 请求参数：
+### 请求参数
 
 参数名 | 类型 | 必要性 | 描述
 --------- | ----------- |  ----------- | -----------
@@ -646,7 +645,7 @@ POST `/api/transaction/approve`
 </aside>
 
 
-### 请求地址：
+### 请求地址
 
 POST `/api/transaction/assets/collect`
 
@@ -655,7 +654,7 @@ POST `/api/transaction/assets/collect`
 - Method: POST 
 - Content-Type: application/json
  
-### 请求参数：
+### 请求参数
 
 参数名 | 类型 | <div style="width:50px">必要性</div> | 描述
 --------- | ----------- |  ----------- | -----------
