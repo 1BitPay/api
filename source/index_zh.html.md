@@ -186,7 +186,7 @@ sellRate | Decimal| 卖单最新汇率
 ## 创建订单
 
 <aside class="notice">
- 注意：cryptoAmount 和 legalAmount 传一个就可以，如两个都填，legalAmount无效，另外legalAmount不支持小数
+ 注意：cryptoAmount 和 legalAmount 传一个就可以，如两个都填，legalAmount无效
 </aside>
 
 ### 请求地址
@@ -207,7 +207,7 @@ POST `/api/otc/create`
 | syncUrl         | String              |N|同步回调地址
 | asyncUrl        | String              |N|异步回调地址
 | cryptoAmount    | Decimal              |Y|购买或者出售数量
-|legalAmount | Int|购买或者出售的金额，这里不支持小数
+|legalAmount | Int|购买或者出售的金额
 | cryptoCurrency  | String                |Y|交易币种
 | legalCurrency   | String                |Y|付款币种
 | idCardType      | Int                   |Y| 证件类型。1：身份证；2：护照
@@ -274,7 +274,7 @@ orderNo|String| 订单号
 ## 批量卖单
 
 <aside class="notice">
- 注意：cryptoAmount 和 legalAmount 传一个就可以，如两个都填，legalAmount无效，另外legalAmount不支持小数
+ 注意：cryptoAmount 和 legalAmount 传一个就可以，如两个都填，legalAmount无效
 </aside>
 
 ### 请求地址：
@@ -295,7 +295,7 @@ POST `/api/otc/batch/sell`
 | syncUrl         | String              |N|同步回调地址
 | asyncUrl        | String              |N|异步回调地址
 | cryptoAmount    | Decimal              |N|出售数量
-| legalAmount     | Int                  |N|出售金额，这里不支持小数
+| legalAmount     | Int                  |N|出售金额
 | cryptoCurrency  | String                |Y|交易币种
 | legalCurrency   | String                |Y|付款币种
 | idCardType      | Int                   |Y| 证件类型。1：身份证；2：护照
