@@ -614,7 +614,11 @@
     </span><span class="nl">"sellRate"</span><span class="p">:</span><span class="s2">"6.9"</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre></div><h2 id='5ac84906d9'>创建订单</h2><h3 id='0e84ef42ae-2'>请求地址</h3>
+</span></code></pre></div><h2 id='5ac84906d9'>创建订单</h2>
+<aside class="notice">
+ 注意：cryptoAmount 和 legalAmount 传一个就可以，如两个都填，legalAmount无效，另外legalAmount不支持小数
+</aside>
+<h3 id='0e84ef42ae-2'>请求地址</h3>
 <p>POST <code>/api/otc/create</code></p>
 <h3 id='af989d8988-2'>请求方式</h3>
 <ul>
@@ -665,6 +669,12 @@
 <td>Decimal</td>
 <td>Y</td>
 <td>购买或者出售数量</td>
+</tr>
+<tr>
+<td>legalAmount</td>
+<td>Int</td>
+<td>购买或者出售的金额，这里不支持小数</td>
+<td></td>
 </tr>
 <tr>
 <td>cryptoCurrency</td>
@@ -802,7 +812,11 @@
       </span><span class="nl">"orderNo"</span><span class="p">:</span><span class="w"> </span><span class="s2">"335793449653514240"</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
-</span></code></pre></div><h2 id='dd767af054'>批量卖单</h2><h3 id='86e489d578'>请求地址：</h3>
+</span></code></pre></div><h2 id='dd767af054'>批量卖单</h2>
+<aside class="notice">
+ 注意：cryptoAmount 和 legalAmount 传一个就可以，如两个都填，legalAmount无效，另外legalAmount不支持小数
+</aside>
+<h3 id='86e489d578'>请求地址：</h3>
 <p>POST <code>/api/otc/batch/sell</code></p>
 <h3 id='af989d8988-3'>请求方式</h3>
 <ul>
@@ -851,8 +865,14 @@
 <tr>
 <td>cryptoAmount</td>
 <td>Decimal</td>
-<td>Y</td>
-<td>购买或者出售数量</td>
+<td>N</td>
+<td>出售数量</td>
+</tr>
+<tr>
+<td>legalAmount</td>
+<td>Int</td>
+<td>N｜出售金额，这里不支持小数</td>
+<td></td>
 </tr>
 <tr>
 <td>cryptoCurrency</td>
@@ -879,39 +899,27 @@
 <td>证件号码</td>
 </tr>
 <tr>
-<td>kyc</td>
-<td>Int</td>
-<td>Y</td>
-<td>KYC级别，目前KYC级别传递2</td>
-</tr>
-<tr>
 <td>merchantOrderNo</td>
 <td>String</td>
 <td>Y</td>
 <td>商户订单号</td>
 </tr>
 <tr>
-<td>payWay</td>
-<td>Int</td>
-<td>Y</td>
-<td>支付方式。1：银行卡；2:支付宝；3:微信支付。用户卖单目前仅支持 1:银行卡</td>
-</tr>
-<tr>
 <td>bank</td>
 <td>String</td>
-<td>N</td>
-<td>用户收款开户行，卖单必填</td>
+<td>Y</td>
+<td>用户收款开户行</td>
 </tr>
 <tr>
 <td>bankAccount</td>
 <td>String</td>
-<td>N</td>
-<td>用户收款账户，卖单必填</td>
+<td>Y</td>
+<td>用户收款账户</td>
 </tr>
 <tr>
 <td>bankBranch</td>
 <td>String</td>
-<td>N</td>
+<td>Y</td>
 <td>用户收款开户支行</td>
 </tr>
 </tbody></table>
@@ -933,7 +941,6 @@
     </span><span class="nl">"idCard"</span><span class="p">:</span><span class="s2">"412627288918989891"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"merchantNo"</span><span class="p">:</span><span class="s2">"mer1c92b0319ef5b794"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"merchantOrderNo"</span><span class="p">:</span><span class="s2">"1231222112d8"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"payWay"</span><span class="p">:</span><span class="s2">"1"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"bank"</span><span class="p">:</span><span class="s2">"建设银行"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"bankAccount"</span><span class="p">:</span><span class="s2">"6217229282829299111"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"bankBranch"</span><span class="p">:</span><span class="s2">"建设支行"</span><span class="w">
