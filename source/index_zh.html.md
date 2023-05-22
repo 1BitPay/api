@@ -185,6 +185,10 @@ sellRate | Decimal| 卖单最新汇率
 
 ## 创建订单
 
+<aside class="notice">
+ 注意：cryptoAmount 和 legalAmount 传一个就可以，如两个都填，legalAmount无效，另外legalAmount不支持小数
+</aside>
+
 ### 请求地址
 
 POST `/api/otc/create`
@@ -203,6 +207,7 @@ POST `/api/otc/create`
 | syncUrl         | String              |N|同步回调地址
 | asyncUrl        | String              |N|异步回调地址
 | cryptoAmount    | Decimal              |Y|购买或者出售数量
+|legalAmount | Int | 购买或者出售的金额，这里不支持小数
 | cryptoCurrency  | String                |Y|交易币种
 | legalCurrency   | String                |Y|付款币种
 | idCardType      | Int                   |Y| 证件类型。1：身份证；2：护照
@@ -268,6 +273,10 @@ orderNo|String| 订单号
 
 ## 批量卖单
 
+<aside class="notice">
+ 注意：cryptoAmount 和 legalAmount 传一个就可以，如两个都填，legalAmount无效，另外legalAmount不支持小数
+</aside>
+
 ### 请求地址：
 
 POST `/api/otc/batch/sell`
@@ -285,17 +294,16 @@ POST `/api/otc/batch/sell`
 | phone           | String              |Y|用户手机号码
 | syncUrl         | String              |N|同步回调地址
 | asyncUrl        | String              |N|异步回调地址
-| cryptoAmount    | Decimal              |Y|购买或者出售数量
+| cryptoAmount    | Decimal              |N|出售数量
+| legalAmount     | Int                  |N｜出售金额，这里不支持小数
 | cryptoCurrency  | String                |Y|交易币种
 | legalCurrency   | String                |Y|付款币种
 | idCardType      | Int                   |Y| 证件类型。1：身份证；2：护照
 | idCard          | String                |Y|证件号码
-| kyc             | Int                   |Y|KYC级别，目前KYC级别传递2
 | merchantOrderNo | String                |Y|商户订单号
-| payWay          | Int                   |Y|支付方式。1：银行卡；2:支付宝；3:微信支付。用户卖单目前仅支持 1:银行卡
-| bank            | String                |N| 用户收款开户行，卖单必填
-| bankAccount     | String                |N|用户收款账户，卖单必填
-| bankBranch      | String                |N|用户收款开户支行
+| bank            | String                |Y| 用户收款开户行
+| bankAccount     | String                |Y|用户收款账户
+| bankBranch      | String                |Y|用户收款开户支行
 
 > 请求示例:
 
@@ -314,7 +322,6 @@ POST `/api/otc/batch/sell`
     "idCard":"412627288918989891",
     "merchantNo":"mer1c92b0319ef5b794",
     "merchantOrderNo":"1231222112d8",
-    "payWay":"1",
     "bank":"建设银行",
     "bankAccount":"6217229282829299111",
     "bankBranch":"建设支行"
