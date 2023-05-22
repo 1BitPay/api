@@ -975,9 +975,14 @@
 </tr>
 </thead><tbody>
 <tr>
-<td>orderNo</td>
+<td>batchNo</td>
 <td>String</td>
-<td>订单号</td>
+<td>批次号</td>
+</tr>
+<tr>
+<td>merchantOrderNos</td>
+<td>List</td>
+<td>商户号</td>
 </tr>
 </tbody></table>
 
@@ -987,10 +992,14 @@
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
   </span><span class="nl">"code"</span><span class="p">:</span><span class="w"> </span><span class="mi">200</span><span class="p">,</span><span class="w">
   </span><span class="nl">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Success"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-    </span><span class="s2">"335793449653514241"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"335793449653514242"</span><span class="w">
-  </span><span class="p">]</span><span class="w">
+  </span><span class="nl">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"batchNo"</span><span class="p">:</span><span class="s2">"76181192882"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"merchantOrderNos"</span><span class="p">:[</span><span class="w">
+      </span><span class="s2">"335793449653514241"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"335793449653514242"</span><span class="w">
+    </span><span class="p">]</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div><h2 id='e9a612a743'>订单回调</h2><h3 id='0e84ef42ae-3'>请求地址</h3>
 <p>POST <a href="#5ac84906d9">创建订单</a>接口定义的<code>asyncUrl</code></p>
