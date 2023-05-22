@@ -354,18 +354,22 @@ data参数如下：
 
 参数名 | 类型 | 描述
 --------- | ----------- | -----------
-orderNo|String| 订单号
-
+batchNo|String| 批次号
+merchantOrderNos|List | 商户号
 >  响应示例:
 
 ```json
 {
   "code": 200,
   "message": "Success",
-  "data": [
-    "335793449653514241",
-    "335793449653514242"
-  ]
+  "data": {
+    "batchNo":"76181192882",
+    "merchantOrderNos":[
+      "335793449653514241",
+      "335793449653514242"
+    ]
+  }
+  
 }
 ```
 
